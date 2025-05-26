@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.CgmscHO__API PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CgmscHO_API/Controllers/CGMSCStockController.cs">
+    <Files>
+      <File FileName="CgmscHO_API/Controllers/CGMSCStockController.cs" Line="2498" Column="21" />
+      <File FileName="CgmscHO_API/DTO/GetFileStorageLocationDTO.cs" />
+      <File FileName="CgmscHO_API/Utility/master.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CgmscHO_API" expanded="True">
+            <Node name="CgmscHO_API" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="DTO" expanded="True" />
+              <Node name="Utility" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

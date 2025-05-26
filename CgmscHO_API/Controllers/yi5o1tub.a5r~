@@ -1,0 +1,2190 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using CgmscHO_API.Models;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using MessagePack;
+using System.Net.NetworkInformation;
+using System.IO.Pipelines;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using CgmscHO_API.HODTO;
+using CgmscHO_API.Utility;
+using Newtonsoft.Json.Linq;
+using CgmscHO_API.DTO;
+//using Broadline.Controls;
+//using CgmscHO_API.Utility;
+
+namespace CgmscHO_API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class HOController : ControllerBase
+    {
+
+        private readonly OraDbContext _context;
+
+        public HOController(OraDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginModel model)
+        {
+            //GenFunctions.Users.WardloginDetails(model.WardId, model.Password, out string message);
+            loginDetails(model.emailid, model.pwd, out string message, out UsruserModel user);
+
+            if (message == "Successfully Login")
+            {
+                //return Ok(message);
+                return Ok(new { Message = message, UserInfo = user });
+            }
+
+            return BadRequest("Invalid credentials.");
+        }
+
+        private bool loginDetails(string email, string password, out string message, out UsruserModel user)
+        {
+            message = null;
+
+            //var result = _context.MasFacilityWards
+            //    .FirstOrDefault(w => w.wardid == wardId);
+
+            var result = _context.Usruser
+               .FirstOrDefault(u => u.EMAILID == email);
+
+            user = result;
+
+            if (result == null)
+            {
+                message = "Invalid ID.";
+                return false;
+            }
+
+
+            // Perform password verification
+            string salthash = result.PWD;
+            string mStart = "salt{";
+            string mMid = "}hash{";
+            string mEnd = "}";
+            string mSalt = salthash.Substring(salthash.IndexOf(mStart) + mStart.Length, salthash.IndexOf(mMid) - (salthash.IndexOf(mStart) + mStart.Length));
+            string mHash = salthash.Substring(salthash.IndexOf(mMid) + mMid.Length, salthash.LastIndexOf(mEnd) - (salthash.IndexOf(mMid) + mMid.Length));
+
+
+            Broadline.Common.SecUtils.SaltedHash ver = Broadline.Common.SecUtils.SaltedHash.Create(mSalt, mHash);
+            bool isValid = ver.Verify(password);
+
+            // bool isValid = SaltedHashUtils.VerifySaltedHash(salthash, password);
+
+            if (!isValid)
+            {
+                message = "The email or password you have entered is incorrect.";
+                return false;
+            }
+            message = "Successfully Login";
+            return true;
+        }
+
+
+        //HO PO Related
+        [HttpGet("HODYearWisePO")]
+        public async Task<ActionResult<IEnumerable<HODYearWisePODTO>>> HODYearWisePO(string yearid, string mcatid, string itemid)
+        {
+            string whyearid = "";
+            if (yearid != "0")
+            {
+                whyearid = " and  op.ACCYRSETID=" + yearid;
+            }
+            string whMCatID = "";
+            if (mcatid != "0")
+            {
+                whMCatID = " and  mc.mcid =" + mcatid;
+            }
+            string whitemid = "";
+            if (itemid != "0")
+            {
+                whitemid = " and mi.itemid =" + itemid;
+            }
+
+
+            string qry = @" select mcid, MCATEGORY, count(distinct itemid) noofitems,
+round(sum(dhspovalue) / 10000000, 2) dhspovalue,
+round(sum(dhsrvalue) / 10000000, 2) dhsrvalue,
+round(sum(dmepovalue) / 10000000, 2) dmepovalue,
+round(sum(dmervalue) / 10000000, 2) dmervalue,
+round(sum(dhspovalue) / 10000000, 2) + round(sum(dmepovalue) / 10000000, 2) totalpovalue, 
+round(sum(dhsrvalue) / 10000000, 2) + round(sum(dmervalue) / 10000000, 2) totalrvalue
+,ACCYRSETID,ACCYEAR,to_char(mcid)||to_char(ACCYRSETID) as ID
+from(
+select mc.mcid, mc.MCATEGORY, op.ponoid,
+                            oi.absqty as orderedqty,
+                            nvl(sum(od.dhsqty), 0) dhspoqty,
+                            nvl(sum(od.dhsqty), 0) * c.finalrategst dhspovalue,
+                            nvl(r1.dhsrqty, 0) dhsrqty, nvl(r1.dhsrqty, 0) * c.finalrategst dhsrvalue,
+                            nvl(sum(od.dmeqty), 0) dmepoqty,
+                            nvl(sum(od.dmeqty), 0) * c.finalrategst dmepovalue,
+                            nvl(r2.dmerqty, 0) dmerqty, nvl(r2.dmerqty, 0) * c.finalrategst dmervalue,
+                            case when nvl(sum(od.dhsqty), 0) > 0 then 1 else 0 end dhspocnt,
+                            case when nvl(sum(od.dmeqty), 0) > 0 then 1 else 0 end dmepocnt
+                            , op.ACCYRSETID,mi.itemid,y.SHACCYEAR as ACCYEAR
+                            from masItems MI
+                                              inner join soOrderedItems OI on(OI.ItemID = MI.ItemID)
+                                              inner join soorderplaced op on(op.ponoid = oi.ponoid and op.status not in ('OC', 'WA1', 'I'))
+ inner join masaccyearsettings y on y.ACCYRSETID=op.ACCYRSETID                                             
+inner join soorderdistribution od on(od.orderitemid = oi.orderitemid)
+                                              inner join aoccontractitems c on c.contractitemid = oi.contractitemid
+                                              inner join masitemcategories ic on ic.categoryid = mi.categoryid
+                                              inner join masitemmaincategory mc on mc.MCID = ic.MCID
+                                              left outer join
+                                                (
+                                                select i.itemid, t.ponoid, nvl(sum(tb.absrqty), 0) as dhsrqty
+                                                from tbreceipts t
+                                                inner
+                                                join tbreceiptitems i on (i.receiptid = t.receiptid)
+                                                inner
+                                                join tbreceiptbatches tb on (i.receiptitemid = tb.receiptitemid)
+                                                where T.Status = 'C' and  T.receipttype = 'NO'
+                                                and t.ponoid in (select ponoid from soorderplaced where deptid in (367, 371))
+                                                and t.receiptid not in (select tr.receiptid
+                                                                           from tbindents t
+                                                                           inner join tbindentitems i on(i.indentid = t.indentid)
+                                                                           inner join tboutwards o on(o.indentitemid = i.indentitemid)
+                                                                           inner join tbreceiptbatches tb on(tb.inwno = o.inwno)
+                                                                           inner join tbreceiptitems ti on ti.receiptitemid = tb.receiptitemid
+                                                                           inner join tbreceipts tr on tr.receiptid = ti.receiptid
+                                                                           where t.status = 'C' and t.issuetype in ('RS') )
+                                                group by I.ItemID, T.PoNoID
+                                                ) r1 on(r1.itemid = oi.itemid and r1.ponoid = op.ponoid)
+                                                left outer join
+                                                (
+                                                select i.itemid, t.ponoid, nvl(sum(tb.absrqty), 0) as dmerqty
+                                                from tbreceipts t
+                                                inner
+                                                join tbreceiptitems i on (i.receiptid = t.receiptid)
+                                                inner
+                                                join tbreceiptbatches tb on (i.receiptitemid = tb.receiptitemid)
+                                                where T.Status = 'C' and  T.receipttype = 'NO'
+                                                and t.ponoid in (select ponoid from soorderplaced where deptid = 364)
+                                                and t.receiptid not in (select tr.receiptid
+                                                                           from tbindents t
+                                                                           inner join tbindentitems i on(i.indentid = t.indentid)
+                                                                           inner join tboutwards o on(o.indentitemid = i.indentitemid)
+                                                                           inner join tbreceiptbatches tb on(tb.inwno = o.inwno)
+                                                                           inner join tbreceiptitems ti on ti.receiptitemid = tb.receiptitemid
+                                                                           inner join tbreceipts tr on tr.receiptid = ti.receiptid
+                                                                           where t.status = 'C' and t.issuetype in ('RS') )
+                                                group by I.ItemID, T.PoNoID
+                                                ) r2 on(r2.itemid = oi.itemid and r2.ponoid = op.ponoid)
+                                              where 1 = 1 " + whitemid + @"  " + whMCatID + @" and op.ACCYRSETID >= 539 " + whyearid + @"
+                                              group by mc.mcid,mc.MCATEGORY,op.ponoid,
+                                                  oi.absqty,c.finalrategst,r1.dhsrqty, r2.dmerqty ,op.ACCYRSETID,mi.itemid,y.SHACCYEAR
+                                              ) group by mcid,MCATEGORY,ACCYRSETID,ACCYEAR order by mcid
+";
+            var myList = _context.HODYearWisePODbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+        [HttpGet("HODYearWiseIssuance")]
+        public async Task<ActionResult<IEnumerable<HODIssueDTO>>> HODYearWiseIssuance(string yearid, string mcatid, string hodid, string itemid)
+        {
+            string whyearid = "";
+            if (yearid != "0")
+            {
+                whyearid = " and  y.ACCYRSETID=" + yearid;
+            }
+            string whMCatID = "";
+            if (mcatid != "0")
+            {
+                whMCatID = " and  mc.mcid =" + mcatid;
+            }
+            string whhodid = "";
+            if (hodid != "0")
+            {
+                whhodid = " and t.hodid =" + hodid;
+            }
+            string whitemid = "";
+            if (itemid != "0")
+            {
+                whitemid = " and m.itemid =" + itemid;
+            }
+
+            string qry = @" select y.SHACCYEAR as ACCYEAR, MCATEGORY,Round(sum(finalvalue)/10000000,2) issuevalue,count(distinct itemid) as noofitems,mcid
+    ,y.ACCYRSETID,
+    to_char(mcid)||to_char(y.ACCYRSETID) as ID
+    from (                       
+        select 
+        (
+        select ACCYEAR from masaccyearsettings where tb.indentdate between startdate and enddate) as Year
+        ,f.facilityid,
+        tb.indentid,tb.indentdate,tbi.itemid,tbi.indentitemid,mc.mcid,mc.MCATEGORY,m.itemcode,
+        rb.batchno iss_batchno,
+        sum(tbo.issueqty + nvl(tbo.reconcile_qty,0)) iss_qty ,sb.acibasicratenew skurate,acicst,acgstpvalue,
+        acivat,case when rb.ponoid=1111 then 0 else  sb.acisingleunitprice end  finalrate,
+        (sum(tbo.issueqty + nvl(tbo.reconcile_qty,0)) * sb.acibasicratenew) as skuvalue, 
+        (sum(tbo.issueqty) * sb.acisingleunitprice) as finalvalue
+         from tbindents tb
+         inner join tbindentitems tbi on tbi.indentid=tb.indentid 
+         inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+         inner join tbreceiptbatches rb on rb.inwno=tbo.inwno
+         inner join masitems m on m.itemid = tbi.itemid
+         inner join masfacilities f on f.facilityid = tb.facilityid
+         inner join masfacilitytypes t on t.facilitytypeid = f.facilitytypeid
+          inner join masitemcategories c on c.categoryid=m.categoryid
+       inner join masitemmaincategory mc on mc.MCID=c.MCID
+         left outer join 
+                (
+                select s.ponoid,tbo.inwno,si.basicrate, a.indentdate,c.batchno,tbo.indentitemid
+               ,coalesce(round(((si.basicrate) + ((si.basicrate *si.percentvalue)/100)+((si.basicrate *nvl(si.exciseduty,0))/100) ),2),si.singleunitprice) as supp 
+               ,case when  a.indentdate >= '01-Jul-2017' then ( case when  aci.basicratenew is null then aci.basicrate else   aci.basicratenew  end) else aci.basicrate end acibasicratenew
+               ,case when  a.indentDate >= '01-Jul-2017' then  (case when aci.gstflag='Y' then aci.finalrategst else coalesce(round(((si.basicrate) + ((si.basicrate *si.percentvalue)/100)+((si.basicrate *nvl(si.ExciseDuty,0))/100) ),2),si.singleunitprice)  end) else coalesce(round(((si.basicrate) + ((si.basicrate *si.percentvalue)/100)+((si.basicrate *nvl(si.ExciseDuty,0))/100) ),2),si.singleunitprice)  end   ACIsingleunitprice
+               ,case when aci.cstvat ='CST' then aci.percentvalue  else 0 end ACICST,  
+               case when aci.cstvat ='VAT' then aci.percentvalue  else 0 end ACIVAT,  
+               case when  a.indentDate >= '01-Jul-2017' then  (case when aci.gstflag='Y' then nvl(aci.percentvaluegst,0) else 0 end) else 0 end  ACGSTPvalue   from tbindents a
+               inner join tbindentitems b on a.indentid = b.indentid
+               inner join tboutwards tbo on tbo.indentitemid=b.indentitemid
+               inner join tbreceiptbatches c on  tbo.inwno = c.inwno 
+               inner join tbreceiptitems ri on ri.receiptitemid=c.receiptitemid
+               inner join tbreceipts r on r.receiptid=ri.receiptid
+               left outer join soorderplaced s on s.ponoid=c.ponoid
+               inner join soordereditems si on  si.ponoid=s.ponoid and si.itemid=b.itemid   
+               INNER JOIN aoccontractitems aci on aci.contractitemid=si.contractitemid
+               inner join aoccontracts ac on ac.contractid=aci.contractid
+               where a.Status='C' and a.notindpdmis is null 
+               and b.notindpdmis is null and c.notindpdmis is null 
+               and tbo.notindpdmis is null 
+               group by s.ponoid,tbo.inwno,si.basicrate,a.indentDate,tbo.indentitemid,
+               c.batchno,si.singleunitprice,si.percentvalue,si.ExciseDuty,aci.basicratenew,aci.basicrate,aci.percentvalue,aci.percentvaluegst,aci.cstvat
+               ,r.receiptdate,aci.gstflag,aci.singleunitprice,aci.singleunitprice,aci.finalrategst
+                 )  sb on sb.inwno=rb.inwno and sb.indentitemid=tbo.indentitemid
+        where 1=1 " + whitemid + @" and tb.status = 'C' " + whMCatID + @" and tb.issuetype='NO' " + whhodid + @"  
+        and tb.indentdate between '01-APR-19' and SYSDATE
+
+        and tb.notindpdmis is null and tb.notindpdmis is null and tbi.notindpdmis is null   
+        and tbo.notindpdmis is null and rb.notindpdmis is null   
+        group by tb.indentid,tb.indentdate,tbi.itemid,tbi.indentitemid,mc.mcid,mc.MCATEGORY,m.itemcode,rb.batchno,
+        f.facilityid  ,sb.acisingleunitprice,sb.acibasicratenew,tb.indentdate,rb.ponoid ,acicst,acgstpvalue,acivat
+        ) i 
+      inner join masaccyearsettings y on y.ACCYEAR=i.Year     
+      where 1=1 " + whyearid + @"
+        group by mcid,MCATEGORY,y.SHACCYEAR,year,y.ACCYRSETID having sum(finalvalue) > 0     
+         order by y.ACCYRSETID desc";
+
+            var myList = _context.HODIssueDbSet
+         .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+        [HttpGet("CGMSCStockValueData")]
+
+        public async Task<ActionResult<IEnumerable<StockVDTO>>> CGMSCStockValueData(string mcatid)
+        {
+
+            string whMCatID = "";
+            string mcid = "";
+            if (mcatid != "0")
+            {
+                whMCatID = " and  c.mcid =" + mcatid;
+                mcid = " and  mcid =" + mcatid;
+            }
+
+
+            string qry = @"
+        select ROW_NUMBER() OVER ( ORDER BY mcid ) AS ID,edlcat, mcid, MCATEGORY, count (distinct itemid) noofitems,sum(ready_no) noofitemsready,sum(UQC_NO) noofitemsuqc,sum(PIP_NO) noofitemspipeline,
+round(sum(ReadyForIssueValue)/10000000,2) ReadyForIssueValue,
+round(sum(PendingValue)/10000000,2) QCPendingValue,
+round(sum(pipelinevalue)/10000000,2) pipelinevalue
+        from
+        (
+select 0 SlNo, edlcat, mcid, MCATEGORY, x.itemid,case when (sum(nvl(ReadyForIssue,0))+nvl(balance,0))>0 then 1 else 0 end ready_no,
+case when(sum(nvl(ReadyForIssue,0))+nvl(balance,0))=0 and sum(nvl(Pending,0))>0  then 1 else 0 end as UQC_NO,
+case when nvl(p.pipelineqty,0)>0 then 1 else 0 end as PIP_NO,
+round(sum(nvl(ReadyForIssueValue,0)),0)+(nvl(balancevalue,0)) ReadyForIssueValue,
+round(sum(nvl(PendingValue,0)),0) PendingValue,
+sum(nvl(ReadyForIssue,0))+nvl(balance,0) ReadyForIssue,
+sum(nvl(Pending,0)) Pending,
+nvl(p.pipelineqty,0) pipelineqty,
+nvl(p.pipelinevalue,0) pipelinevalue
+ from
+ (
+ select 0 SlNo,case when mia.isedl2021= 'Y' then 'EDL' else 'NON-EDL' end edlcat, c.mcid, c.MCATEGORY, a.itemid, A.batchno, to_char(A.expdate,'dd-mm-yy') as expdate ,Finalrategst ,
+ (case when sum(A.ReadyForIssue)>0 then sum(A.ReadyForIssue) else 0 end)  as ReadyForIssue,
+ nvl((case when sum(A.ReadyForIssue)>0 then sum(A.ReadyForIssue) else 0 end),0)* Finalrategst ReadyForIssueValue,
+ (case when sum(nvl(Pending, 0)) > 0 then sum(nvl(Pending, 0)) else 0 end) Pending, 
+ (case when sum(nvl(Pending,0)) >0 then sum(nvl(Pending,0)) else 0 end)*Finalrategst PendingValue, mc.CategoryName,mc.CategoryID
+        from
+        (
+        select b.batchno, b.expdate, b.inwno, mi.itemid,
+ (case when b.qastatus = '1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0))    
+ else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) ReadyForIssue,    
+ case when mi.qctest='N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then (nvl(b.absrqty,0)- nvl(iq.issueqty,0)) end) end Pending,
+        ci.Finalrategst
+        from tbreceiptbatches b
+ inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid
+ inner join tbreceipts t on t.receiptid= i.receiptid
+ inner join masitems mi on mi.itemid= i.itemid
+ inner join soordereditems odi on odi.ponoid = b.ponoid
+ inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+ left outer join
+     (
+     select tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty,0)) issueqty
+     from tboutwards tbo, tbindentitems tbi , tbindents tb
+     where tbo.indentitemid=tbi.indentitemid and tbi.indentid= tb.indentid and tb.status = 'C'
+     and tb.notindpdmis is null and tbo.notindpdmis is null 
+     and tbi.notindpdmis is null                   
+     group by tbi.itemid, tb.warehouseid, tbo.inwno
+     ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid
+     Where  T.Status = 'C'   And(b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate
+ ) A
+ inner join masitems mia on mia.itemid=A.itemid
+ inner join masitemcategories mc on mc.CategoryID=mia.CategoryID
+ inner join masitemmaincategory c on c.MCID=mc.MCID
+ where 1=1  " + whMCatID + @"
+ group by mc.CategoryID, mc.CategoryName, A.batchno, A.expdate , A.itemid
+ , Finalrategst , c.MCATEGORY, c.mcid, mia.isedl2021
+ having sum(nvl(A.ReadyForIssue,0)) >0 or sum(nvl(A.Pending,0)) >0    
+ ) x
+
+  Left outer join
+ (
+
+  select itemid, balance, balancevalue from (
+  select itemid, itemcode, sum(trasferqty) transferqty, sum(receqty) receqty, sum(trasferqty)-sum(receqty) as balance,
+  sum(transfervalue)-sum(recptvalue) balancevalue from
+  (
+  select m.itemcode, m.itemid, c.finalrategst, sum(tbo.issueqty) trasferqty, sum(tbo.issueqty)* c.finalrategst transfervalue,
+  nvl(receqty,0) receqty ,nvl(receqty,0)*c.finalrategst recptvalue, tb.warehouseid,tb.towarehouseid,tb.transferid
+  from tbindents tb
+  inner join tbindentitems tbi on tbi.indentid=tb.indentid
+  inner join tboutwards tbo on tbo.indentitemid= tbi.indentitemid
+  inner join tbreceiptbatches rb on rb.inwno= tbo.inwno
+  inner join soordereditems oi on oi.ponoid = rb.ponoid
+  inner join aoccontractitems c on c.contractitemid = oi.contractitemid
+  inner join masitems m on m.itemid = tbi.itemid
+  inner join maswarehouses w on w.warehouseid = tb.warehouseid
+left outer join
+(
+  select m.itemcode, tr.ponoid, tri.itemid, sum(rb.absrqty) receqty, receiptdate, nvl(tr.transferid,0) transferid
+  from tbreceipts tr
+  inner join tbreceiptitems tri on tri.receiptid=tr.receiptid
+  inner join tbreceiptbatches rb on rb.receiptitemid= tri.receiptitemid
+  inner join masitems m on m.itemid = tri.itemid
+  where tr.receipttype= 'SP'
+    and tr.status= 'C'
+    and tr.notindpdmis is null and tri.notindpdmis is null and rb.notindpdmis is null 
+    and tr.receiptdate > '01-Apr-23'
+     group by tri.itemid, receiptdate, tr.ponoid, tr.transferid, m.itemcode
+) x on  x.transferid=tb.transferid and x.itemid=tbi.itemid
+ where   tb.Status = 'C' and tb.issuetype in ('SP')
+ and tb.indentdate > '01-Apr-23'
+  group by m.itemcode, m.itemid, tb.warehouseid, tb.towarehouseid, tb.transferid, receqty, c.finalrategst
+
+
+  )   group by itemcode,itemid
+  ) where balance>0 
+  ) IWHB on IWHB.itemid=x.itemid
+  left outer join
+        (
+  select itemid, sum(pipelineQTY) pipelineQTY, sum(pipelinevalue) pipelinevalue from
+(select m.itemcode, OI.itemid, op.ponoid, m.nablreq, op.soissuedate, op.extendeddate, sum(soi.ABSQTY) as absqty, nvl(rec.receiptabsqty,0)receiptabsqty,
+receiptdelayexception ,round(sysdate-op.soissuedate,0) as days,
+case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end as pipelineQTY,
+oci.finalrategst,
+(case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end)*oci.finalrategst pipelinevalue
+from soOrderPlaced OP
+inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
+inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+inner join masitems m on m.itemid = oi.itemid
+inner join aoccontractitems oci on oci.contractitemid = oi.contractitemid
+left outer join
+(
+select tr.ponoid, tri.itemid, sum(tri.receiptabsqty) receiptabsqty from tbreceipts tr
+inner join tbreceiptitems tri on tri.receiptid= tr.receiptid
+where tr.receipttype= 'NO' and tr.status= 'C' and tr.notindpdmis is null and tri.notindpdmis is null
+group by tr.ponoid, tri.itemid
+) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid
+ where op.status  in ('C','O') 
+ group by m.itemcode, m.nablreq, op.ponoid, op.soissuedate, op.extendeddate, OI.itemid , rec.receiptabsqty,
+ op.soissuedate, op.extendeddate , receiptdelayexception, oci.finalrategst
+ having (case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate
+and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end) >0
+) group by itemid
+) p on p.itemid = x.itemid
+  where 1=1 " + mcid + @"
+ group by edlcat,mcid,MCATEGORY,IWHB.balance,IWHB.balancevalue,x.itemid,p.pipelineqty,p.pipelinevalue 
+ )
+ group by edlcat,mcid,MCATEGORY
+ order by mcid";
+
+
+            var myList = _context.CGMSCStockValueDbSet
+         .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+        [HttpGet("CGMSCItemStock")]
+        public async Task<ActionResult<IEnumerable<CGMSCStockDTO>>> CGMSCItemStock(string mcatid, string EDLNedl, string mitemid, string WHID, string searchP)
+        {
+
+            string whMCatID = "";
+            string mcid = "";
+            string whedlnedl = "";
+            string whitemid = "";
+            string whidW = ""; string whidT = "";
+            string whsearchP = "";
+
+            if (mcatid != "0")
+            {
+
+                mcid = " and mc.MCID =" + mcatid;
+            }
+            if (searchP != "0")
+            {
+                whsearchP = "  and  (mi.itemcode like '%" + searchP + "%' or  mi.ITEMNAME like '%" + searchP + "%' )";
+            }
+
+            if (WHID != "0")
+            {
+                whidW = " and w.warehouseid =" + WHID;
+                whidT = " and t.warehouseid =" + WHID;
+            }
+
+            if (mitemid != "0")
+            {
+                whitemid = " and mi.itemid=" + mitemid;
+            }
+            else
+            {
+
+
+                if (EDLNedl == "Y")
+                {
+
+                    whedlnedl = "  mi.isedl2021='Y'";
+                }
+                else if (EDLNedl == "N")
+                {
+
+                    whedlnedl = " and (case when mi.isedl2021= 'Y' then 'EDL' else 'Non EDL' end )='Non EDL' ";
+                }
+                else
+                {
+                    whedlnedl = "";
+                }
+            }
+
+
+
+            string qry = @" select A.itemcode as ITEMCODE, A.ItemName as ITEMNAME, A.strength1 as STRENGTH1, A.SKU, edlcat, edl, (case when sum(A.ReadyForIssue) > 0 then sum(A.ReadyForIssue) else 0 end) as READYFORISSUE,
+(case when sum(nvl(Pending, 0)) > 0 then sum(nvl(Pending,0)) else 0 end) PENDING,itemid
+                  from
+                 (
+                 select case when 1=0 then 'All' else w.WAREHOUSENAME end as WAREHOUSENAME, mi.ITEMCODE, b.inwno, mi.ITEMNAME, mi.strength1, mi.unit as SKU,
+               (case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.Qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) ReadyForIssue,  
+                   case when mi.qctest = 'N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) end) end Pending
+, e.edlcat,e.edl,mi.itemid
+
+                  from tbreceiptbatches b
+                  inner join tbreceiptitems i on b.receiptitemid = i.receiptitemid
+                  inner join tbreceipts t on t.receiptid = i.receiptid
+                  inner join masitems mi on mi.itemid = i.itemid
+                  left outer join masedl e on e.edlcat= mi.edlcat
+                  inner join masitemcategories c on c.categoryid= mi.categoryid
+                  inner join masitemmaincategory mc on mc.MCID= c.MCID
+                  left outer join massubitemcategory msc on msc.categoryid= c.categoryid
+                 inner join MASWAREHOUSES w  on w.warehouseid = t.warehouseid
+                 left outer join
+                (
+                   select tb.warehouseid, tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty,0)) issueqty
+                   from tboutwards tbo, tbindentitems tbi , tbindents tb
+                   where 1=1 and tbo.indentitemid = tbi.indentitemid and tbi.indentid = tb.indentid and tb.status = 'C' and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null
+                   group by tbi.itemid, tb.warehouseid, tbo.inwno
+                 ) iq on b.inwno = Iq.inwno and iq.itemid = i.itemid and iq.warehouseid = t.warehouseid
+                 Where 1=1 " + whsearchP + @"  " + mcid + @"  and T.Status = 'C' and(b.ExpDate >= SysDate or nvl(b.ExpDate, SysDate) >= SysDate) And(b.Whissueblock = 0 or b.Whissueblock is null)                
+                 and t.notindpdmis is null " + whidW + @"  and b.notindpdmis is null  " + whidT + @"  and i.notindpdmis is null " + whitemid + @"
+                 ) A
+                 where 1=1 and nvl(READYFORISSUE,0)+nvl(PENDING,0)>0
+                 group by  A.itemcode,A.ItemName, A.strength1,A.SKU,A.edlcat,edl,itemid
+
+                 order by A.ItemName ";
+            var myList = _context.CGMSCStockDbSet
+.FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+
+
+        [HttpGet("WarehouseWiseStock")]
+        public async Task<ActionResult<IEnumerable<WHWiseStockDTO>>> WarehouseWiseStock(string mitemid, string whid)
+        {
+
+
+            string whmitemid = ""; string mwhmitemid = ""; string ihmitemid = "";
+            if (mitemid != "0")
+            {
+                whmitemid = " and mi.itemid=" + mitemid;
+                mwhmitemid = " and m.itemid=" + mitemid;
+                ihmitemid = " and i.itemid =" + mitemid;
+
+
+            }
+            string whWarehouseid = ""; string toWHID = "";
+            if (whid != "0")
+            {
+                whWarehouseid = " and w.warehouseid=" + whid;
+                toWHID = " and t.towarehouseid=" + whid;
+
+            }
+            string qry = @"   select w.WAREHOUSENAME,w.warehouseid,nvl(READYFORISSUE, 0) as READYFORISSUE,nvl(PENDING, 0) as PENDING,
+nvl(pip.pipelineqty, 0) supplierpipeline,nvl(IWHP.transferqty, 0) iwhpipeline,AITEMID,pip.itemid pipitemid, iwhp.itemid iwhitemid
+
+,(case when AITEMID is not null then AITEMID else case when AITEMID is null and pip.itemid is not null then
+pip.itemid else iwhp.itemid end end)|| w.warehouseid as ID
+from MASWAREHOUSES w
+left outer join
+(
+select A.itemcode as ITEMCODE,A.ItemName as ITEMNAME,A.strength1 as STRENGTH1, A.SKU,(case when sum(A.ReadyForIssue) > 0 then sum(A.ReadyForIssue) else 0 end) as READYFORISSUE,(case when sum(nvl(Pending, 0)) > 0 then sum(nvl(Pending,0)) else 0 end) PENDING
+,edlcat,edl,warehouseid,A.itemid as AITEMID
+                  from
+                 (
+                 select w.warehouseid, mi.ITEMCODE, b.inwno, mi.ITEMNAME, mi.strength1, mi.unit as SKU,
+               (case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.Qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) ReadyForIssue,  
+                   case when mi.qctest = 'N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) end) end Pending
+, e.edlcat,e.edl,mi.itemid
+
+                  from tbreceiptbatches b
+                  inner join tbreceiptitems i on b.receiptitemid = i.receiptitemid
+                  inner join tbreceipts t on t.receiptid = i.receiptid
+                  inner join masitems mi on mi.itemid = i.itemid
+                   left outer join masedl e on e.edlcat = mi.edlcat
+                  inner join masitemcategories c on c.categoryid = mi.categoryid
+                  inner join masitemmaincategory mc on mc.MCID = c.MCID
+                  left outer join massubitemcategory msc on msc.categoryid = c.categoryid
+                 inner join MASWAREHOUSES w  on w.warehouseid = t.warehouseid
+                 left outer join
+                (
+                   select tb.warehouseid, tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty, 0)) issueqty
+                   from tboutwards tbo, tbindentitems tbi, tbindents tb
+                   where 1 = 1 and  tbo.indentitemid = tbi.indentitemid and tbi.indentid = tb.indentid and tb.status = 'C' and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null
+                   group by tbi.itemid, tb.warehouseid, tbo.inwno
+                 ) iq on b.inwno = Iq.inwno and iq.itemid = i.itemid and iq.warehouseid = t.warehouseid
+                 Where T.Status = 'C' and(b.ExpDate >= SysDate or nvl(b.ExpDate, SysDate) >= SysDate) And(b.Whissueblock = 0 or b.Whissueblock is null)
+                     " + whmitemid + @"  " + whWarehouseid + @"
+                 and t.notindpdmis is null and b.notindpdmis is null and i.notindpdmis is null
+                 ) A group by A.itemcode,A.ItemName, A.strength1,A.SKU ,edlcat,edl,warehouseid,A.itemid
+ ) b on b.warehouseid = w.warehouseid
+ left outer join
+ (
+ select  warehouseid, itemid, sum(pipelineQTY) pipelineQTY from
+(
+select w.warehousename, w.warehouseid, m.itemcode, OI.itemid, op.ponoid, sum(soi.ABSQTY) as absqty, nvl(rec.receiptabsqty, 0)receiptabsqty,
+case when op.extendeddate is null and round(sysdate - op.soissuedate, 0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty, 0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate + 1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty, 0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and(op.extendeddate + 1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty, 0) else 0 end end end as pipelineQTY
+from soOrderPlaced OP
+inner
+join SoOrderedItems OI on OI.PoNoID = OP.PoNoID
+inner
+join soorderdistribution soi on soi.orderitemid = OI.orderitemid
+inner
+join masitems m on m.itemid = oi.itemid
+inner
+join maswarehouses w on w.warehouseid = soi.warehouseid
+left outer join
+(
+select tr.warehouseid, tr.ponoid, tri.itemid, sum(tri.receiptabsqty) receiptabsqty from tbreceipts tr
+inner join tbreceiptitems tri on tri.receiptid= tr.receiptid
+where tr.receipttype= 'NO' and tr.status= 'C' and tr.notindpdmis is null and tri.notindpdmis is null
+group by tr.ponoid,tri.itemid,tr.warehouseid
+) rec on rec.ponoid = OP.PoNoID and rec.itemid = OI.itemid and rec.warehouseid = soi.warehouseid
+ where op.status  in ('C', 'O') " + mwhmitemid + @"  " + whWarehouseid + @"
+ group by w.warehousename,w.warehouseid,m.itemcode,op.ponoid,OI.itemid ,rec.receiptabsqty,
+ op.soissuedate,op.extendeddate ,receiptdelayexception
+ having(case when op.extendeddate is null and round(sysdate - op.soissuedate, 0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty, 0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate + 1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty, 0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and(op.extendeddate + 1) <= op.soissuedate
+and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty, 0) else 0 end end end) > 0
+) group by warehouseid,itemid
+ ) pip on pip.warehouseid = w.warehouseid
+
+
+ left outer join
+(
+select sum(o.issueqty) as transferQTY, t.towarehouseid, tbi.itemid
+from stktransfers t
+inner
+join stktransferitems i on i.transferid = t.transferid
+inner
+join tbindents ti on ti.transferid = t.transferid
+inner
+join tbindentitems tbi on tbi.indentid = ti.indentid and tbi.itemid = i.itemid
+inner join tboutwards o on o.indentitemid = tbi.indentitemid
+where t.status = 'C' " + ihmitemid + @" " + toWHID + @"
+and t.transferid in (select transferid from tbindents where status = 'C' and transferid is not null)
+and t.transferid not in (select transferid from tbreceipts where status = 'C' and transferid is not null)
+and t.transferdate between '01-APR-23' and sysdate
+group by t.towarehouseid,tbi.itemid
+) IWHP on    IWHP.towarehouseid = w.warehouseid
+ order by w.WAREHOUSENAME ";
+            var myList = _context.WHWiseStockDbSet
+.FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
+        [HttpGet("QCLabOutTime")]
+        public async Task<ActionResult<IEnumerable<QCLabOutDTO>>> QCLabOutTime()
+        {
+
+
+            string qry = @"  select ROW_NUMBER() OVER ( ORDER BY mcid ) AS ID,mcid, mcategory,count(distinct itemcode) as nositems,count(distinct batchno) as nosbatch,Round(sum(receiptvalue)/10000000,2) as uqcValue
+ ,timeline,ExceddedSincetimeline,ExceddedSincetimeline1
+ from 
+ (
+ select mc.mcid,mc.mcategory,m.itemcode,i.itemid,tb.batchno,tb.absrqty receiptqty,ci.finalrategst,tb.absrqty*ci.finalrategst receiptvalue
+ ,qt.labreceiptdate,round(sysdate-qt.labreceiptdate) as nosdays,mt.qcdayslab
+ ,case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end as timeline
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Out of timeline'
+then round(sysdate-qt.labreceiptdate)-mt.qcdayslab else 0 end as Dayover
+
+,case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>15 then '>15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 then '7-15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>=3 then '3-6 days'
+else 'Under 2 days' 
+end end end as  ExceddedSincetimeline,
+
+case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>15 then '1.>15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 then '2.7-15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>=3 then '3.3-6 days'
+else '4.Under 2 days' 
+end end end as  ExceddedSincetimeline1
+
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Within timeline'
+then mt.qcdayslab-round(sysdate-qt.labreceiptdate) else 0 end as PendingDays
+ from tbreceipts t
+ inner join tbreceiptitems i on (i.receiptid = t.receiptid)
+ inner join tbreceiptbatches tb on (i.receiptitemid =tb.receiptitemid)
+ left outer join soordereditems oi on oi.ponoid = tb.ponoid
+ left outer join aoccontractitems ci on ci.contractitemid = oi.contractitemid
+ inner join masitems m on m.itemid = i.itemid
+ inner join masitemtypes mt on mt.itemtypeid = m.itemtypeid
+ inner join masitemcategories ic on ic.categoryid = m.categoryid
+ inner join masitemmaincategory mc on mc.MCID=ic.MCID
+ left outer join
+ (
+ select tbi.itemid,tbo.outwno,tbo.inwno from tboutwards tbo 
+ inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+ inner join tbindents t on t.indentid = tbi.indentid 
+ where  t.issuetype in ('QA','QS') and t.status = 'C' 
+ ) qi on qi.inwno = tb.inwno 
+ 
+   left outer join
+ (
+ select s.outwno,s.itemid,s.receiptdate samplereceiptdate,t.samplereceiveddate labreceiptdate 
+ from qcsamples s
+ inner join qctests t on t.sampleid = s.sampleid or t.sampleid = s.refsampleid 
+ ) qt on qt.outwno = qi.outwno 
+ 
+ where t.status='C' and  t.receipttype = 'NO' and qt.labreceiptdate between '01-Apr-23' and sysdate
+ and m.qctest = 'Y' and tb.whissueblock is null and tb.qastatus = 0
+ and mt.qcdayslab is  not null and round(sysdate-qt.labreceiptdate)-mt.qcdayslab>0
+ )
+ where timeline='Out of timeline'
+ group by mcid, mcategory,timeline,ExceddedSincetimeline,ExceddedSincetimeline1
+ order by ExceddedSincetimeline1 ";
+            var myList = _context.QCLabOutDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+
+        [HttpGet("QCLabOutTimeBatchwise")]
+        public async Task<ActionResult<IEnumerable<QCLabTimeLineDetailsDTO>>> QCLabOutTimeBatchwise(string mcid, string dayID)
+        {
+            string dayclause = "";
+            if (dayID == "1.>15 days")
+            {
+                dayclause = " and  (round(sysdate - qt.labreceiptdate) - mt.qcdayslab) > 15 ";
+            }
+            else if (dayID == "2.7-15 days")
+            {
+                dayclause = " and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 ";
+            }
+            else if (dayID == "3.3-6 days")
+            {
+                dayclause = " and ( round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and(round(sysdate-qt.labreceiptdate)-mt.qcdayslab )>=3 ";
+            }
+            else if (dayID == "4.Under 2 days")
+            {
+                dayclause = " and  (round(sysdate - qt.labreceiptdate) - mt.qcdayslab) <= 2 ";
+            }
+            else
+            {
+
+            }
+
+            string qry = @" select itemcode,mcid,mcategory,itemname||''||itemcode as itemname,itemtype,qcdayslab,batchno,Round(sum(nosdays)/count(batchno),0) as AvgDayInLab,count(distinct labid) noslab ,
+sum(receiptqty) as QTY,ExceddedSincetimeline1
+from 
+(
+
+ select itemcode,itemname,itemtype,batchno,labreceiptdate,qcdayslab,nosdays,LABNAME,receiptqty,labid,mcid,mcategory,ExceddedSincetimeline1 from ( 
+ 
+ select lb.labid,lb.LABNAME,mc.mcid,mc.mcategory,m.itemcode,m.itemname,i.itemid,tb.batchno,tb.absrqty receiptqty,ci.finalrategst,tb.absrqty*ci.finalrategst receiptvalue
+ ,qt.labreceiptdate,round(sysdate-qt.labreceiptdate) as nosdays,mt.qcdayslab
+ ,case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end as timeline
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Out of timeline'
+then round(sysdate-qt.labreceiptdate)-mt.qcdayslab else 0 end as Dayover
+
+,case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>15 then '>15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 then '7-15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>=3 then '3-6 days'
+else 'Under 2 days' 
+end end end as  ExceddedSincetimeline,
+
+case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>15 then '1.>15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 then '2.7-15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>=3 then '3.3-6 days'
+else '4.Under 2 days' 
+end end end as  ExceddedSincetimeline1
+
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Within timeline'
+then mt.qcdayslab-round(sysdate-qt.labreceiptdate) else 0 end as PendingDays
+,mt.itemtypename as itemtype
+ from tbreceipts t
+ inner join tbreceiptitems i on (i.receiptid = t.receiptid)
+ inner join tbreceiptbatches tb on (i.receiptitemid =tb.receiptitemid)
+ left outer join soordereditems oi on oi.ponoid = tb.ponoid
+ left outer join aoccontractitems ci on ci.contractitemid = oi.contractitemid
+ inner join masitems m on m.itemid = i.itemid
+ inner join masitemtypes mt on mt.itemtypeid = m.itemtypeid
+ inner join masitemcategories ic on ic.categoryid = m.categoryid
+ inner join masitemmaincategory mc on mc.MCID=ic.MCID
+ left outer join
+ (
+ select tbi.itemid,tbo.outwno,tbo.inwno from tboutwards tbo 
+ inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+ inner join tbindents t on t.indentid = tbi.indentid 
+ where  t.issuetype in ('QA','QS') and t.status = 'C' 
+ ) qi on qi.inwno = tb.inwno 
+ 
+   left outer join
+ (
+ select s.outwno,s.itemid,s.receiptdate samplereceiptdate,t.samplereceiveddate labreceiptdate ,labid
+ from qcsamples s
+ inner join qctests t on t.sampleid = s.sampleid or t.sampleid = s.refsampleid 
+ ) qt on qt.outwno = qi.outwno 
+ inner join qclabs lb on  lb.labid=qt.labid
+ 
+ where 1=1 and mc.MCID=1 and t.status='C' and  t.receipttype = 'NO' and qt.labreceiptdate between '01-Apr-23' and sysdate
+ and m.qctest = 'Y' and tb.whissueblock is null and tb.qastatus = 0
+ and mt.qcdayslab is  not null and round(sysdate-qt.labreceiptdate)-mt.qcdayslab>0  " + dayclause + @"
+ )
+ ) group by itemcode,itemname,qcdayslab,batchno,itemtype,mcid,mcategory,ExceddedSincetimeline1
+ order by Round(sum(nosdays)/count(batchno),0) desc ";
+            var myList = _context.QCLabTimeLineDetailsDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("QCLabOutTimeLabDetails")]
+        public async Task<ActionResult<IEnumerable<QCLabTimeLineBatchDTO>>> QCLabOutTimeLabDetails(string mcid, string dayID, string batchno)
+        {
+            string dayclause = "";
+            if (dayID == ">15 days")
+            {
+                dayclause = " and  (round(sysdate - qt.labreceiptdate) - mt.qcdayslab) > 15 ";
+            }
+            else if (dayID == "7-15 days")
+            {
+                dayclause = " and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 ";
+            }
+            else if (dayID == "3-6 days")
+            {
+                dayclause = " and ( round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and(round(sysdate-qt.labreceiptdate)-mt.qcdayslab )>=3 ";
+            }
+            else if (dayID == "Under 2 days")
+            {
+                dayclause = " and  (round(sysdate - qt.labreceiptdate) - mt.qcdayslab) <= 2 ";
+            }
+
+
+            string qry = @"
+ select distinct mcid,mcategory, itemcode,itemname,itemtype,qcdayslab,batchno,
+ labreceiptdate,nosdays,LABNAME,nvl(PHONE1,0) as PHONE1 ,labid,ExceddedSincetimeline  from ( 
+ select lb.labid,lb.LABNAME,lb.PHONE1,mc.mcid,mc.mcategory,m.itemcode,m.itemname,i.itemid,tb.batchno,tb.absrqty receiptqty,ci.finalrategst,tb.absrqty*ci.finalrategst receiptvalue
+ ,qt.labreceiptdate,round(sysdate-qt.labreceiptdate) as nosdays,mt.qcdayslab
+ ,case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end as timeline
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Out of timeline'
+then round(sysdate-qt.labreceiptdate)-mt.qcdayslab else 0 end as Dayover
+
+,case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>15 then '>15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 then '7-15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>=3 then '3-6 days'
+else 'Under 2 days' 
+end end end as  ExceddedSincetimeline,
+
+case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>15 then '1.>15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=15 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>6 then '2.7-15 days'
+else case when (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)<=6 and (round(sysdate-qt.labreceiptdate)-mt.qcdayslab)>=3 then '3.3-6 days'
+else '4.Under 2 days' 
+end end end as  ExceddedSincetimeline1
+
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Within timeline'
+then mt.qcdayslab-round(sysdate-qt.labreceiptdate) else 0 end as PendingDays
+,mt.itemtypename as itemtype
+ from tbreceipts t
+ inner join tbreceiptitems i on (i.receiptid = t.receiptid)
+ inner join tbreceiptbatches tb on (i.receiptitemid =tb.receiptitemid)
+ left outer join soordereditems oi on oi.ponoid = tb.ponoid
+ left outer join aoccontractitems ci on ci.contractitemid = oi.contractitemid
+ inner join masitems m on m.itemid = i.itemid
+ inner join masitemtypes mt on mt.itemtypeid = m.itemtypeid
+ inner join masitemcategories ic on ic.categoryid = m.categoryid
+ inner join masitemmaincategory mc on mc.MCID=ic.MCID
+ left outer join
+ (
+ select tbi.itemid,tbo.outwno,tbo.inwno from tboutwards tbo 
+ inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+ inner join tbindents t on t.indentid = tbi.indentid 
+ where  t.issuetype in ('QA','QS') and t.status = 'C' 
+ ) qi on qi.inwno = tb.inwno 
+ 
+   left outer join
+ (
+ select s.outwno,s.itemid,s.receiptdate samplereceiptdate,t.samplereceiveddate labreceiptdate ,labid
+ from qcsamples s
+ inner join qctests t on t.sampleid = s.sampleid or t.sampleid = s.refsampleid 
+ ) qt on qt.outwno = qi.outwno 
+ inner join qclabs lb on  lb.labid=qt.labid
+ 
+ where  mc.MCID=" + mcid + @" and t.status='C' and  t.receipttype = 'NO' and qt.labreceiptdate between '01-Apr-23' and sysdate
+ and m.qctest = 'Y' and tb.whissueblock is null and tb.qastatus = 0
+ and mt.qcdayslab is  not null " + dayclause + @"  and batchno='" + batchno + @"'
+ ) order by  labreceiptdate ";
+            var myList = _context.QCLabTimeLineBatchDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("QCLabWithTime")]
+        public async Task<ActionResult<IEnumerable<QCLabWithDTO>>> QCLabWithTime()
+        {
+
+
+            string qry = @"  
+ 
+ select ROW_NUMBER() OVER ( ORDER BY mcid ) AS ID,mcid, mcategory,count(distinct itemcode) as nositems,count(distinct batchno) as nosbatch,Round(sum(receiptvalue)/10000000,2) as uqcValue
+ ,timeline,ExceddedSincetimeline,ExceddedSincetimeline1
+ from 
+ (
+ select mc.mcid,mc.mcategory,m.itemcode,i.itemid,tb.batchno,tb.absrqty receiptqty,ci.finalrategst,tb.absrqty*ci.finalrategst receiptvalue
+ ,qt.labreceiptdate,round(sysdate-qt.labreceiptdate) as nosdays,mt.qcdayslab
+ ,case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end as timeline
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Out of timeline'
+then round(sysdate-qt.labreceiptdate)-mt.qcdayslab else 0 end as Dayover
+
+,case when (mt.qcdayslab-round(sysdate-qt.labreceiptdate))>15 then '>15 days'
+else case when (mt.qcdayslab-round(sysdate-qt.labreceiptdate))<=15 and (mt.qcdayslab-round(sysdate-qt.labreceiptdate))>6 then '7-15 days'
+else case when (mt.qcdayslab-round(sysdate-qt.labreceiptdate))<=6 and (mt.qcdayslab-round(sysdate-qt.labreceiptdate))>=3 then '3-6 days'
+else 'Under 2 days' 
+end end end as  ExceddedSincetimeline,
+
+case when (mt.qcdayslab-round(sysdate-qt.labreceiptdate))>15 then '4.>15 days'
+else case when (mt.qcdayslab-round(sysdate-qt.labreceiptdate))<=15 and (mt.qcdayslab-round(sysdate-qt.labreceiptdate))>6 then '3.7-15 days'
+else case when (mt.qcdayslab-round(sysdate-qt.labreceiptdate))<=6 and (mt.qcdayslab-round(sysdate-qt.labreceiptdate))>=3 then '2.3-6 days'
+else '1.Under 2 days' 
+end end end as  ExceddedSincetimeline1
+
+
+,case when (case when mt.qcdayslab is  null then 'Timeline Not Set'
+else case when 
+round((sysdate-qt.labreceiptdate),0) <= mt.qcdayslab then 'Within timeline' else 'Out of timeline' end end)='Within timeline'
+then mt.qcdayslab-round(sysdate-qt.labreceiptdate) else 0 end as PendingDays
+
+
+ from tbreceipts t
+ inner join tbreceiptitems i on (i.receiptid = t.receiptid)
+ inner join tbreceiptbatches tb on (i.receiptitemid =tb.receiptitemid)
+ left outer join soordereditems oi on oi.ponoid = tb.ponoid
+ left outer join aoccontractitems ci on ci.contractitemid = oi.contractitemid
+ inner join masitems m on m.itemid = i.itemid
+ inner join masitemtypes mt on mt.itemtypeid = m.itemtypeid
+ inner join masitemcategories ic on ic.categoryid = m.categoryid
+ inner join masitemmaincategory mc on mc.MCID=ic.MCID
+ left outer join
+ (
+ select tbi.itemid,tbo.outwno,tbo.inwno from tboutwards tbo 
+ inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+ inner join tbindents t on t.indentid = tbi.indentid 
+ where  t.issuetype in ('QA','QS') and t.status = 'C' 
+ ) qi on qi.inwno = tb.inwno 
+ 
+   left outer join
+ (
+ select s.outwno,s.itemid,s.receiptdate samplereceiptdate,t.samplereceiveddate labreceiptdate 
+ from qcsamples s
+ inner join qctests t on t.sampleid = s.sampleid or t.sampleid = s.refsampleid 
+ ) qt on qt.outwno = qi.outwno 
+ 
+ where t.status='C' and  t.receipttype = 'NO' and qt.labreceiptdate between '01-Apr-23' and sysdate
+ and m.qctest = 'Y' and tb.whissueblock is null and tb.qastatus = 0
+ and mt.qcdayslab is  not null and mt.qcdayslab-round(sysdate-qt.labreceiptdate)>0
+ )
+ where timeline='Within timeline'
+ group by mcid, mcategory,timeline,ExceddedSincetimeline,ExceddedSincetimeline1
+ order by ExceddedSincetimeline1 ";
+            var myList = _context.QCLabWithDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+        [HttpGet("QCResultFinalUpdate")]
+        public async Task<ActionResult<IEnumerable<QCLabOutDTO>>> QCResultFinalUpdate()
+        {
+
+
+            string qry = @"  select ROW_NUMBER() OVER ( ORDER BY mcid ) AS ID,mcid, mcategory,count(distinct itemid) as nositems
+,count(distinct batchno) as nosbatch,Round(sum(receiptvalue)/10000000,2) as uqcValue,'Final Update Pending' as timeline
+
+,daysPendingP as  ExceddedSincetimeline,daysPending as ExceddedSincetimeline1
+from 
+(
+select distinct t.sampleid,mc.mcid, mc.mcategory, ql.labid,ql.labname,ql.email,ql.phone1 mobileno,m.itemcode drugcode,m.itemname drugname,
+mt.itemtypename,mt.itemtypeid,s.batchno,t.sampleno,t.samplereceiveddate,t.labuploadeddate,mt.qcdayslab qcdeadlinedays,
+round((sysdate-t.labuploadeddate),0) PendinDays,t.labresult
+
+,case when dr.descid is not null then '6:Discrepancy in Report' else case when round((sysdate-t.labuploadeddate),0)=0 then '5:-Todays Pending'
+else case when round((sysdate-t.labuploadeddate),0)>0 and  round((sysdate-t.labuploadeddate),0)<=3
+then '4:-1 to 3 days Pending'
+else case when round((sysdate-t.labuploadeddate),0)>3 and  round((sysdate-t.labuploadeddate),0)<=6
+then '3:-3 to 6 days Pending' else case when round((sysdate-t.labuploadeddate),0)>6 and  round((sysdate-t.labuploadeddate),0)<=10
+then '2:-7 to 10 days Pending'
+else  '1:More than 10 days Pending'
+end end end end end as daysPending
+,case when dr.descid is not null then 'Discrepancy in Report' else case when round((sysdate-t.labuploadeddate),0)=0 then 'Today'
+else case when round((sysdate-t.labuploadeddate),0)>0 and  round((sysdate-t.labuploadeddate),0)<=3
+then '1-3 days'
+else case when round((sysdate-t.labuploadeddate),0)>3 and  round((sysdate-t.labuploadeddate),0)<=6
+then '3-6 days' else case when round((sysdate-t.labuploadeddate),0)>7 and  round((sysdate-t.labuploadeddate),0)<=10
+then '7-10 days' 
+else  '> 10 days'
+end end end end end as daysPendingP
+
+,m.itemid,ci.finalrategst,tb.absrqty*ci.finalrategst receiptvalue
+from qctests t
+inner join qcsamples s on s.sampleid = t.sampleid
+inner join masitems m on m.itemid = s.itemid
+inner join masitemcategories c on c.categoryid=m.categoryid
+ inner join masitemmaincategory mc on mc.MCID=c.MCID
+ Inner Join MasItemVens Ven on (Ven.VenID = m.VenID) 
+inner join masitemtypes mt on mt.itemtypeid = m.itemtypeid
+inner join qclabs ql on ql.labid = t.labid
+inner join usrusers u on u.labid=ql.labid
+
+ left outer join  
+ ( 
+ select max(descid) as descid,labid,sampleid,testid from qcsamplediscrepancy 
+ where 1=1 and  islabdisc='N'  group by labid,sampleid,testid 
+ ) dr  on dr.labid=T.LabID and dr.testid=T.QcTestID  and  dr.sampleid=T.Sampleid 
+ left outer join qcsamplediscrepancy d on d.descid=dr.descid 
+  left outer join
+ (
+ select tbi.itemid,tbo.outwno,tbo.inwno from tboutwards tbo 
+ inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+ inner join tbindents t on t.indentid = tbi.indentid 
+ where  t.issuetype in ('QA','QS') and t.status = 'C' 
+ ) qi on qi.outwno=s.outwno
+  inner join tbreceiptbatches tb on tb.inwno  =qi.inwno
+  left outer join soordereditems oi on oi.ponoid = tb.ponoid
+ left outer join aoccontractitems ci on ci.contractitemid = oi.contractitemid
+where  1=1 and T.LabIssueDate>'01-Apr-2022' 
+and   T.SampleReceivedDate is not null   and t.labuploadeddate is not null 
+and t.reportreceiveddate is null and t.testresult is  null
+) group by mcid, mcategory,daysPending,daysPendingP order by mcid,daysPending ";
+            var myList = _context.QCLabOutDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("getUnpaidSupplier")]
+        public async Task<ActionResult<IEnumerable<UnpaidSupplierDTO>>> getUnpaidSupplier()
+        {
+
+
+            string qry = @"  select SUPPLIERID,SUPPLIERNAME ||'-' ||to_char(count(distinct PONOID)) as nospo from v_popaymentstatus
+                            where PAYMENTSTATUSNEW !='Paid'
+                            group by SUPPLIERNAME,SUPPLIERID
+                            order by SUPPLIERNAME
+                             ";
+
+            var myList = _context.UnpaidSupplierDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+        [HttpGet("getSupplierLiability")]
+        public async Task<ActionResult<IEnumerable<SupplierLiabilityDTO>>> getSupplierLiability(string supplierId)
+        {
+            string qry = @" select ROW_NUMBER() OVER (ORDER BY FITUNFIT) AS serial_no, FITUNFIT,HODTYPE,count(distinct PONOID) as nosPO
+                            ,Round(sum(LIBWITHOUTADM)/10000000,2) LibAmt from v_fitunfit where supplierid=" + supplierId + @"
+                            group by FITUNFIT,HODTYPE
+                            order by HODTYPE,FITUNFIT";
+
+            var myList = _context.SupplierLiabilityDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+        [HttpGet("getSupplierPO")]
+        public async Task<ActionResult<IEnumerable<SupplierPoDTO>>> getSupplierPO(string supplierId, string fitnessStatus, string hodType)
+        {
+            //string qry = @" select ROW_NUMBER() OVER (ORDER BY LASTMRCDT) AS serial_no, ITEMCODE,ITEMNAME,pono,PODATE,POQTY,
+            //,Round(RECEIPTVALUE/100000,2) as RvalueLacs
+            //                      ,REASONNAME from v_fitunfit where supplierid="+ supplierId +@"
+            //             and FITUNFIT='"+ fitnessStatus + @"' and HODTYPE='"+ hodType +@"'
+            //           order by LASTMRCDT ";
+
+
+            string qry = @" select ROW_NUMBER() OVER (ORDER BY 
+(case when SDACKUSERDT is not null and SDACKUSERDT>LASTMRCDT and SDACKUSERDT>LastQCPaadedDT then SDACKUSERDT else case when LastQCPaadedDT>SDACKUSERDT and LastQCPaadedDT>LASTMRCDT then LastQCPaadedDT else LASTMRCDT end end)
+) AS serial_no, m.ITEMCODE,m.ITEMNAME,pono,PODATE,POQTY,case when LASTMRCDT is not null then  to_char(LASTMRCDT,'dd-MM-yyyy') else 'Not Received' end as LASTMRCDT,
+Round(RECEIPTVALUE/100000,2) as RvalueLacs
+                            ,REASONNAME ,case when sdackuserdt is not null then  to_char(sdackuserdt,'dd-MM-yyyy') else 'Not Received' end as SDDate,PRESENTFILE,FILENO,FILEDT,to_char(LastQCPaadedDT,'dd-MM-yyyy') as LastQCPaadedDT
+                            ,to_char(CASE when SDACKUSERDT is not null and SDACKUSERDT>LASTMRCDT and SDACKUSERDT>LastQCPaadedDT then SDACKUSERDT else case when LastQCPaadedDT>SDACKUSERDT and LastQCPaadedDT>LASTMRCDT then LastQCPaadedDT else LASTMRCDT end end ,'dd-MM-yyyy')  as FitDate
+                            ,FITUNFIT,HODTYPE,
+                            case when  nvl(sc.sanctionid,'0')  ='0' and nvl(scP.fpsanctionid,'0')='0' then 'Not Genrated'                      
+                            else case when (nvl(sc.sanctionid,0)!='0' and  nvl(scP.fpsanctionid,0)=0 and nvl(scP.PID,0)=0) then 'Sanction Gen. on '||to_char(SancGenDT,'dd-MM-yyyy') 
+                            else case when nvl(scP.PID,0)>0 then 'Cheque Prepared on '||to_char(bp.AIDDATE,'dd-MM-yyyy')
+                            else 'Forward For Cheque Prep on '||to_char(FPDate,'dd-MM-yyyy')
+                            end end end as fileFinStatus
+                            ,f.SUPPLIERID,f.SUPPLIERNAME,m.unit,f.RECEIPTQTY,f.QCPASS,case when m.qctest='Y' then 'Required' else 'Not Required' end as QCTest
+                            ,f.BUDGETID,b.BUDGETNAME
+                            from v_fitunfit f
+                            inner join masitems m on m.itemid=f.itemid
+                     inner join masbudget b on b.BUDGETID=f.BUDGETID
+                             left outer join  
+            (
+            select s.ponoid,max(reportreceiveddate) as LastQCPaadedDT,s.itemid
+            from qcsamples s  
+            inner join soOrderPlaced so on so.ponoid=s.ponoid
+            inner join masitems mi on mi.itemid=s.itemid
+            left outer join qctests q on (s.sampleid=q.sampleid or s.refsampleid=q.sampleid )
+            where  q.testresult='SQ' and reportreceiveddate is not null
+            group by s.itemid,s.ponoid
+            ) qt on qt.ponoid=f.ponoid  and qt.itemid=f.ItemID
+             left outer join
+ (
+ select max(sanctionid) sanctionid ,ponoid,Max(SANCTIONDATE) SancGenDT from blpsanctions
+ where STATUS  in ('IN') group by ponoid
+ )sc on sc.ponoid=f.ponoid
+ left outer join
+ (
+ select max(sanctionid) fpsanctionid ,ponoid,Max(SANCTIONDATE) FPDate,max(s.paymentid)PID from blpsanctions s
+ where s.STATUS  in ('FP') group by s.ponoid
+ )scP on scP.ponoid=f.ponoid
+ left outer join blppayments bp on bp.paymentid=scp.PID
+ where f.supplierid=" + supplierId + @"        and f.FITUNFIT='" + fitnessStatus + @"' and f.HODTYPE='" + hodType + @"'";
+
+            var myList = _context.SupplierPoDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+        [HttpGet("QCSameBatchWithDiffPOs")]
+        public async Task<ActionResult<IEnumerable<QCSameBatchDTO>>> QCSameBatchWithDiffPOs()
+        {
+
+
+            string qry = @" select MCID,MCATEGORY,count(distinct itemid) nosItem,count(distinct tested_batchno) as nosBatches from 
+(
+select distinct mc.MCID,mc.MCATEGORY,m.itemid,s.batchno tested_batchno,t.sampleno tested_sampleno,t.reportno,to_char( t.reportdate,'dd-MM-yyyy') reportdate,nvl(s.newtestresult,s.testresult) testresult,o.pono pono_qc_done,sp.suppliername,qsp.batchno batchno_qc_pending,qsp.sampleno as sampleno_pending,to_char(qsp.receiptdate,'dd-MM-yyyy') sample_receiptdate,qsp.pono pono_qc_pending from qcsamples s 
+left outer join qctests t on t.sampleid = s.sampleid or t.sampleid = s.refsampleid
+inner join soorderplaced o on o.ponoid = s.ponoid
+inner join massuppliers sp on sp.supplierid = o.supplierid
+inner join masitems m on m.itemid = s.itemid and m.qctest = 'Y'
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID=c.MCID
+left outer join
+(
+select s.supplierid,s.itemid,batchno,o.pono,s.receiptdate,t.sampleno,nvl(s.newtestresult,s.testresult) testresult from qcsamples s 
+left outer join qctests t on t.sampleid = s.sampleid
+inner join soorderplaced o on o.ponoid = s.ponoid
+where nvl(s.newtestresult,s.testresult) is null
+) qsp on qsp.batchno = s.batchno and qsp.itemid = s.itemid and qsp.supplierid = s.supplierid
+where   nvl(s.newtestresult,s.testresult) = 'SQ' and qsp.pono is not null 
+and  qsp.testresult is null and o.podate>'01-Apr-2019'
+) group by MCID,MCATEGORY";
+            var myList = _context.QCSameBatchDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+        [HttpGet("QCSameBatchWithDiffPOsDetails")]
+        public async Task<ActionResult<IEnumerable<QCSameBatchDetailsDTO>>> QCSameBatchWithDiffPOsDetails(string mcid)
+        {
+
+
+            string qry = @" 
+select ROW_NUMBER() OVER (ORDER BY itemid,tested_batchno,TESTED_SAMPLENO,SAMPLENO_PENDING ) as id,
+itemid,itemcode,itemname,suppliername,pono_qc_done,tested_batchno,
+tested_sampleno,reportno,testresult,reportdate,sampleno_pending,sample_receiptdate,pono_qc_pending
+from 
+(
+
+select distinct  mc.MCID,m.itemid,m.itemcode,m.itemname,s.batchno tested_batchno,t.sampleno tested_sampleno,t.reportno,to_char( t.reportdate,'dd-MM-yyyy') reportdate,nvl(s.newtestresult,s.testresult) testresult,o.pono pono_qc_done,sp.suppliername,qsp.batchno batchno_qc_pending,qsp.sampleno as sampleno_pending,to_char(qsp.receiptdate,'dd-MM-yyyy') sample_receiptdate,qsp.pono pono_qc_pending from qcsamples s 
+left outer join qctests t on t.sampleid = s.sampleid or t.sampleid = s.refsampleid
+inner join soorderplaced o on o.ponoid = s.ponoid
+inner join massuppliers sp on sp.supplierid = o.supplierid
+inner join masitems m on m.itemid = s.itemid and m.qctest = 'Y'
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID=c.MCID
+left outer join
+(
+select s.supplierid,s.itemid,batchno,o.pono,s.receiptdate,t.sampleno,nvl(s.newtestresult,s.testresult) testresult from qcsamples s 
+left outer join qctests t on t.sampleid = s.sampleid
+inner join soorderplaced o on o.ponoid = s.ponoid
+where nvl(s.newtestresult,s.testresult) is null
+) qsp on qsp.batchno = s.batchno and qsp.itemid = s.itemid and qsp.supplierid = s.supplierid
+where 1=1 and  o.podate>'01-04-2019' and  mc.mcid=" + mcid + @" and nvl(s.newtestresult,s.testresult) = 'SQ' and qsp.pono is not null 
+and  qsp.testresult is null
+) ";
+            var myList = _context.QCSameBatchDetailsDbset
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+
+
+        [HttpGet("YearWiseExpired")]
+        public async Task<ActionResult<IEnumerable<YearWiseExpiredDTO>>> YearWiseExpired(string mcid)
+        {
+
+
+            string qry = @" select Year, mcid,MCATEGORY,count(distinct itemcode) noofitems,round(sum(ExpValueBasic)/10000000,3) ExpValueBasic,round(sum(ExpValueGST)/10000000,3) ExpValueGST from
+(
+select distinct (select SHACCYEAR as ACCYEAR  from masaccyearsettings where b.expdate between startdate and enddate) as Year, b.ponoid,mc.mcid,mc.MCATEGORY,mi.itemcode,mi.itemname,strength1 strength,b.batchno,b.expdate,w.warehousename, b.inwno,mi.itemid, 
+                (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) else (case when mi.qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) expqty,nvl(sb.BASICRATENEW,sb.acibasicrate) basicrate,
+                nvl(sb.ACICST,0) cst,nvl(sb.ACIVAT,0) vat,nvl(sb.acgstpvalue,0) gst,nvl(sb.SUPP,0) finalrate,
+                ((case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) *nvl(sb.BASICRATENEW,sb.acibasicrate)) as ExpValueBasic,
+                ((case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) *sb.SUPP ) as ExpValueGST,
+                 round( (Round((b.EXPDate-nvl(case when t.receipttype = 'NO' then t.receiptdate else 
+                 case when t.receipttype = 'RF' then nvl(f.receiptdate,mr.receiptdate) else
+                 case when t.receipttype = 'RQ' then nvl(q.receiptdate,mr.receiptdate) else nr.norcptdate end end end,nrs.rd)),0)/Round((b.EXPDate-b.MFGDate),0))*100,2) shelflife
+                 from tbreceiptbatches b 
+                 inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid
+                 inner join tbreceipts t on t.receiptid=i.receiptid
+                 inner join masitems mi on mi.itemid=i.itemid
+                 inner join masitemcategories c on c.categoryid=mi.categoryid
+                 inner join masitemmaincategory mc on mc.MCID=c.MCID
+                 inner join maswarehouses w  on w.warehouseid=t.warehouseid
+                 left outer join soorderplaced so on so.ponoid = b.ponoid
+               
+
+                 left outer join
+                 ( 
+                   select  tb.warehouseid,tbi.itemid,tbo.inwno,sum(nvl(tbo.issueqty,0) + nvl(tbo.reconcile_qty,0)) issueqty  
+                   from tboutwards tbo, tbindentitems tbi , tbindents tb
+                   where  tbo.indentitemid=tbi.indentitemid and tbi.indentid=tb.indentid and tb.status = 'C' 
+                   and tb.issuetype not in ('EX') 
+                   and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null
+                   group by tbi.itemid,tb.warehouseid,tbo.inwno 
+                 ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.warehouseid=t.warehouseid 
+
+                  left outer join 
+                  (
+                    select distinct c.ponoid,ri.itemid,c.inwno,si.basicrate,aci.basicrate acibasicrate,aci.basicratenew,c.batchno
+                   ,case when  (r.receiptdate < '01-Jul-2017' ) then coalesce(round(((si.basicrate) + ((si.basicrate *si.percentvalue)/100)+((si.basicrate *nvl(si.exciseduty,0))/100) ),2),si.singleunitprice) else 
+                   (case when aci.gstflag='Y' then aci.finalrategst else coalesce(round(((si.basicrate) + ((si.basicrate *si.percentvalue)/100)+((si.basicrate *nvl(si.ExciseDuty,0))/100) ),2),si.singleunitprice) end) end supp ,
+                   case when aci.cstvat ='CST' then aci.percentvalue  else 0 end ACICST,  
+                   case when aci.cstvat ='VAT' then aci.percentvalue  else 0 end acivat,  
+                   case when aci.gstflag='Y' then nvl(aci.percentvaluegst,0) else 0 end acgstpvalue   from tbreceipts r 
+                   inner join  tbreceiptitems ri on ri.receiptid = r.receiptid
+                   inner join tbreceiptbatches c on  c.receiptitemid =ri.receiptitemid
+                   left outer join tboutwards tbo on tbo.inwno = c.inwno
+                   left outer join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+                   left outer join tbindents t on t.indentid = tbi.indentid
+                   left outer join soorderplaced s on s.ponoid=c.ponoid
+                   inner join soordereditems si on  si.ponoid=c.ponoid and si.itemid=ri.itemid   
+                   inner join  aoccontractitems aci on aci.contractitemid=si.contractitemid
+                   inner join aoccontracts ac on ac.contractid=aci.contractid
+                   where r.status='C' 
+                   and c.notindpdmis is null 
+                   group by c.ponoid,ri.itemid,c.inwno,si.basicrate,t.indentdate,aci.basicrate,
+                   c.batchno,si.singleunitprice,si.percentvalue,si.exciseduty,aci.basicratenew,aci.basicrate,aci.percentvalue,aci.percentvaluegst,aci.cstvat,
+                   r.receiptdate,aci.gstflag,aci.singleunitprice,aci.singleunitprice,aci.finalrategst       
+                  ) sb on sb.inwno=b.inwno and sb.itemid=i.itemid
+                  left outer join
+                  (
+                    select distinct s.receipttype, i.itemid, tb.ponoid, tb.inwno,tb.batchno,t.receiptdate,t.warehouseid ,t.fromwarehouseid,t.transferid ,s.transferid stransferid,s.receipttype norcpttype,s.receiptdate norcptdate               
+                                                from tbreceipts t 
+                                                inner join tbreceiptitems i on (i.receiptid = t.receiptid) 
+                                                inner join tbreceiptbatches tb on (i.receiptitemid =tb.receiptitemid) 
+                                                inner join
+                                                (
+                                                   select  tb.warehouseid,tbi.itemid,tbo.inwno,b.batchno,b.ponoid ,tb.transferid,t.receipttype,t.receiptdate
+                                                   from tboutwards tbo 
+                                                   inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+                                                   inner join tbindents tb on tb.indentid=tbi.indentid
+                                                   inner join tbreceiptbatches b on b.inwno = tbo.inwno
+                                                   inner join tbreceiptitems i on i.receiptitemid = b.receiptitemid
+                                                   inner join tbreceipts t on t.receiptid = i.receiptid
+                                                   where  tb.status = 'C'  and t.receipttype = 'NO' 
+                                                ) s on s.transferid = t.transferid and s.ponoid = tb.ponoid and s.batchno = tb.batchno 
+                                                where t.status = 'C'
+                  ) nr on nr.ponoid = b.ponoid and nr.batchno = b.batchno and nr.warehouseid = t.warehouseid and nr.inwno = b.inwno
+
+                  left outer join
+                  (
+                  select distinct s.receipttype, i.itemid, tb.ponoid, tb.inwno,tb.batchno,t.receiptdate,t.warehouseid ,t.fromwarehouseid,t.transferid ,s.transferid stransferid,
+                    s.receipttype norcpttype,s.receiptdate norcptdate,nrs.receipttype rt,max(nrs.receiptdate) rd,  nrs.warehouseid nwid            
+                                                from tbreceipts t 
+                                                inner join tbreceiptitems i on (i.receiptid = t.receiptid) 
+                                                inner join tbreceiptbatches tb on (i.receiptitemid =tb.receiptitemid) 
+                                                inner join
+                                                (
+                                                   select  tb.warehouseid,t.fromwarehouseid,tbi.itemid,tbo.inwno,b.batchno,b.ponoid ,tb.transferid,t.receipttype,t.receiptdate
+                                                   from tboutwards tbo 
+                                                   inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+                                                   inner join tbindents tb on tb.indentid=tbi.indentid
+                                                   inner join tbreceiptbatches b on b.inwno = tbo.inwno
+                                                   inner join tbreceiptitems i on i.receiptitemid = b.receiptitemid
+                                                   inner join tbreceipts t on t.receiptid = i.receiptid
+                                                   where  tb.status = 'C'  and t.receipttype = 'SP' 
+                                                ) s on s.transferid = t.transferid and s.ponoid = tb.ponoid and s.batchno = tb.batchno 
+                                                left outer join
+                                                (
+                                                select t.warehouseid,i.itemid,b.inwno,b.batchno,b.ponoid ,t.receipttype,t.receiptdate
+                                                   from tbreceiptbatches b 
+                                                   inner join tbreceiptitems i on i.receiptitemid = b.receiptitemid
+                                                   inner join tbreceipts t on t.receiptid = i.receiptid
+                                                   where  t.status = 'C'  and t.receipttype = 'NO' 
+                                                ) nrs on nrs.ponoid = s.ponoid and nrs.batchno = s.batchno and nrs.warehouseid = s.fromwarehouseid
+                                                where t.status = 'C' 
+                                                 group by s.receipttype, i.itemid, tb.ponoid, tb.inwno,tb.batchno,t.receiptdate,t.warehouseid ,t.fromwarehouseid,
+                                                t.transferid ,s.transferid,s.receipttype ,s.receiptdate ,nrs.receipttype,nrs.warehouseid
+                  ) nrs on nrs.inwno = b.inwno
+
+                  left outer join
+                 (
+                    select distinct t.warehouseid,tr.receipttype,tr.receiptdate,b.batchno,b.ponoid,i.itemid from tbindents t
+                    inner join tbindentitems i on i.indentid = t.indentid
+                    inner join tboutwards o on o.indentitemid = i.indentitemid
+                    inner join tbreceiptbatches b on b.inwno = o.inwno
+                    inner join tbreceiptitems ti on ti.receiptitemid = b.receiptitemid
+                    inner join tbreceipts tr on tr.receiptid = ti.receiptid
+                    where tr.receipttype = 'NO' and t.facilityid is not null 
+                 ) f on f.warehouseid = t.warehouseid and f.batchno = b.batchno and f.ponoid = b.ponoid and f.itemid = mi.itemid
+
+                 left outer join
+                 (
+                   select distinct t.warehouseid,tr.receipttype,tr.receiptdate,b.batchno,b.ponoid,i.itemid from tbindents t
+                    inner join tbindentitems i on i.indentid = t.indentid
+                    inner join tboutwards o on o.indentitemid = i.indentitemid
+                    inner join tbreceiptbatches b on b.inwno = o.inwno
+                    inner join tbreceiptitems ti on ti.receiptitemid = b.receiptitemid
+                    inner join tbreceipts tr on tr.receiptid = ti.receiptid
+                    where t.issuetype in ('QA') and tr.receipttype = 'NO' 
+                 ) q on q.ponoid = b.ponoid and q.batchno = b.batchno and q.itemid = mi.itemid and q.warehouseid = t.warehouseid  
+                 left outer join
+                      (
+                        select max(t.warehouseid) warehouseid,i.itemid,b.batchno,b.ponoid ,t.receipttype,max(t.receiptdate) receiptdate
+                        from tbreceiptbatches b 
+                        inner join tbreceiptitems i on i.receiptitemid = b.receiptitemid
+                        inner join tbreceipts t on t.receiptid = i.receiptid
+                        where  t.status = 'C'  and t.receipttype = 'NO' 
+                        group by i.itemid,b.batchno,b.ponoid ,t.receipttype
+                        ) mr on mr.ponoid = b.ponoid and mr.batchno = b.batchno and mr.itemid = mi.itemid
+                 where  t.status = 'C'  and mc.mcid = " + mcid + @"
+                 and nvl(b.whissueblock,0) in (0) and b.expdate between '01-APR-13' and sysdate
+                 and t.notindpdmis is null and b.notindpdmis is null  and i.notindpdmis is null
+                 and (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) 
+                 else (case when mi.qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) >0
+                 and round( (Round((b.EXPDate-nvl(case when t.receipttype = 'NO' then t.receiptdate else 
+                 case when t.receipttype = 'RF' then nvl(f.receiptdate,mr.receiptdate) else
+                 case when t.receipttype = 'RQ' then nvl(q.receiptdate,mr.receiptdate) else nr.norcptdate end end end,nrs.rd)),0)/Round((b.EXPDate-b.MFGDate),0))*100,2)>=80
+                 ) group by Year, mcid,MCATEGORY order by Year desc";
+            var myList = _context.YearWiseExpiredDbset
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+
+
+        [HttpGet("getPOAlertBaedOnAI")]
+        public async Task<ActionResult<IEnumerable<POAlertAIDTO>>> getPOAlertBaedOnAI(string mcid, string hodid)
+        {
+            FacOperations f = new FacOperations(_context);
+
+            string yearid = f.getACCYRSETID();
+            string whhoid = "";
+            string whhodcluase = "";
+            if (hodid == "367")
+            {
+                whhoid = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                whhodcluase = " and (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))>0 ";
+            }
+            else if (hodid == "371")
+            {
+                whhoid = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                whhodcluase = " and (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))>0 ";
+            }
+            else
+            {
+                whhoid = " sum(nvl(i.DME_INDENTQTY, 0)) ";
+                whhodcluase = " and (nvl(i.DME_INDENTQTY, 0))>0 ";
+            }
+            string qry = @"  select ROW_NUMBER() OVER ( ORDER BY MCID,RCStatusValue,EDLtypeValue ) AS ID,MCID,RCStatus,EDLtype,sum(EDL)+sum(NEDL) as total,sum(tobePOCount) as tobePOCount,sum(stockout) as stockout,
+ sum(OnlyQC) as OnlyQC,sum(OnlyPipeline) as OnlyPipeline,
+ EDLtypeValue,RCStatusValue from 
+(
+select m.itemid,mc.MCID,m.itemcode,m.itemname,case when m.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end as EDLtype,
+case when m.isedl2021 = 'Y' then 1 else 0 end as EDLtypeValue,
+case when r.itemid is not null then 1 else 0 end as RCStatusValue,
+
+DHSAI,nvl(POQTY,0) as POQTY,nvl(DHSAI-nvl(POQTY,0),0) as BalanceIndentPO,
+nvl(ReadyForIssue,0) as ReadyForIssue ,
+nvl(Pending,0) as UnderQC,nvl(pip.pipelineQTY,0) as pipelineQTY,
+case when m.isedl2021 = 'Y' then 1 else 0 end as EDL, case when m.isedl2021 = 'Y' then 0 else 1 end as NEDL 
+,round(DHSAI/4,0) as DHS3MonthAI,round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) as buffavl
+,case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end as tobePO,
+case when (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end)>nvl(DHSAI-nvl(POQTY,0),0)
+then nvl(DHSAI-nvl(POQTY,0),0) else (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end) end actualtobePO
+,case when (nvl(ReadyForIssue,0)+nvl(Pending,0)+nvl(pip.pipelineQTY,0))=0  then 1 else 0 end as stockout
+,case when r.itemid is not null then 'Yes' else 'No' end as RCStatus
+,case when (case when (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end)>nvl(DHSAI-nvl(POQTY,0),0)
+then nvl(DHSAI-nvl(POQTY,0),0) else (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end) end )>0 then 1 else 0 end as tobePOCount
+,nvl(AIReturn,0) Return
+,case when nvl(ReadyForIssue,0)=0 and nvl(Pending,0) >0 then 1 else 0 end as OnlyQC
+,case when nvl(ReadyForIssue,0)=0 and nvl(Pending,0) =0 and nvl(pip.pipelineQTY,0)>0 then 1 else 0 end as OnlyPipeline
+from masitems m 
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+left outer join 
+(
+select distinct itemid from v_rcvalid
+) r on r.itemid = m.itemid
+ inner join 
+(
+select itemid," + whhoid + @" as DHSAI,case when i.isaireturn ='Y' then 1 else 0 end as AIReturn from itemindent i  where 1 = 1 " + whhodcluase + @" and
+accyrsetid = " + yearid + @"
+group by  itemid,i.isaireturn
+) ai on ai.itemid = m.itemid
+
+left outer join 
+(
+select oi.itemid,sum(ABSQTY) as POQTY  from  soOrderedItems oi
+inner join soorderplaced op on (op.ponoid = oi.ponoid and op.status not in ( 'OC','WA1','I' )) 
+where DEPTID=" + hodid + @" and AIFINYEAR=" + yearid + @"
+group by oi.itemid
+) p on p.itemid=m.itemid
+left outer join 
+(
+select itemid,sum(nvl(ReadyForIssue,0)) as ReadyForIssue,sum(nvl(Pending,0)) as Pending from 
+(
+ select b.batchno, b.expdate, b.inwno, mi.itemid,
+ (case when b.qastatus = '1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0))    
+ else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) ReadyForIssue,    
+ case when mi.qctest='N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then (nvl(b.absrqty,0)- nvl(iq.issueqty,0)) end) end Pending,
+ ci.Finalrategst
+ from tbreceiptbatches b
+ inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid
+ inner join tbreceipts t on t.receiptid= i.receiptid
+ inner join masitems mi on mi.itemid= i.itemid
+ inner join masitemcategories c on c.categoryid = mi.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+ inner join soordereditems odi on odi.ponoid = b.ponoid
+ inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+ left outer join
+     (
+     select tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty,0)) issueqty
+     from tboutwards tbo, tbindentitems tbi , tbindents tb
+     where tbo.indentitemid=tbi.indentitemid and tbi.indentid= tb.indentid and tb.status = 'C'
+     and tb.notindpdmis is null and tbo.notindpdmis is null 
+     and tbi.notindpdmis is null                   
+     group by tbi.itemid, tb.warehouseid, tbo.inwno
+     ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid
+     Where  T.Status = 'C' and mc.mcid=1   And(b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate
+     ) group by itemid
+) st on st.itemid=m.itemid
+
+
+  left outer join
+(
+  select itemid, sum(pipelineQTY) pipelineQTY from
+(
+select m.itemcode, OI.itemid, op.ponoid, m.nablreq, op.soissuedate, op.extendeddate, sum(soi.ABSQTY) as absqty, nvl(rec.receiptabsqty,0)receiptabsqty,
+receiptdelayexception ,round(sysdate-op.soissuedate,0) as days,
+case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end as pipelineQTY,
+oci.finalrategst,
+(case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end)*oci.finalrategst pipelinevalue
+from soOrderPlaced OP
+inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
+inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+inner join masitems m on m.itemid = oi.itemid
+inner join aoccontractitems oci on oci.contractitemid = oi.contractitemid
+left outer join
+(
+select tr.ponoid, tri.itemid, sum(tri.receiptabsqty) receiptabsqty from tbreceipts tr
+inner join tbreceiptitems tri on tri.receiptid= tr.receiptid
+where tr.receipttype= 'NO' and tr.status= 'C' and tr.notindpdmis is null and tri.notindpdmis is null
+group by tr.ponoid, tri.itemid
+) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid
+ where op.status  in ('C','O') 
+ group by m.itemcode, m.nablreq, op.ponoid, op.soissuedate, op.extendeddate, OI.itemid , rec.receiptabsqty,
+ op.soissuedate, op.extendeddate , receiptdelayexception, oci.finalrategst
+ having (case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate
+and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end) >0
+) group by itemid
+) pip on pip.itemid = m.itemid
+
+where  m.ISFREEZ_ITPR is null  and mc.mcid=" + mcid + @" and nvl(AIReturn,0)=0 
+) group by RCStatus,EDLtype,EDLtypeValue,RCStatusValue,MCID
+order by EDLtype,(RCStatusValue+EDLtypeValue)  desc  ";
+
+            var myList = _context.POAlertAIDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+        [HttpGet("getPOStockoutQCPipe_Details")]
+        public async Task<ActionResult<IEnumerable<POAlertDetailsDTO>>> getPOStockoutQCPipe_Details(string mcid, string hodid, string edlvalue, string rcvalue, string rpttype)
+        {
+            FacOperations f = new FacOperations(_context);
+
+            string yearid = f.getACCYRSETID();
+            string whhoid = "";
+            string whhodcluase = "";
+            if (hodid == "367")
+            {
+                whhoid = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                whhodcluase = " and (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))>0 ";
+            }
+            else if (hodid == "371")
+            {
+                whhoid = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                whhodcluase = " and (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))>0 ";
+            }
+            else
+            {
+                whhoid = " sum(nvl(i.DME_INDENTQTY, 0)) ";
+                whhodcluase = " and (nvl(i.DME_INDENTQTY, 0))>0 ";
+            }
+            string whedlcaluse = " and(case when m.isedl2021 = 'Y' then 1 else 0 end)= 0";
+            if (edlvalue == "1")
+            {
+                whedlcaluse = " and(case when m.isedl2021 = 'Y' then 1 else 0 end)= 1";
+            }
+            string whrcclause = " and (case when r.itemid is not null then 1 else 0 end)= 0";
+            if (rcvalue == "1")
+            {
+                whrcclause = " and (case when r.itemid is not null then 1 else 0 end)=1";
+            }
+            string whrpttypeclause = "";
+            if (rpttype == "0")
+            {
+                //PO alert
+                whrpttypeclause = " and (case when (case when (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then \r\nround(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end)>nvl(DHSAI-nvl(POQTY,0),0)\r\nthen nvl(DHSAI-nvl(POQTY,0),0) else (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then \r\nround(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end) end )>0 then 1 else 0 end)=1";
+            }
+            else if (rpttype == "1")
+            {
+                //stockout
+                whrpttypeclause = " and (case when(nvl(ReadyForIssue, 0)+nvl(Pending, 0) + nvl(pip.pipelineQTY, 0))= 0  then 1 else 0 end) =1";
+
+            }
+            else if (rpttype == "2")
+            {
+                //onlyQC
+                whrpttypeclause = " and (case when nvl(ReadyForIssue,0)=0 and nvl(Pending,0) >0 then 1 else 0 end) =1";
+
+            }
+            else if (rpttype == "3")
+            {
+                //onlyPipeline
+                whrpttypeclause = " and (case when nvl(ReadyForIssue,0)=0 and nvl(Pending,0) =0 and nvl(pip.pipelineQTY,0)>0 then 1 else 0 end) =1";
+
+            }
+            else
+            {
+
+            }
+
+
+
+            string qry = @" select ROW_NUMBER() OVER ( ORDER BY m.itemname ) AS ID,m.itemcode,m.itemname,
+DHSAI,nvl(POQTY,0) as POQTY,nvl(DHSAI-POQTY,0) as BalanceIndentPO,
+nvl(ReadyForIssue,0) as ReadyForIssue ,nvl(Pending,0) as UnderQC,nvl(pip.pipelineQTY,0) as pipelineQTY
+,round(DHSAI/4,0) as DHS3MonthAI,round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) as Qauter1_MStock
+,case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end as tobePO,
+case when (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end)>nvl(DHSAI-nvl(POQTY,0),0)
+then nvl(DHSAI-nvl(POQTY,0),0) else (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end) end actualtobePO
+,case when (nvl(ReadyForIssue,0)+nvl(Pending,0)+nvl(pip.pipelineQTY,0))=0  then 1 else 0 end as stockout
+,case when r.itemid is not null then 'Yes' else 'No' end as RCStatus
+,case when (case when (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end)>nvl(DHSAI-nvl(POQTY,0),0)
+then nvl(DHSAI-nvl(POQTY,0),0) else (case when (round(DHSAI/4,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)))>0 then 
+round(DHSAI/2,0)-(nvl(ReadyForIssue,0)+ nvl(Pending,0)+nvl(pip.pipelineQTY,0)) else 0 end) end )>0 then 1 else 0 end as tobePOCount
+,nvl(AIReturn,0) Return,m.itemid,mc.MCID,case when m.isedl2021 = 'Y' then 1 else 0 end as EDLtypeValue,
+case when r.itemid is not null then 1 else 0 end as RCStatusValue,case when m.isedl2021 = 'Y' then 1 else 0 end as EDL, case when m.isedl2021 = 'Y' then 0 else 1 end as NEDL 
+,m.strength1,case when m.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end as EDLtype,m.unit
+,mt.qcdayslab,mt.itemtypename
+, GET_RCSupplier(m.itemid) as sup
+,RCRate,RCStartDT,RCEndDT
+,case when nvl(ReadyForIssue,0)=0 and nvl(Pending,0) >0 then 1 else 0 end as OnlyQC
+,case when nvl(ReadyForIssue,0)=0 and nvl(Pending,0) =0 and nvl(pip.pipelineQTY,0)>0 then 1 else 0 end as OnlyPipeline
+from masitems m 
+left outer join masitemtypes mt on mt.itemtypeid = m.itemtypeid
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+left outer join 
+(
+select itemid,Round(min(FINALRATEGST),2) as RCRate,min(RCSTART) RCStartDT,min(RCENDDT) as RCEndDT from v_rcvalid
+group by itemid
+) r on r.itemid = m.itemid
+inner join 
+(
+select itemid," + whhoid + @" as DHSAI,case when i.isaireturn ='Y' then 1 else 0 end as AIReturn from itemindent i  where 1 = 1 " + whhodcluase + @" and
+accyrsetid = " + yearid + @"
+group by  itemid,i.isaireturn
+) ai on ai.itemid = m.itemid
+
+left outer join 
+(
+select oi.itemid,sum(ABSQTY) as POQTY  from  soOrderedItems oi
+inner join soorderplaced op on (op.ponoid = oi.ponoid and op.status not in ( 'OC','WA1','I' )) 
+where DEPTID=" + hodid + @" and AIFINYEAR=" + yearid + @"
+group by oi.itemid
+) p on p.itemid=m.itemid
+left outer join 
+(
+select itemid,sum(nvl(ReadyForIssue,0)) as ReadyForIssue,sum(nvl(Pending,0)) as Pending from 
+(
+ select b.batchno, b.expdate, b.inwno, mi.itemid,
+ (case when b.qastatus = '1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0))    
+ else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) ReadyForIssue,    
+ case when mi.qctest='N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then (nvl(b.absrqty,0)- nvl(iq.issueqty,0)) end) end Pending,
+ ci.Finalrategst
+ from tbreceiptbatches b
+ inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid
+ inner join tbreceipts t on t.receiptid= i.receiptid
+ inner join masitems mi on mi.itemid= i.itemid
+ inner join masitemcategories c on c.categoryid = mi.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+ inner join soordereditems odi on odi.ponoid = b.ponoid
+ inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+ left outer join
+     (
+     select tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty,0)) issueqty
+     from tboutwards tbo, tbindentitems tbi , tbindents tb
+     where tbo.indentitemid=tbi.indentitemid and tbi.indentid= tb.indentid and tb.status = 'C'
+     and tb.notindpdmis is null and tbo.notindpdmis is null 
+     and tbi.notindpdmis is null                   
+     group by tbi.itemid, tb.warehouseid, tbo.inwno
+     ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid
+     Where  T.Status = 'C' and mc.mcid=1   And(b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate
+     ) group by itemid
+) st on st.itemid=m.itemid
+  left outer join
+(
+  select itemid, sum(pipelineQTY) pipelineQTY from
+(
+select m.itemcode, OI.itemid, op.ponoid, m.nablreq, op.soissuedate, op.extendeddate, sum(soi.ABSQTY) as absqty, nvl(rec.receiptabsqty,0)receiptabsqty,
+receiptdelayexception ,round(sysdate-op.soissuedate,0) as days,
+case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end as pipelineQTY,
+oci.finalrategst,
+(case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end)*oci.finalrategst pipelinevalue
+from soOrderPlaced OP
+inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
+inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+inner join masitems m on m.itemid = oi.itemid
+inner join aoccontractitems oci on oci.contractitemid = oi.contractitemid
+left outer join
+(
+select tr.ponoid, tri.itemid, sum(tri.receiptabsqty) receiptabsqty from tbreceipts tr
+inner join tbreceiptitems tri on tri.receiptid= tr.receiptid
+where tr.receipttype= 'NO' and tr.status= 'C' and tr.notindpdmis is null and tri.notindpdmis is null
+group by tr.ponoid, tri.itemid
+) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid
+ where op.status  in ('C','O') 
+ group by m.itemcode, m.nablreq, op.ponoid, op.soissuedate, op.extendeddate, OI.itemid , rec.receiptabsqty,
+ op.soissuedate, op.extendeddate , receiptdelayexception, oci.finalrategst
+ having (case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate
+and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end) >0
+) group by itemid
+) pip on pip.itemid = m.itemid
+where  m.ISFREEZ_ITPR is null  " + whedlcaluse + @"
+and mc.mcid=" + mcid + @" and nvl(AIReturn,0)=0 
+" + whrcclause + @"
+" + whrpttypeclause + @"  ";
+            var myList = _context.POAlertDetailsDbSet
+        .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+
+        [HttpGet("PublicCGMSCStockItems")]
+        public async Task<ActionResult<IEnumerable<StockitemsDTO>>> PublicCGMSCStockItems(string mcid)
+        {
+            string whmcid = "";
+            if (mcid != "0")
+            {
+                whmcid = " and mc.mcid=" + mcid;
+            }
+            string qry = @" select m.itemid as id, 
+m.itemname ||'-'||m.itemcode||'-'||nvl(ty.itemtypename,'NA')||'-'||nvl(g.groupname,'NA')||':'||(nvl(st.ready,0)+nvl(st.UQC,0)+nvl(pip.TOTLPIPELINE,0)) as details
+,case when m.isedl2021='Y' then 1 else 0 end as edltype
+from masitems m
+left outer join masitemgroups g on g.groupid=m.groupid
+left outer join masitemtypes ty on ty.itemtypeid=m.itemtypeid
+left outer join 
+(
+select itemid,sum(nvl(ReadyForIssue,0)) as READY,sum(nvl(Pending,0)) as UQC from 
+(
+ select b.batchno, b.expdate, b.inwno, mi.itemid,
+ (case when b.qastatus = '1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0))    
+ else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) ReadyForIssue,    
+ case when mi.qctest='N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then (nvl(b.absrqty,0)- nvl(iq.issueqty,0)) end) end Pending
+ from tbreceiptbatches b
+ inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid
+ inner join tbreceipts t on t.receiptid= i.receiptid
+ inner join masitems mi on mi.itemid= i.itemid
+ inner join masitemcategories c on c.categoryid = mi.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+ inner join soordereditems odi on odi.ponoid = b.ponoid
+ inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+ left outer join
+     (
+     select tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty,0)) issueqty
+     from tboutwards tbo, tbindentitems tbi , tbindents tb
+     where tbo.indentitemid=tbi.indentitemid and tbi.indentid= tb.indentid and tb.status = 'C'
+     and tb.notindpdmis is null and tbo.notindpdmis is null 
+     and tbi.notindpdmis is null                   
+     group by tbi.itemid, tb.warehouseid, tbo.inwno
+     ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid
+     Where  T.Status = 'C' and mc.mcid=1   And(b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate
+     ) group by itemid
+) st on st.itemid=m.itemid
+
+
+left outer join
+(
+  select itemid, sum(pipelineQTY) TOTLPIPELINE from
+(
+select m.itemcode, OI.itemid, op.ponoid, m.nablreq, op.soissuedate, op.extendeddate, sum(soi.ABSQTY) as absqty, nvl(rec.receiptabsqty,0)receiptabsqty,
+receiptdelayexception ,round(sysdate-op.soissuedate,0) as days,
+case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end as pipelineQTY,
+oci.finalrategst,
+(case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end)*oci.finalrategst pipelinevalue
+from soOrderPlaced OP
+inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
+inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+inner join masitems m on m.itemid = oi.itemid
+inner join aoccontractitems oci on oci.contractitemid = oi.contractitemid
+left outer join
+(
+select tr.ponoid, tri.itemid, sum(tri.receiptabsqty) receiptabsqty from tbreceipts tr
+inner join tbreceiptitems tri on tri.receiptid= tr.receiptid
+where tr.receipttype= 'NO' and tr.status= 'C' and tr.notindpdmis is null and tri.notindpdmis is null
+group by tr.ponoid, tri.itemid
+) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid
+ where op.status  in ('C','O') 
+ group by m.itemcode, m.nablreq, op.ponoid, op.soissuedate, op.extendeddate, OI.itemid , rec.receiptabsqty,
+ op.soissuedate, op.extendeddate , receiptdelayexception, oci.finalrategst
+ having (case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate
+and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end) >0
+) group by itemid
+) pip on pip.itemid = m.itemid
+
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+where m.ISFREEZ_ITPR is null and (nvl(st.ready,0)+nvl(st.UQC,0)+nvl(pip.TOTLPIPELINE,0))>0  "+whmcid+@"
+order by (case when m.isedl2021='Y' then 0 else 1 end),g.groupname desc
+ ";
+            var myList = _context.StockitemsDbSet
+      .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+            [HttpGet("PublicCGMSCStock")]
+        public async Task<ActionResult<IEnumerable<CGMSCPublicStockDTO>>> PublicCGMSCStock(string mcid)
+        {
+            string whmcid = "";
+            if (mcid != "0")
+            {
+                whmcid = " and mc.mcid=" + mcid;
+            }
+            string qry = @" select m.itemid as id, m.itemname ||'('||m.itemcode||')' as name,
+m.Unit||',Ready:'||nvl(st.ready,0)||',UQC:'||nvl(st.UQC,0)||',In-transit:'||nvl(pip.TOTLPIPELINE,0)||',Group:'||nvl(g.groupname,'NA') as details
+,case when m.isedl2021='Y' then 1 else 0 end as edltype
+from masitems m
+left outer join masitemgroups g on g.groupid=m.groupid
+left outer join 
+(
+select itemid,sum(nvl(ReadyForIssue,0)) as READY,sum(nvl(Pending,0)) as UQC from 
+(
+ select b.batchno, b.expdate, b.inwno, mi.itemid,
+ (case when b.qastatus = '1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0))    
+ else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) ReadyForIssue,    
+ case when mi.qctest='N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then (nvl(b.absrqty,0)- nvl(iq.issueqty,0)) end) end Pending
+ from tbreceiptbatches b
+ inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid
+ inner join tbreceipts t on t.receiptid= i.receiptid
+ inner join masitems mi on mi.itemid= i.itemid
+ inner join masitemcategories c on c.categoryid = mi.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+ inner join soordereditems odi on odi.ponoid = b.ponoid
+ inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+ left outer join
+     (
+     select tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty,0)) issueqty
+     from tboutwards tbo, tbindentitems tbi , tbindents tb
+     where tbo.indentitemid=tbi.indentitemid and tbi.indentid= tb.indentid and tb.status = 'C'
+     and tb.notindpdmis is null and tbo.notindpdmis is null 
+     and tbi.notindpdmis is null                   
+     group by tbi.itemid, tb.warehouseid, tbo.inwno
+     ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid
+     Where  T.Status = 'C' and mc.mcid=1   And(b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate
+     ) group by itemid
+) st on st.itemid=m.itemid
+
+
+left outer join
+(
+  select itemid, sum(pipelineQTY) TOTLPIPELINE from
+(
+select m.itemcode, OI.itemid, op.ponoid, m.nablreq, op.soissuedate, op.extendeddate, sum(soi.ABSQTY) as absqty, nvl(rec.receiptabsqty,0)receiptabsqty,
+receiptdelayexception ,round(sysdate-op.soissuedate,0) as days,
+case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end as pipelineQTY,
+oci.finalrategst,
+(case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end)*oci.finalrategst pipelinevalue
+from soOrderPlaced OP
+inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
+inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+inner join masitems m on m.itemid = oi.itemid
+inner join aoccontractitems oci on oci.contractitemid = oi.contractitemid
+left outer join
+(
+select tr.ponoid, tri.itemid, sum(tri.receiptabsqty) receiptabsqty from tbreceipts tr
+inner join tbreceiptitems tri on tri.receiptid= tr.receiptid
+where tr.receipttype= 'NO' and tr.status= 'C' and tr.notindpdmis is null and tri.notindpdmis is null
+group by tr.ponoid, tri.itemid
+) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid
+ where op.status  in ('C','O') 
+ group by m.itemcode, m.nablreq, op.ponoid, op.soissuedate, op.extendeddate, OI.itemid , rec.receiptabsqty,
+ op.soissuedate, op.extendeddate , receiptdelayexception, oci.finalrategst
+ having (case when m.nablreq = 'Y' and round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate
+and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end) >0
+) group by itemid
+) pip on pip.itemid = m.itemid
+
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+where m.ISFREEZ_ITPR is null and (nvl(st.ready,0)+nvl(st.UQC,0)+nvl(pip.TOTLPIPELINE,0))>0 " + whmcid + @"
+order by (case when m.isedl2021='Y' then 0 else 1 end),g.groupname desc ";
+            var myList = _context.CGMSCPublicStockDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+
+
+
+        [HttpGet("SearchRCValid")]
+        public async Task<ActionResult<IEnumerable<CGMSCPublicStockDTO>>> SearchRCValid(string mcid)
+        {
+            string whmcid = "";
+            if (mcid != "0")
+            {
+                whmcid = " and mc.mcid=" + mcid;
+            }
+            string qry = @" select contractitemid as id,itemname ||'('||itemcode||')'||itemtypename||',SKU:'||Unit||',Rate:'||to_char(finalrategst) as name, 
+strength1||','||suppliername||',StartDT:'||RCSTART||',EndDT:'||RCENDDT||',Group:'||nvl(groupname,'NA') as details,case when isedl2021='Y' then 1 else 0 end as edltype
+from (
+select m.itemcode,ms.schemecode,s.suppliername||' '||case when ci.rankpercetage is not null then ci.rankid else '' end ||' '|| case when ci.rankpercetage is not null then to_char(ci.rankpercetage) else '' end||to_char((case when ci.rankpercetage is not null then '%' else '' end )) as suppliername,
+to_char(a.ContractStartDate,'dd-MM-yyyy') rcstart,
+a.ContractEndDate,case when (ci.isextended='Y') then to_char(ci.rcextendedupto,'dd-MM-yyyy') else to_char(ContractEndDate,'dd-MM-yyyy') end RCEndDT,
+round(Months_Between(to_date(a.ContractEndDate),to_date(a.ContractStartDate)),0) as RCDuration
+,round(Months_Between(to_date(sysdate),to_date(a.ContractStartDate)),0) as TotalDurFromStart
+,ci.rcextendedfrom,ci.rcextendedupto,ci.isextended ,a.contractid,ci.contractitemid,
+ case when ci.basicratenew is null then ci.basicrate else basicratenew end basicrate,
+ ci.finalrategst
+ ,
+                               case when   ci.percentvaluegst is null then   ci.percentvalue  else ci.percentvaluegst end Tax   
+                            ,   ci.itemid,ms.schemeid,s.supplierid
+                               ,m.categoryid
+,case when m.isedl2021= 'Y' then 'Y' else 'N' end as isedl2021   
+, case when sysdate between s.blacklistfdate and  s.blacklisttdate then 'Yes' else 'No' end as blacklisted,
+case when (ci.isextended='Y') then round(rcextendedupto-sysdate,0) else  round(ContractEndDate-sysdate,0)  end as DayRemaining
+,g.groupname,m.unit,m.strength1,m.itemname,ty.itemtypename
+from aoccontractitems ci
+inner join aoccontracts a on a.contractid=ci.contractid
+inner join massuppliers s on s.supplierid=a.supplierid
+inner join masschemes ms on ms.schemeid=a.schemeid
+inner join masitems m on m.itemid=ci.itemid
+left outer join masitemtypes ty on ty.ITEMTYPEID=m.ITEMTYPEID
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+left outer join masitemgroups g on g.groupid=m.groupid
+where  ForceCloseRC is null  and a.status = 'C' and s.blacklistfdate is null  
+and  (sysdate between a.contractstartdate and a.contractenddate or 
+sysdate between a.contractstartdate and  (case when ci.isextended='Y' then ci.rcextendedupto else a.contractenddate end))
+and round(Months_Between(to_date(a.ContractEndDate),to_date(a.ContractStartDate)),0)<=nvl(( case when m.categoryid=62 then  nvl(ms.ISREAGDURATION,36) else 36 end) ,36)
+" + whmcid + @"
+) where blacklisted='No' 
+order by itemname ";
+            var myList = _context.CGMSCPublicStockDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+
+
+
+        [HttpGet("NearExpReport")]
+        public async Task<ActionResult<IEnumerable<NearExpDTO>>> NearExpReport(string mcid, string nexppara)
+        {
+            string whmcidclause = "";
+            if (mcid != "0")
+            {
+
+                whmcidclause = " and  mc.mcid =" + mcid;
+            }
+
+            FacOperations f = new FacOperations(_context);
+            string curryearmonth = f.getCurrYearmonth();
+            FacOperations f2 = new FacOperations(_context);
+            string toyearmonth = f2.getNextYearMonth(Convert.ToInt64(nexppara));
+
+            string qry = @" select Expirymonth,count(distinct itemcode) noofitems,count(distinct batchno) noofbatches,round(sum(ExValue)/10000000,2) nearexpvalue,Expirymonth1 from 
+(
+select b.batchno,ci.finalrategst,b.expdate, to_char(b.expdate,'MM-YYYY') as Expirymonth,to_char(b.expdate,'YYYY-MM') as Expirymonth1,
+w.warehousename,mc.mcid,mc.MCATEGORY, mi.itemcode, mi.itemname, b.inwno,mi.itemid, 
+(case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) else (case when mi.qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) expqty,
+((case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) *ci.finalrategst ) as ExValue
+
+from tbreceiptbatches b 
+inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid
+inner join tbreceipts t on t.receiptid=i.receiptid
+inner join masitems mi on mi.itemid=i.itemid
+inner join masitemcategories c on c.categoryid=mi.categoryid
+inner join masitemmaincategory mc on mc.MCID=c.MCID
+inner join masedl me on me.edlcat=mi.edlcat
+inner join masitemcategories mc on mc.categoryid=mi.categoryid
+inner join soorderplaced o on o.ponoid = b.ponoid
+inner join maswarehouses w  on w.warehouseid=t.warehouseid
+left outer join soorderplaced so on so.ponoid = b.ponoid
+inner join soordereditems odi on odi.ponoid = so.ponoid
+inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+left outer join
+( 
+select  tb.warehouseid,tbi.itemid,tbo.inwno,sum(nvl(tbo.issueqty,0) + nvl(tbo.reconcile_qty,0)) issueqty  
+from tboutwards tbo, tbindentitems tbi , tbindents tb
+where  tbo.indentitemid=tbi.indentitemid and tbi.indentid=tb.indentid and tb.status = 'C' 
+and tb.issuetype not in ('EX') 
+and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null
+group by tbi.itemid,tb.warehouseid,tbo.inwno 
+) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.warehouseid=t.warehouseid 
+where  t.status = 'C'  " + whmcidclause + @"
+and nvl(b.whissueblock,0) in (0) and to_char(b.expdate,'YYYY-MM') between '" + curryearmonth + @"' and '" + toyearmonth + @"'
+and t.notindpdmis is null and b.notindpdmis is null  and i.notindpdmis is null
+and (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) else (case when mi.qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) >0
+
+) group by Expirymonth,Expirymonth1 order by Expirymonth1 ";
+            var myList = _context.NearExpDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+
+        [HttpGet("NearExpReportDrugs")]
+        public async Task<ActionResult<IEnumerable<NearExpDTOItems>>> NearExpReportDrugs(string mcid, string nexppara, string expmonth)
+        {
+            string whmcidclause = "";
+            if (mcid != "0")
+            {
+
+                whmcidclause = " and  mc.mcid =" + mcid;
+            }
+            //if(expmonth==)
+
+            FacOperations f = new FacOperations(_context);
+            string curryearmonth = f.getCurrYearmonth();
+            FacOperations f2 = new FacOperations(_context);
+            string toyearmonth = f2.getNextYearMonth(Convert.ToInt64(nexppara));
+
+
+
+            string qry = @"   select itemid,itemcode, itemname, count(distinct batchno) noofbatches,round(sum(ExValue) / 100000, 2) nearexpvalue,sum(expqty) as QTY from
+(
+select b.batchno, ci.finalrategst, b.expdate, to_char(b.expdate,'MM-YYYY') as Expirymonth,to_char(b.expdate, 'YYYY-MM') as Expirymonth1,
+w.warehousename,mc.mcid,mc.MCATEGORY, mi.itemcode, mi.itemname, b.inwno,mi.itemid, 
+(case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) expqty,
+((case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.Qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) *ci.finalrategst ) as ExValue
+from tbreceiptbatches b
+inner join tbreceiptitems i on b.receiptitemid = i.receiptitemid
+inner join tbreceipts t on t.receiptid = i.receiptid
+inner join masitems mi on mi.itemid = i.itemid
+inner join masitemcategories c on c.categoryid = mi.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+inner join masedl me on me.edlcat = mi.edlcat
+inner join masitemcategories mc on mc.categoryid = mi.categoryid
+inner join soorderplaced o on o.ponoid = b.ponoid
+inner join maswarehouses w  on w.warehouseid = t.warehouseid
+left outer join soorderplaced so on so.ponoid = b.ponoid
+inner join soordereditems odi on odi.ponoid = so.ponoid
+inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+left outer join
+(
+select  tb.warehouseid, tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty, 0) + nvl(tbo.reconcile_qty, 0)) issueqty
+from tboutwards tbo, tbindentitems tbi, tbindents tb
+where  tbo.indentitemid = tbi.indentitemid and tbi.indentid = tb.indentid and tb.status = 'C'
+and tb.issuetype not in ('EX')
+and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null
+group by tbi.itemid, tb.warehouseid, tbo.inwno
+) iq on b.inwno = Iq.inwno and iq.itemid = i.itemid and iq.warehouseid = t.warehouseid
+where t.status = 'C'  " + whmcidclause + @"
+and nvl(b.whissueblock,0) in (0) and to_char(b.expdate,'YYYY-MM') between '" + curryearmonth + @"' and '" + toyearmonth + @"'
+and t.notindpdmis is null and b.notindpdmis is null and i.notindpdmis is null
+and (case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) > 0
+and to_char(b.expdate,'MM-YYYY')= '"+ expmonth + @"'
+) group by itemcode,itemname,itemid
+order by round(sum(ExValue)/ 100000,2) desc ";
+
+
+            var myList = _context.NearExpItemsDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
+        [HttpGet("NearExpReportbatch")]
+        public async Task<ActionResult<IEnumerable<NearExpBatchWHDTO>>> NearExpReportbatch(string mcid, string nexppara, string expmonth)
+        {
+            string whmcidclause = "";
+            if (mcid != "0")
+            {
+
+                whmcidclause = " and  mc.mcid =" + mcid;
+            }
+            //if(expmonth==)
+
+            FacOperations f = new FacOperations(_context);
+            string curryearmonth = f.getCurrYearmonth();
+            FacOperations f2 = new FacOperations(_context);
+            string toyearmonth = f2.getNextYearMonth(Convert.ToInt64(nexppara));
+
+          
+            string qry = @"   select itemid,itemcode, '' as WH,itemname,batchno,expdate,round(sum(ExValue) / 100000, 2) nearexpvalue,sum(expqty) as QTY from
+(
+select b.batchno, ci.finalrategst, b.expdate, to_char(b.expdate,'MM-YYYY') as Expirymonth,to_char(b.expdate, 'YYYY-MM') as Expirymonth1,
+w.warehousename,mc.mcid,mc.MCATEGORY, mi.itemcode, mi.itemname, b.inwno,mi.itemid, 
+(case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) expqty,
+((case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.Qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) *ci.finalrategst ) as ExValue
+from tbreceiptbatches b
+inner join tbreceiptitems i on b.receiptitemid = i.receiptitemid
+inner join tbreceipts t on t.receiptid = i.receiptid
+inner join masitems mi on mi.itemid = i.itemid
+inner join masitemcategories c on c.categoryid = mi.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+inner join masedl me on me.edlcat = mi.edlcat
+inner join masitemcategories mc on mc.categoryid = mi.categoryid
+inner join soorderplaced o on o.ponoid = b.ponoid
+inner join maswarehouses w  on w.warehouseid = t.warehouseid
+left outer join soorderplaced so on so.ponoid = b.ponoid
+inner join soordereditems odi on odi.ponoid = so.ponoid
+inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+left outer join
+(
+select  tb.warehouseid, tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty, 0) + nvl(tbo.reconcile_qty, 0)) issueqty
+from tboutwards tbo, tbindentitems tbi, tbindents tb
+where  tbo.indentitemid = tbi.indentitemid and tbi.indentid = tb.indentid and tb.status = 'C'
+and tb.issuetype not in ('EX')
+and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null
+group by tbi.itemid, tb.warehouseid, tbo.inwno
+) iq on b.inwno = Iq.inwno and iq.itemid = i.itemid and iq.warehouseid = t.warehouseid
+where t.status = 'C'  " + whmcidclause + @"
+and nvl(b.whissueblock,0) in (0) and to_char(b.expdate,'YYYY-MM') between '" + curryearmonth + @"' and '" + toyearmonth + @"'
+and t.notindpdmis is null and b.notindpdmis is null and i.notindpdmis is null
+and (case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) > 0
+and to_char(b.expdate,'MM-YYYY')= '"+ expmonth + @"'
+) group by itemcode,itemname,itemid,batchno,expdate
+order by round(sum(ExValue)/ 100000,2) desc ";
+            var myList = _context.NearExpBatchWHDbSet
+      .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+
+        }
+
+        [HttpGet("NearExpReportbatchWH")]
+        public async Task<ActionResult<IEnumerable<NearExpBatchWHDTO>>> NearExpReportbatchWH(string nexppara, string expmonth,string batchno,string itemid)
+        {
+            string whbatchno = "";
+            if (batchno != "0")
+            {
+
+                whbatchno = " and  b.batchno= ='" + batchno+"'";
+            }
+            string whitemid = "";
+            if (itemid != "0")
+            {
+                whitemid=" and mi.itemid="+itemid;
+            }
+            //if(expmonth==)
+
+            FacOperations f = new FacOperations(_context);
+            string curryearmonth = f.getCurrYearmonth();
+            FacOperations f2 = new FacOperations(_context);
+            string toyearmonth = f2.getNextYearMonth(Convert.ToInt64(nexppara));
+
+
+            string qry = @"   select itemid,itemcode, warehousename as WH,itemname,batchno,expdate,round(sum(ExValue) / 100000, 2) nearexpvalue,sum(expqty) as QTY from
+(
+select b.batchno, ci.finalrategst, b.expdate, to_char(b.expdate,'MM-YYYY') as Expirymonth,to_char(b.expdate, 'YYYY-MM') as Expirymonth1,
+w.warehousename,mc.mcid,mc.MCATEGORY, mi.itemcode, mi.itemname, b.inwno,mi.itemid, 
+(case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) expqty,
+((case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.Qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) *ci.finalrategst ) as ExValue
+from tbreceiptbatches b
+inner join tbreceiptitems i on b.receiptitemid = i.receiptitemid
+inner join tbreceipts t on t.receiptid = i.receiptid
+inner join masitems mi on mi.itemid = i.itemid
+inner join masitemcategories c on c.categoryid = mi.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID
+inner join masedl me on me.edlcat = mi.edlcat
+inner join masitemcategories mc on mc.categoryid = mi.categoryid
+inner join soorderplaced o on o.ponoid = b.ponoid
+inner join maswarehouses w  on w.warehouseid = t.warehouseid
+left outer join soorderplaced so on so.ponoid = b.ponoid
+inner join soordereditems odi on odi.ponoid = so.ponoid
+inner join aoccontractitems ci on ci.contractitemid = odi.contractitemid
+left outer join
+(
+select  tb.warehouseid, tbi.itemid, tbo.inwno, sum(nvl(tbo.issueqty, 0) + nvl(tbo.reconcile_qty, 0)) issueqty
+from tboutwards tbo, tbindentitems tbi, tbindents tb
+where  tbo.indentitemid = tbi.indentitemid and tbi.indentid = tb.indentid and tb.status = 'C'
+and tb.issuetype not in ('EX')
+and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null
+group by tbi.itemid, tb.warehouseid, tbo.inwno
+) iq on b.inwno = Iq.inwno and iq.itemid = i.itemid and iq.warehouseid = t.warehouseid
+where t.status = 'C'  " + whitemid + @"
+and nvl(b.whissueblock,0) in (0) and to_char(b.expdate,'YYYY-MM') between '" + curryearmonth + @"' and '" + toyearmonth + @"'
+and t.notindpdmis is null and b.notindpdmis is null and i.notindpdmis is null
+and (case when b.qastatus = '1' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0)) else (case when mi.qctest = 'N' then(nvl(b.absrqty, 0) - nvl(iq.issueqty, 0))  end ) end ) > 0
+and to_char(b.expdate,'MM-YYYY')= '" + expmonth + @"' "+ whbatchno + @"
+) group by itemcode,itemname,itemid,batchno,expdate,warehousename
+order by round(sum(ExValue)/ 100000,2) desc ";
+            var myList = _context.NearExpBatchWHDbSet
+      .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+
+        }
+    }
+}

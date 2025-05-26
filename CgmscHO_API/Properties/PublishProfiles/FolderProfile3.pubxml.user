@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>H:\31-01-25\CgmscHO_API\CgmscHO_API\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>False|2025-02-13T06:46:18.8423873Z||;True|2025-02-13T01:34:19.0506374+05:30||;True|2025-02-12T23:52:00.0218611+05:30||;True|2025-02-11T22:53:57.9861046+05:30||;True|2025-02-11T14:46:04.7367208+05:30||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,317 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "H:\\31-01-25\\CgmscHO_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\dashboardfinance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboardfinance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\yrlibdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\yrlibdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\indenthomedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\indenthomedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\paiddatewisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\paiddatewisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\qc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\qc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\hotendercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hotendercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\paidyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\paidyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\qcdto\\qchomedashplacewise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\qcdto\\qchomedashplacewise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\grosspaiddetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\grosspaiddetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\hodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\issueitemsyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\issueitemsyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\indentcnthome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\indentcnthome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\stockoutperhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\stockoutperhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\partiitem_rcdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\partiitem_rcdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\emd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\emd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\issuedcfydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\issuedcfydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QC.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\QC.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\QC.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\QC.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\QC.cs",
+              "ViewState": "AgIAAEwBAAAAAAAAAAAqwGUBAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T05:41:37.653Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GrossPaidDetails.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
+              "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAUwAQAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T03:37:38.452Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HOTenderController.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOTenderController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\HOTenderController.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOTenderController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\HOTenderController.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAMwHIAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T19:54:49.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OraDbContext.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Models\\OraDbContext.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
+              "RelativeToolTip": "CgmscHO_API\\Models\\OraDbContext.cs",
+              "ViewState": "AgIAAEcBAAAAAAAAAAAzwFYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T18:21:33.403Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "YrLibDTO.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T18:20:08.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IndentHomeDTO.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T17:28:20.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PaidDateWiseDTO.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T16:58:56.416Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PartiItem_RCDTO.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAMAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T05:05:15.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DashboardFinance.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardFinance.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DashboardFinance.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardFinance.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\DashboardFinance.cs",
+              "ViewState": "AgIAAE4BAAAAAAAAAAAiwF0BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-03T03:39:13.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DashboardHome.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "ViewState": "AQIAALsCAAAAAAAAAAAqwMECAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T17:12:15.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "QCHomeDashPlacewise.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
+              "RelativeToolTip": "CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T08:01:33.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IssueItemsYearwiseDTO.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T04:29:12.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "HODController.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HODController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\HODController.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HODController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\HODController.cs",
+              "ViewState": "AQIAAGYCAAAAAAAAAAAMwHMCAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T04:10:37.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PaidYearWiseDTO.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-03T04:33:56.768Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "EMD.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\EMD.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\EMD.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\EMD.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\EMD.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-03T03:38:30.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "StockoutPerHome.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
+              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-02T15:39:30.138Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IndentCntHome.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
+              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-02T12:20:57.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IssuedCFYDTO.cs",
+              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
+              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-02T09:22:45.609Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
