@@ -2221,11 +2221,298 @@ where 1=1 order by  s.schemeid desc ";
     am.MOB1 AS AMMOBILENO,
     TO_CHAR(so.SOID) AS SOID,
     so.SONAME,
-    so.MOB1 AS SOMOBILENO
+    so.MOB1 AS SOMOBILENO,
+    w.LATITUDE,
+    W.LONGITUDE
 FROM maswarehouses w
 LEFT OUTER JOIN masamgr am ON am.AMID = w.AMID
 LEFT OUTER JOIN masso so ON so.SOID = w.SOID; ";
             var myList = _context.WhMangerSSODetailDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("ToBeTender")]
+        public async Task<ActionResult<IEnumerable<ToBeTenderDTO>>> ToBeTender(string mcid)
+        {
+
+            string whMcId = "";
+
+
+            if (mcid != "0")
+            {
+                whMcId = " and mc.mcid= " + mcid + "   ";
+            }
+
+
+            string qry = @"  select distinct count(itemcode) cntItems,round(sum(AIValue)/10000000,2) as AIValue  from (
+
+ select m.itemcode,m.itemname,m.strength1,m.unit,m.itemid
+,case when m.isedl2021='Y' then 'Yes' else 'No' end as EDL
+,lsch.lSchemeid,lsch.schemecode,lsch.status
+, case when lsch.status=1 then '6:Live' else 
+case when lsch.status=2  and SUBSTR(ts.ACTIONCODE,1,10)='Cover-A in' then '5:Cover A' else  
+case when lsch.status=3 and SUBSTR(ts.ACTIONCODE,1,10)='Cover-B in' then '3:Cover B' else 
+case when lsch.status=7 and SUBSTR(ts.ACTIONCODE,1,18)='Claim Objection in' then '4:Under Claim Objection' else 
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,11)='Accepted in' then  '1:Accepted' else
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,15)='Price Opened in' then  '2:Price Opened' else 
+case when SUBSTR(ts.ACTIONCODE,1,14)='To be Retender' then '8:To be ReTender' else 
+case when SUBSTR(ts.ACTIONCODE,1,10)='RC Blocked' then '7:RC Blocked,To be Tender' else 
+'9:Fresh Tender'
+end end end end end end end end as TStatus,action,ACTIONCODE,
+case when skurate is not null then Round((nvl(dme_indentqty,0)+nvl(i.dhs_indentqty,0)+nvl(i.mitanin,0))*skurate,0) 
+else 0 end as AIValue,
+case when lsch.status=1 then ts.schemeid else 
+case when lsch.status=2  and SUBSTR(ts.ACTIONCODE,1,10)='Cover-A in' then ts.schemeid  else  
+case when lsch.status=3 and SUBSTR(ts.ACTIONCODE,1,10)='Cover-B in' then ts.schemeid  else 
+case when lsch.status=7 and SUBSTR(ts.ACTIONCODE,1,18)='Claim Objection in' then ts.schemeid  else 
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,11)='Accepted in' then  ts.schemeid  else
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,15)='Price Opened in' then  ts.schemeid  else 
+case when SUBSTR(ts.ACTIONCODE,1,14)='To be Retender' then ts.schemeid  else 
+case when SUBSTR(ts.ACTIONCODE,1,10)='RC Blocked' then BSchemeid else 
+NULL
+end end end end end end end end as TenderRef
+from itemindent i 
+inner join masitems m on m.itemid=i.itemid 
+inner join masitemcategories c on c.CATEGORYID=m.CATEGORYID
+inner join masitemmaincategory mc on mc.mcid=c.mcid
+left outer join 
+(
+select itemid,max(SKUFINALRATE) skurate from v_itemrate
+group by itemid
+) rt on rt.itemid=m.itemid
+left outer join
+(
+select distinct r.itemid as ritemid from  v_rcvalid r
+) r on r.ritemid=m.itemid
+
+left outer join 
+(
+select schemeid as BSchemeid,itemid from v_rcvalidblocked
+) rb on rb.itemid=m.itemid
+
+
+left outer join 
+   (
+   select itemid,action,schemeid,ACTIONCODE from v_tenderstatusallnew e
+   ) ts on ts.itemid=m.itemid
+
+   left outer join 
+   (
+   select max(tid) as tid,drug_code from live_tenders l
+   inner join masschemesstatus sc on sc.schemeid=l.schemeid
+   where 1=1 and sc.nitdate>'01-Apr-2021' 
+   group by drug_code
+   ) lastT on lastT.drug_code=m.itemcode
+
+   left outer join 
+   (
+  select tid,drug_code,l.schemeid as lSchemeid,s.schemecode,sc.status from live_tenders l
+  inner join masschemes s on s.schemeid=l.schemeid
+  inner join masschemesstatus sc on sc.schemeid=l.schemeid
+   ) lsch on lsch.tid=lastT.tid
+
+where (nvl(i.ISAIRETURN_DHS,'N')='N' and nvl(i.ISAIRETURN_DME,'N') ='N') and i.accyrsetid=(select accyrsetid from masaccyearsettings where sysdate between startdate and enddate) 
+"+ whMcId + @"
+and m.isfreez_itpr is null and ritemid is null 
+ and   (nvl(dme_indentqty,0)+nvl(i.dhs_indentqty,0)+nvl(i.mitanin,0))>0 
+and case when lsch.status=1 then '6:Live' else 
+case when lsch.status=2  and SUBSTR(ts.ACTIONCODE,1,10)='Cover-A in' then '5:Cover A' else  
+case when lsch.status=3 and SUBSTR(ts.ACTIONCODE,1,10)='Cover-B in' then '3:Cover B' else 
+case when lsch.status=7 and SUBSTR(ts.ACTIONCODE,1,18)='Claim Objection in' then '4:Under Claim Objection' else 
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,11)='Accepted in' then  '1:Accepted' else
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,15)='Price Opened in' then  '2:Price Opened' else 
+case when SUBSTR(ts.ACTIONCODE,1,14)='To be Retender' then '8:To be ReTender' else 
+case when SUBSTR(ts.ACTIONCODE,1,10)='RC Blocked' then '7:RC Blocked,To be Tender' else 
+'9:Fresh Tender'
+end end end end end end end end = '8:To be ReTender' 
+) ";
+            var myList = _context.ToBeTenderDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("ToBeTenderDetail")]
+        public async Task<ActionResult<IEnumerable<ToBeTenderDetailDTO>>> ToBeTenderDetail(string mcid)
+        {
+
+            string whMcid = "";
+
+
+            if (mcid != "0")
+            {
+                whMcid = " and mc.MCID= " + mcid + "   ";
+            }
+
+
+            string qry = @"  select ITEMCODE, ITEMNAME, STRENGTH1 as STRENGTH, UNIT, EDL,
+DHSIndnetQty,DHSAIValue,DMEIndentQty,DMEAIValue,
+(DHSIndnetQty+DMEIndentQty) TotalIndentQty
+,TotalAIValue,
+SCHEMECODE,SCHEMENAME,  TENDERREF,lSchemeid from (
+
+ select m.itemcode,m.itemname,m.strength1,m.unit,m.itemid
+,case when m.isedl2021='Y' then 'Yes' else 'No' end as EDL
+,lsch.lSchemeid,lsch.schemecode,lsch.status,lsch.SCHEMENAME
+, case when lsch.status=1 then '6:Live' else 
+case when lsch.status=2  and SUBSTR(ts.ACTIONCODE,1,10)='Cover-A in' then '5:Cover A' else  
+case when lsch.status=3 and SUBSTR(ts.ACTIONCODE,1,10)='Cover-B in' then '3:Cover B' else 
+case when lsch.status=7 and SUBSTR(ts.ACTIONCODE,1,18)='Claim Objection in' then '4:Under Claim Objection' else 
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,11)='Accepted in' then  '1:Accepted' else
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,15)='Price Opened in' then  '2:Price Opened' else 
+case when SUBSTR(ts.ACTIONCODE,1,14)='To be Retender' then '8:To be ReTender' else 
+case when SUBSTR(ts.ACTIONCODE,1,10)='RC Blocked' then '7:RC Blocked,To be Tender' else 
+'9:Fresh Tender'
+end end end end end end end end as TStatus,action,ACTIONCODE,
+
+nvl(dme_indentqty,0) as DMEIndentQty,
+(nvl(i.dhs_indentqty,0)+nvl(i.mitanin,0)) as DHSIndnetQty 
+,case when skurate is not null then Round((nvl(i.dhs_indentqty,0)+nvl(i.mitanin,0))*skurate,0) else 0 end as DHSAIValue
+,case when skurate is not null then Round((nvl(dme_indentqty,0))*skurate,0) else 0 end as DMEAIValue
+,
+case when skurate is not null then Round((nvl(dme_indentqty,0)+nvl(i.dhs_indentqty,0)+nvl(i.mitanin,0))*skurate,0) else 0 end as TotalAIValue
+
+
+
+,
+case when lsch.status=1 then ts.schemeid else 
+case when lsch.status=2  and SUBSTR(ts.ACTIONCODE,1,10)='Cover-A in' then ts.schemeid  else  
+case when lsch.status=3 and SUBSTR(ts.ACTIONCODE,1,10)='Cover-B in' then ts.schemeid  else 
+case when lsch.status=7 and SUBSTR(ts.ACTIONCODE,1,18)='Claim Objection in' then ts.schemeid  else 
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,11)='Accepted in' then  ts.schemeid  else
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,15)='Price Opened in' then  ts.schemeid  else 
+case when SUBSTR(ts.ACTIONCODE,1,14)='To be Retender' then ts.schemeid  else 
+case when SUBSTR(ts.ACTIONCODE,1,10)='RC Blocked' then BSchemeid else 
+NULL
+end end end end end end end end as TenderRef
+from itemindent i 
+inner join masitems m on m.itemid=i.itemid 
+inner join masitemcategories c on c.CATEGORYID=m.CATEGORYID
+inner join masitemmaincategory mc on mc.mcid=c.mcid
+left outer join 
+(
+select itemid,max(SKUFINALRATE) skurate from v_itemrate
+group by itemid
+) rt on rt.itemid=m.itemid
+left outer join
+(
+select distinct r.itemid as ritemid from  v_rcvalid r
+) r on r.ritemid=m.itemid
+
+left outer join 
+(
+select schemeid as BSchemeid,itemid from v_rcvalidblocked
+) rb on rb.itemid=m.itemid
+
+
+left outer join 
+   (
+   select itemid,action,schemeid,ACTIONCODE from v_tenderstatusallnew e
+   ) ts on ts.itemid=m.itemid
+
+   left outer join 
+   (
+   select max(tid) as tid,drug_code from live_tenders l
+   inner join masschemesstatus sc on sc.schemeid=l.schemeid
+   where 1=1 and sc.nitdate>'01-Apr-2021' 
+   group by drug_code
+   ) lastT on lastT.drug_code=m.itemcode
+
+   left outer join 
+   (
+  select tid,drug_code,l.schemeid as lSchemeid,s.schemecode,sc.status,SCHEMENAME from live_tenders l
+  inner join masschemes s on s.schemeid=l.schemeid
+  inner join masschemesstatus sc on sc.schemeid=l.schemeid
+   ) lsch on lsch.tid=lastT.tid
+
+where (nvl(i.ISAIRETURN_DHS,'N')='N' and nvl(i.ISAIRETURN_DME,'N') ='N') and i.accyrsetid=(select accyrsetid from masaccyearsettings where sysdate between startdate and enddate) 
+" + whMcid + @"
+and m.isfreez_itpr is null and ritemid is null 
+ and   (nvl(dme_indentqty,0)+nvl(i.dhs_indentqty,0)+nvl(i.mitanin,0))>0 
+and case when lsch.status=1 then '6:Live' else 
+case when lsch.status=2  and SUBSTR(ts.ACTIONCODE,1,10)='Cover-A in' then '5:Cover A' else  
+case when lsch.status=3 and SUBSTR(ts.ACTIONCODE,1,10)='Cover-B in' then '3:Cover B' else 
+case when lsch.status=7 and SUBSTR(ts.ACTIONCODE,1,18)='Claim Objection in' then '4:Under Claim Objection' else 
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,11)='Accepted in' then  '1:Accepted' else
+case when lsch.status=4 and SUBSTR(ts.ACTIONCODE,1,15)='Price Opened in' then  '2:Price Opened' else 
+case when SUBSTR(ts.ACTIONCODE,1,14)='To be Retender' then '8:To be ReTender' else 
+case when SUBSTR(ts.ACTIONCODE,1,10)='RC Blocked' then '7:RC Blocked,To be Tender' else 
+'9:Fresh Tender'
+end end end end end end end end = '8:To be ReTender' 
+
+)x
+
+where 1=1 -- and TOTALAIVALUE>100000
+order by ITEMNAME ";
+            var myList = _context.ToBeTenderDetailDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+        [HttpGet("SchemeReceived")]
+        public async Task<ActionResult<IEnumerable<SchemeReceivedDTO>>> SchemeReceived(string schemeid)
+        {
+
+            string whSchemeId = "";
+
+
+            if (schemeid != "0")
+            {
+                whSchemeId = " and s.schemeid= " + schemeid + "   ";
+            }
+
+
+            string qry = @" select t.SCHEMEID, s.SCHEMENAME ,ft.FACILITYTYPECODE,  t.letterno,to_char( t.letterdate,'dd-MM-yyyy') as letterdate,t.remarks,to_char( t.senddate,'dd-MM-yyyy') as senddate,t.entrydate,t.filename,
+replace(t.filepath,'~','dpdmis.in') as filepath,t.convid 
+,rp.CONRID, rp.RECVDATE, rp.RECVLETTERNO, rp.RECVLETTERDT, rp.RECVREMARK,rp.RECVFILENAME, replace(rp.RECVFILEPATH,'~','dpdmis.in')  as RECVFILEPATH , rp.RECVENTRYDATE
+from TBHODCONVERSATION t
+inner join masschemes  s on s.SCHEMEID=t.SCHEMEID
+inner join masfacilitytypes ft on ft.FACILITYTYPEID=t.hodid
+left outer join 
+(
+select CONRID,CONVID,to_char( RecvDate,'dd-MM-yyy')  as RecvDate,LetterNo as RecvLetterNo
+,to_char( LetterDT,'dd-MM-yyy') as RecvLetterDT,Remarks as RecvRemark,FileName as RecvFileName,FilePath as RecvFilePath,entryby,to_char(entrydate,'dd-MM-yyyy')   as Recventrydate
+from TBHODCONVERSATIONREPLY  order by entrydate desc
+)rp on rp.convid=t.convid
+where 1=1  "+ whSchemeId + @" order by  convid desc ";
+            var myList = _context.SchemeReceivedDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("SchemeTenderStatus")]
+        public async Task<ActionResult<IEnumerable<SchemeTenderStatusDTO>>> SchemeTenderStatus(string schemeid)
+        {
+
+            string whSchemeId = "";
+
+
+            if (schemeid != "0")
+            {
+                whSchemeId = " and s.schemeid= " + schemeid + "   ";
+            }
+
+
+            string qry = @" select s.SCHEMEID, s.SCHEMENAME  ,t.tenderstatus, tr.tenderremark,
+                            to_char( tr.entrydate,'dd-MM-yyyy') as entrydate
+                           ,tr.TSID 
+                            from
+                            TENDERSTATUSREMARK tr 
+                            inner join TENDERSTATUSMASTER t  on t.tsid=tr.tsid
+                            inner join masschemes  s on s.SCHEMEID=tr.SCHEMEID
+                            where 1=1 "+ whSchemeId + @" order by  TSID desc ";
+            var myList = _context.SchemeTenderStatusDbSet
            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
             return myList;

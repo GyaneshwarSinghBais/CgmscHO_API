@@ -313,7 +313,7 @@ order by mi.itemname ";
             string qry = "";
             if (Usertype == "HOD")
             {
-                qry = @" select firstname ||' ' ||lastname as textfield,u.userid,u.emailid,firstname,lastname,u.orderid, h.footer1 as SIDesig,h.FOOTER2 SIName,nvl(h.FOOTER3,'6263007758') as SIMobile,'-' as DEPEMAIL,r.rolename,r.roleid,0 as warehouseid,0 as districtid,0 as HimisDistrictid,0 as  BLID from usrusers u
+                qry = @" select firstname ||' ' ||lastname as textfield,u.userid,u.emailid,firstname,lastname,u.orderid, h.footer1 as SIDesig,h.FOOTER2 SIName,nvl(h.FOOTER3,'7773006940') as SIMobile,'-' as DEPEMAIL,r.rolename,r.roleid,0 as warehouseid,0 as districtid,0 as HimisDistrictid,0 as  BLID from usrusers u
 inner join usrroles r on r.roleid=u.roleid
 left outer join masfacheaderfooter h on h.userid=u.userid
 where r.ISHOUSER='Y'

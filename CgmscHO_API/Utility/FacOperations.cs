@@ -161,7 +161,7 @@ namespace CgmscHO_API.Utility
         public string insertUpdateOTP1(string userid)
         {
             string mobNo = getMobileNumber(userid);
-            //string mobNo = "9691611103";
+           // string mobNo = "9691611103";
 
             string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
             string sRandomOTP = GenerateRandomOTP(5, saAllowedCharacters);

@@ -369,7 +369,15 @@ namespace CgmscHO_API.Models
         public DbSet<NoOfBiddersDTO> NoOfBiddersDbSet { get; set; }
         public DbSet<ConversationHodCgmscDTO> ConversationHodCgmscDbSet { get; set; }
         public DbSet<WhMangerSSODetailDTO> WhMangerSSODetailDbSet { get; set; }
+        public DbSet<ToBeTenderDTO> ToBeTenderDbSet { get; set; }
+        public DbSet<ToBeTenderDetailDTO> ToBeTenderDetailDbSet { get; set; }
+        public DbSet<SchemeReceivedDTO> SchemeReceivedDbSet { get; set; }
+        public DbSet<SchemeTenderStatusDTO> SchemeTenderStatusDbSet { get; set; }
         
+
+
+
+
 
 
 
@@ -394,6 +402,10 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<TotalTenderDTO>().HasNoKey();
             modelBuilder.Entity<NoOfBiddersDTO>().HasNoKey();
             modelBuilder.Entity<ConversationHodCgmscDTO>().HasNoKey();
+            modelBuilder.Entity<ToBeTenderDetailDTO>().HasNoKey(); 
+            modelBuilder.Entity<SchemeReceivedDTO>().HasNoKey();
+            modelBuilder.Entity<SchemeTenderStatusDTO>().HasNoKey();
+            
 
 
 

@@ -16,5 +16,8 @@ namespace CgmscHO_API.HODTO
         public string? SoId { get; set; }
         public string? SoName { get; set; }
         public string? SOMobileNo { get; set; }
+        public string? LATITUDE { get; set; }
+        public string? LONGITUDE { get; set; }
+        
     }
 }
