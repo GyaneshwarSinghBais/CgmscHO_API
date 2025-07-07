@@ -842,6 +842,52 @@ group by b.itemid, m.itemcode,m.itemname,m.strength1
             myList = (List<QCHoldItemDetails>)null;
             return actionResult;
         }
+
+
+        [HttpGet("nsqDrugDetails")]
+        public async Task<ActionResult<IEnumerable<NsqDrugDetailsDTO>>> nsqDrugDetails()
+        {
+            string qry = @" select itemcode,itemname,batchno,mfgdate,expdate,sum(stock) stock,finalrategst finalrate,sum(Stkvalue) Stkvalue
+from
+(
+select  m.itemcode,m.itemname,b.batchno,b.mfgdate,b.expdate,nvl(ABSRQTY,0)-nvl(ALLOTQTY,0) as stock,
+b.ponoid,p.finalrategst,(nvl(ABSRQTY,0)-nvl(ALLOTQTY,0))*p.finalrategst as Stkvalue,b.itemid
+,case when m.isedl2021='Y' then b.itemid else 0  end as EDLitem
+,case when m.isedl2021='Y' then  0  else b.itemid end as NonEDL
+,case when m.isedl2021='Y' then (nvl(ABSRQTY,0)-nvl(ALLOTQTY,0))*p.finalrategst else 0  end as EDLitemValue
+,case when m.isedl2021='Y' then 0  else  (nvl(ABSRQTY,0)-nvl(ALLOTQTY,0))*p.finalrategst end as NonEDLitemValue
+,nvl(ABSRQTY,0) as rqty,nvl(ALLOTQTY,0) as allotqty
+,mc.mcategory,mc.mcid
+from tbreceiptbatches b
+left outer join 
+(
+select op.ponoid,oi.itemid,nvl(c.finalrategst,c.SINGLEUNITPRICE) finalrategst from  soorderplaced op 
+ inner join soOrderedItems OI on (OI.ponoid = op.ponoid)
+ inner join aoccontractitems c on c.contractitemid = oi.contractitemid
+ ) p on p.ponoid=b.ponoid 
+ left outer join 
+(
+select max(sampleid) sampleid ,BATCHNO,ITEMID,PONOID from qcsamples
+group by BATCHNO,ITEMID,PONOID
+) hld on hld.BATCHNO=b.BATCHNO and hld.ITEMID=b.itemid and hld.PONOID=p.ponoid
+left outer join qcsamples c on c.sampleid=hld.sampleid
+ join tbreceiptitems i on b.receiptitemid = i.receiptitemid
+ inner  join tbreceipts t on t.receiptid = i.receiptid
+ inner join masitems m on m.itemid=b.itemid and m.itemid=b.itemid
+ inner join masitemcategories ic on ic.categoryid = m.categoryid
+ inner join masitemmaincategory mc on mc.MCID=ic.MCID
+ Where T.Status = 'C'   And b.qastatus =2   and mc.mcid =1
+ and (nvl(ABSRQTY,0)-nvl(ALLOTQTY,0))>0
+and ((nvl(ABSRQTY,0))-(nvl(ALLOTQTY,0)))>0
+)
+group by itemcode,itemname,batchno,mfgdate,expdate,finalrategst
+order by itemcode,batchno ";
+
+            var myList = _context.NsqDrugDetailsDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+        }
     }
 }
 

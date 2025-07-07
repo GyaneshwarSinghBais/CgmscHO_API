@@ -1,77 +1,149 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "H:\\31-01-25\\CgmscHO_API\\",
+  "WorkspaceRootPath": "H:\\gyan04-07-2025\\CgmscHO_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\dashboardfinance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboardfinance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\hocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\hodto\\aivsissuancedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\aivsissuancedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\yrlibdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\yrlibdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\indenthomedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\indenthomedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\paiddatewisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\paiddatewisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\qc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\qc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\hotendercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hotendercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\paidyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\paidyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\qcdto\\qchomedashplacewise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\qcdto\\qchomedashplacewise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\financedto\\grosspaiddetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\grosspaiddetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\hodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\hodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hodcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\issueitemsyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\hotendercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hotendercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\cgmscstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\cgmscstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\models\\cgmscitemwisestock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\models\\cgmscitemwisestock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\models\\masaccyearsettingsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\models\\masaccyearsettingsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\utility\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\utility\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\utility\\facoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\utility\\facoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\facility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\facility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\dashboarddme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboarddme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\noc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\noc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\timetaken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\timetaken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\hodto\\rcnearexdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\rcnearexdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\hodto\\yearwisercdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\yearwisercdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\hodto\\totalrcdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\totalrcdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\hodto\\rcdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\rcdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\publicreportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\publicreportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\dashboardfinance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboardfinance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\financedto\\yrlibdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\yrlibdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\dashhomedto\\indenthomedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\indenthomedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\financedto\\paiddatewisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\paiddatewisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\qc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\qc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\financedto\\paidyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\paidyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\qcdto\\qchomedashplacewise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\qcdto\\qchomedashplacewise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\financedto\\grosspaiddetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\financedto\\grosspaiddetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\dashhomedto\\issueitemsyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\issueitemsyearwisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\indentcnthome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\dashhomedto\\indentcnthome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\indentcnthome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\stockoutperhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\dashhomedto\\stockoutperhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\stockoutperhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\partiitem_rcdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\dashhomedto\\partiitem_rcdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\partiitem_rcdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\controllers\\emd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\controllers\\emd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\emd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\31-01-25\\cgmscho_api\\cgmscho_api\\dashhomedto\\issuedcfydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|h:\\gyan04-07-2025\\cgmscho_api\\cgmscho_api\\dashhomedto\\issuedcfydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\issuedcfydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -82,15 +154,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 19,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 26,
               "Title": "QC.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\QC.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\QC.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\QC.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\QC.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\QC.cs",
               "RelativeToolTip": "CgmscHO_API\\Controllers\\QC.cs",
               "ViewState": "AgIAAEwBAAAAAAAAAAAqwGUBAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -104,11 +176,245 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DistrictController.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DistrictController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DistrictController.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DistrictController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\DistrictController.cs",
+              "ViewState": "AQIAAMgFAAAAAAAAAAAUwPIFAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:16:16.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CGMSCitemWiseStock.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Models\\CGMSCitemWiseStock.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Models\\CGMSCitemWiseStock.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Models\\CGMSCitemWiseStock.cs",
+              "RelativeToolTip": "CgmscHO_API\\Models\\CGMSCitemWiseStock.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:14:39.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "masAccYearSettingsModel.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Models\\masAccYearSettingsModel.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Models\\masAccYearSettingsModel.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Models\\masAccYearSettingsModel.cs",
+              "RelativeToolTip": "CgmscHO_API\\Models\\masAccYearSettingsModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:13:56.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "master.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Utility\\master.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Utility\\master.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Utility\\master.cs",
+              "RelativeToolTip": "CgmscHO_API\\Utility\\master.cs",
+              "ViewState": "AQIAAIAAAAAAAAAAAAAAAI4AAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:13:31.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FacOperations.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Utility\\FacOperations.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Utility\\FacOperations.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Utility\\FacOperations.cs",
+              "RelativeToolTip": "CgmscHO_API\\Utility\\FacOperations.cs",
+              "ViewState": "AQIAAH4AAAAAAAAAAAAAADoAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:13:16.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Facility.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\Facility.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\Facility.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\Facility.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\Facility.cs",
+              "ViewState": "AQIAADUEAAAAAAAAAAAmwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:12:12.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MasterController.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\MasterController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\MasterController.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\MasterController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\MasterController.cs",
+              "ViewState": "AQIAAMUCAAAAAAAAAAAQwCoCAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:20:47.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "TimeTaken.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\TimeTaken.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\TimeTaken.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\TimeTaken.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\TimeTaken.cs",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAYwGMAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:13:43.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "YearWiseRCDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\YearWiseRCDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\YearWiseRCDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\YearWiseRCDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\HODTO\\YearWiseRCDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:12:11.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "TotalRCDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\TotalRCDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\TotalRCDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\TotalRCDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\HODTO\\TotalRCDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:12:09.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "RCNearExDetails.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\RCNearExDetails.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\RCNearExDetails.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\RCNearExDetails.cs",
+              "RelativeToolTip": "CgmscHO_API\\HODTO\\RCNearExDetails.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:12:02.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "RCDetailDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\RCDetailDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\RCDetailDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\RCDetailDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\HODTO\\RCDetailDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:11:54.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "PublicReportController.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\PublicReportController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\PublicReportController.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\PublicReportController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\PublicReportController.cs",
+              "ViewState": "AQIAACsBAAAAAAAAAAAIwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:10:50.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DashboardDME.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardDME.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DashboardDME.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardDME.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\DashboardDME.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAswA4AAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:09:28.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CGMSCStockController.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "ViewState": "AQIAAI8HAAAAAAAAAAAAAJQHAABVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:09:02.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "NOC.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\NOC.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\NOC.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\NOC.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\NOC.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T17:03:27.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AIvsIssuanceDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\AIvsIssuanceDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\AIvsIssuanceDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\HODTO\\AIvsIssuanceDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\HODTO\\AIvsIssuanceDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T16:32:39.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HOController.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\HOController.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\HOController.cs",
+              "ViewState": "AQIAAAsOAAAAAAAAAAArwB8OAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T16:13:21.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "GrossPaidDetails.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
               "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\GrossPaidDetails.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAAUwAQAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -116,35 +422,37 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "HOTenderController.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOTenderController.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOTenderController.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\HOTenderController.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOTenderController.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOTenderController.cs",
               "RelativeToolTip": "CgmscHO_API\\Controllers\\HOTenderController.cs",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAMwHIAAABaAAAAAAAAAA==",
+              "ViewState": "AQIAAKYJAAAAAAAAAAAqwAgAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-08T19:54:49.439Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OraDbContext.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\Models\\OraDbContext.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
-              "RelativeToolTip": "CgmscHO_API\\Models\\OraDbContext.cs",
-              "ViewState": "AgIAAEcBAAAAAAAAAAAzwFYBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-08T18:21:33.403Z"
+              "WhenOpened": "2025-02-08T19:54:49.439Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "OraDbContext.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Models\\OraDbContext.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
+              "RelativeToolTip": "CgmscHO_API\\Models\\OraDbContext.cs",
+              "ViewState": "AQIAAGwBAAAAAAAAAAArwHoBAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T18:21:33.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "YrLibDTO.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
               "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\YrLibDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -152,11 +460,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 24,
               "Title": "IndentHomeDTO.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
               "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IndentHomeDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -164,11 +472,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 25,
               "Title": "PaidDateWiseDTO.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
               "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\PaidDateWiseDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -176,11 +484,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 33,
               "Title": "PartiItem_RCDTO.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
               "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\PartiItem_RCDTO.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAMAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -188,37 +496,37 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 22,
               "Title": "DashboardFinance.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardFinance.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardFinance.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DashboardFinance.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardFinance.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardFinance.cs",
               "RelativeToolTip": "CgmscHO_API\\Controllers\\DashboardFinance.cs",
-              "ViewState": "AgIAAJ8AAAAAAAAAAAAqwMwAAAA3AAAAAAAAAA==",
+              "ViewState": "AQIAAIIEAAAAAAAAAAAqwBEAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-03T03:39:13.924Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "DashboardHome.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DashboardHome.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
               "RelativeToolTip": "CgmscHO_API\\Controllers\\DashboardHome.cs",
-              "ViewState": "AQIAALsCAAAAAAAAAAAqwMECAAAEAAAA",
+              "ViewState": "AQIAACsEAAAAAAAAAAAAAMECAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-10T17:12:15.546Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 28,
               "Title": "QCHomeDashPlacewise.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
               "RelativeToolTip": "CgmscHO_API\\QCDTO\\QCHomeDashPlacewise.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -226,11 +534,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 30,
               "Title": "IssueItemsYearwiseDTO.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
               "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IssueItemsYearwiseDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -238,24 +546,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 3,
               "Title": "HODController.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HODController.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\HODController.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\HODController.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\HODController.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\HODController.cs",
               "RelativeToolTip": "CgmscHO_API\\Controllers\\HODController.cs",
-              "ViewState": "AQIAAGYCAAAAAAAAAAAMwHMCAAAPAAAA",
+              "ViewState": "AQIAAK8DAAAAAAAAAAAgwLsDAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-05T04:10:37.21Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 27,
               "Title": "PaidYearWiseDTO.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
               "RelativeToolTip": "CgmscHO_API\\FinanceDTO\\PaidYearWiseDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -263,11 +571,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 34,
               "Title": "EMD.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\EMD.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\EMD.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\EMD.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\Controllers\\EMD.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\Controllers\\EMD.cs",
               "RelativeToolTip": "CgmscHO_API\\Controllers\\EMD.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -275,11 +583,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 32,
               "Title": "StockoutPerHome.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
               "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\StockoutPerHome.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -287,11 +595,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 31,
               "Title": "IndentCntHome.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
               "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IndentCntHome.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -299,11 +607,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 35,
               "Title": "IssuedCFYDTO.cs",
-              "DocumentMoniker": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
+              "DocumentMoniker": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
-              "ToolTip": "H:\\31-01-25\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
+              "ToolTip": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
               "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\IssuedCFYDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace CgmscHO_API.Controllers
@@ -846,7 +847,7 @@ order by m.itemname";
 
         }
 
-
+        //gajju
         [HttpGet("DirectorateAIDetails")]
         public async Task<ActionResult<IEnumerable<DirectorateIndentPOStatusDTO>>> DirectorateAIDetails(string yearid, string mcid, string hodid, string groupid, string itemtypeid)
         {
@@ -886,6 +887,30 @@ order by m.itemname";
             }
 
 
+            string dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+            string dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))  ";
+            if (hodid == "364")
+            {
+                dclause = " sum(nvl(i.DME_INDENTQTY, 0)) ";
+                dclausewh = " nvl(i.DME_INDENTQTY, 0) ";
+            }
+            else if (hodid == "367")
+            {
+                dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+            }
+            else if (hodid == "371")
+            {
+                dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+            }
+            else
+            {
+                dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)+ nvl(i.DME_INDENTQTY, 0)) ";
+                dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)+nvl(i.DME_INDENTQTY, 0)) ";
+            }
+
+   
             qry = @" select g.groupid, g.groupname,
 m.itemid,m.itemcode,nvl(DHSAI,0) as DHSAI,nvl(POQTY,0) as POQTY,nvl(povalue,0) as povalue ,nvl(RQTY,0) as RQTY,nvl(rvalue,0) as rvalue,case when nvl(RQTY,0)>0 then to_char(round((nvl(RQTY,0)/nvl(POQTY,0))*100,2))||'%' else '0' end as rPercentage,
 t.itemtypename,m.itemname,m.strength1,m.unit,case when m.isedl2021='Y' then 'EDL' else 'Non EDL' end as edltype,e.edl from  masitems m 
@@ -896,8 +921,8 @@ left outer join masitemgroups g on g.groupid=m.groupid
 left outer join masedl e on e.edlcat=m.edlcat
 inner join 
 (
-select itemid,sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) as DHSAI,case when i.isaireturn ='Y' then 1 else 0 end as AIReturn from itemindent i  where 1 = 1 
-and (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))>0 and
+select itemid," + dclause+ @" as DHSAI,case when i.isaireturn ='Y' then 1 else 0 end as AIReturn from itemindent i  where 1 = 1 
+and "+ dclausewh + @">0 and
 accyrsetid = " + whyearid + @"
 group by  itemid,i.isaireturn
 ) ai on ai.itemid = m.itemid
@@ -975,9 +1000,31 @@ where 1=1 and m.ISFREEZ_ITPR is null "+ whmcid + @"  "+ whgroupid + @"  "+ white
             {
                 whhodid = " and op.deptid =" + hodid;
             }
-         
+            string dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+            string dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))  ";
+            if (hodid == "364")
+            {
+                dclause = " sum(nvl(i.DME_INDENTQTY, 0)) ";
+                dclausewh = " nvl(i.DME_INDENTQTY, 0) ";
+            }
+            else if (hodid == "367")
+            {
+                dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+            }
+            else if (hodid == "371")
+            {
+                dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+                dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) ";
+            }
+            else
+            {
+                dclause = " sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)+ nvl(i.DME_INDENTQTY, 0)) ";
+                dclausewh = " (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)+nvl(i.DME_INDENTQTY, 0)) ";
+            }
+
             qry = @" 
-select groupid,groupname,count(itemid) as nosIndent,sum(POgiven) as POgiven,sum(povalue) as povalue,sum(Received) as itemsreceived,sum(rvalue) as rvalue
+select nvl(groupid,0) as groupid ,nvl(groupname,'-') as groupname,count(itemid) as nosIndent,sum(POgiven) as POgiven,sum(povalue) as povalue,sum(Received) as itemsreceived,sum(rvalue) as rvalue
 from 
 (
 select g.groupid, g.groupname,
@@ -993,8 +1040,8 @@ left outer join masitemgroups g on g.groupid=m.groupid
 left outer join masedl e on e.edlcat=m.edlcat
 inner join 
 (
-select itemid,sum(nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0)) as DHSAI,case when i.isaireturn ='Y' then 1 else 0 end as AIReturn from itemindent i  where 1 = 1 
-and (nvl(i.DHS_INDENTQTY, 0) + nvl(i.mitanin, 0))>0 and
+select itemid," + dclause+@" as DHSAI,case when i.isaireturn ='Y' then 1 else 0 end as AIReturn from itemindent i  where 1 = 1 
+and "+ dclausewh + @">0 and
 accyrsetid = " + whyearid + @"
 group by  itemid,i.isaireturn
 ) ai on ai.itemid = m.itemid

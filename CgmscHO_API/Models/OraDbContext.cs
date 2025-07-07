@@ -119,6 +119,8 @@ namespace CgmscHO_API.Models
         public DbSet<InitiatedPendingIssueDetailsDTO> GetInitiatedPendingIssueDetailsDTODbSet { get; set; }
         public DbSet<IWHPipelineSummaryDTO> GetIWHPipelineSummaryDbSet { get; set; }
         public DbSet<IWHPipelineDetailsDTO> GetIWHPipelineDetailsDTODbSet { get; set; }
+       
+        
 
 
         // public DbSet<tbFacilityOutwardsUpdateModel> tbFacilityOutwardsUpdateModelDbSet { get; set; }
@@ -373,8 +375,9 @@ namespace CgmscHO_API.Models
         public DbSet<ToBeTenderDetailDTO> ToBeTenderDetailDbSet { get; set; }
         public DbSet<SchemeReceivedDTO> SchemeReceivedDbSet { get; set; }
         public DbSet<SchemeTenderStatusDTO> SchemeTenderStatusDbSet { get; set; }
+        public DbSet<NsqDrugDetailsDTO> NsqDrugDetailsDbSet { get; set; }
+        public DbSet<AIvsIssuanceDTO> AIvsIssuanceDbSet { get; set; }
         
-
 
 
 
@@ -405,7 +408,9 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<ToBeTenderDetailDTO>().HasNoKey(); 
             modelBuilder.Entity<SchemeReceivedDTO>().HasNoKey();
             modelBuilder.Entity<SchemeTenderStatusDTO>().HasNoKey();
-            
+            modelBuilder.Entity<NsqDrugDetailsDTO>().HasNoKey();
+            modelBuilder.Entity<AIvsIssuanceDTO>().HasNoKey();
+
 
 
 

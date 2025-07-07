@@ -3590,9 +3590,32 @@ order by mcid ";
 
 
         [HttpGet("getFunds")]
-        public async Task<ActionResult<IEnumerable<FundsDTO>>> getFunds()
+        public async Task<ActionResult<IEnumerable<FundsDTO>>> getFunds(Int32 RoleID)
         {
-            string qry = @" select budgetid,budgetname from MASBUDGET where budgetid not in (3) order by Orderid ";
+            string whRole = "";
+            if(RoleID != 0)
+            {
+                if (RoleID == 485) //CME
+                {
+                    whRole = @"  and FACILITYTYPEID = 364 ";
+                }
+                else if (RoleID == 459) //DHS02
+                {
+                    whRole = @"  and FACILITYTYPEID = 367 ";
+                }
+                else if (RoleID == 441) //DHS02
+                {
+                    whRole = @"  and FACILITYTYPEID = 371 ";
+                }
+                else
+                {
+                    whRole = "";
+                }
+            }
+
+            string qry = @" select budgetid,budgetname from MASBUDGET where 
+budgetid not in (3)   "+ whRole + @"
+order by Orderid ";
 
             var myList = _context.FundsDbSet
       .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
@@ -6031,6 +6054,126 @@ group by f.facilityid,m.unitcount
             string qry = @" insert into TBLRECVPROGRESSHOREMARKS( progressid, remid, horemarks, entrydt,isCurrent,houserid) values(" + progressid + ", "+ remid + ", '"+ horemarks + "', '"+ dt1  + "','Y',"+ houserid +")  ";
             _context.Database.ExecuteSqlRaw(qry);
             return Ok("Successfully Saved");
+
+        }
+
+        [HttpGet("AIvsIssuance")]
+        public async Task<ActionResult<IEnumerable<AIvsIssuanceDTO>>> AIvsIssuance( string mcid, string facid, string yrid)
+        {
+
+            string whmcid = "";
+            string whfacid = "";
+            string whyrid = "";
+
+            if (mcid != "0")
+            {
+                whmcid = " and mc.mcid = " + mcid;
+            }
+         
+            if (facid != "0")
+            {
+                whfacid = " and a.facilityid=" + facid;
+            }
+            string whyrida = ""; string mcyrida = "";
+            if (yrid != "0")
+            {
+                whyrid = " and accyrsetid = " + yrid;
+                whyrida =" and a.accyrsetid = " + yrid;
+                mcyrida = " and mc.accyrsetid = " + yrid;
+            }
+            string qry = "";
+            if (facid != "0")
+            {
+
+                qry = @"  select m.itemid,m.itemcode,m.itemname,m.strength1,m.unit,m.unitcount
+,a.ai,a.ai*nvl(m.unitcount,1) as AINOS, 
+
+nvl(iss.ISS_Qty,0) as IssuedQTY,nvl(iss.ISS_Qty,0)*nvl(m.unitcount,1) as ISSUEQTYNOS,case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end as IssuePEr  ,a.facilityid
+,case when (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end)>=100 then 'Red'
+else case when (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end)>60 and (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end)<100
+then 'Yellow' else 'White' end end as color
+,nvl(nocqty,0) as nocqty,nvl(nocqty,0)*nvl(m.unitcount,1) as nocqtyinNos
+from  V_InstitutionAI a
+inner join masitems m on m.itemid=a.itemid
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.mcid = c.mcid
+left outer join 
+(
+select sum(tbo.issueqty) ISS_Qty,f.facilityid,tbi.itemid 
+ from tbindents tb
+ inner join tbindentitems tbi on tbi.indentid=tb.indentid 
+  inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+  inner join tbreceiptbatches rb on rb.inwno=tbo.inwno
+inner join maswarehouses w on w.warehouseid = tb.warehouseid
+inner join masfacilities f on f.facilityid = tb.facilityid 
+ where   tb.Status = 'C' and tb.issuetype='NO' and f.facilitytypeid in (364,378)
+ and  tb.indentdate between ( select startdate from masaccyearsettings where 1=1 " + whyrid + @" )  
+and ( select enddate from masaccyearsettings where 1=1 " + whyrid + @" )  and tb.notindpdmis is null
+  and tb.notindpdmis is null   and tbi.notindpdmis is null   and tbo.notindpdmis is null   and rb.notindpdmis is null
+  group by f.facilityid,tbi.itemid
+) iss on iss.itemid=m.itemid and iss.facilityid=a.facilityid
+left join
+(
+select mc.accyrsetid,mc.facilityid,mci.itemid,sum(mci.approvedqty) nocqty from mascgmscnoc mc 
+inner join mascgmscnocitems mci on mci.nocid=mc.nocid
+where mc.status='C'  and nvl(mci.approvedqty,0)>0
+" + mcyrida + @"
+group by mc.accyrsetid,mci.itemid,mc.facilityid
+)nc on  nc.itemid=m.itemid and nc.facilityid=a.facilityid
+
+
+where 1=1 " + whmcid + @" " + whfacid + @"
+ and AI>0  " + whyrida + @"
+order by (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end) desc ";
+            }
+            else
+            {
+                qry = @" select m.itemid,m.itemcode,m.itemname,m.strength1,m.unit,m.unitcount,a.ai,a.ai*nvl(m.unitcount,1) as AINOS
+,nvl(iss.ISS_Qty,0) as IssuedQTY,nvl(iss.ISS_Qty,0)*nvl(m.unitcount,1) as ISSUEQTYNOS
+,case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end as IssuePEr  ,0 as facilityid
+,case when (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end)>=100 then 'Red'
+else case when (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end)>60 and (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end)<100
+then 'Yellow' else 'White' end end as color
+,nvl(nocqty,0) as nocqty,nvl(nocqty,0)*nvl(m.unitcount,1) as nocqtyinNos
+from masitems m
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.mcid = c.mcid
+inner join 
+(
+select itemid, nvl(i.DME_INDENTQTY, 0)   as ai,case when i.ISAIRETURN_DME ='Y' then 1 else 0 end as AIReturn from itemindent i  where 1 = 1 
+and  (nvl(i.DME_INDENTQTY, 0) )  >0 "+whyrid+@" and i.ISAIRETURN_DME is null
+) a on a.itemid = m.itemid
+
+left outer join 
+(
+select sum(tbo.issueqty) ISS_Qty,tbi.itemid 
+ from tbindents tb
+ inner join tbindentitems tbi on tbi.indentid=tb.indentid 
+  inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+  inner join tbreceiptbatches rb on rb.inwno=tbo.inwno
+inner join maswarehouses w on w.warehouseid = tb.warehouseid
+inner join masfacilities f on f.facilityid = tb.facilityid 
+ where   tb.Status = 'C' and tb.issuetype='NO' and f.facilitytypeid in (364,378)
+ and  tb.indentdate between ( select startdate from masaccyearsettings where 1=1  "+ whyrid + @")
+and ( select enddate from masaccyearsettings where 1=1 "+ whyrid + @")  and tb.notindpdmis is null
+  and tb.notindpdmis is null   and tbi.notindpdmis is null   and tbo.notindpdmis is null   and rb.notindpdmis is null
+  group by tbi.itemid
+) iss on iss.itemid=m.itemid 
+left join
+(
+select mc.accyrsetid,mci.itemid,sum(mci.approvedqty) nocqty from mascgmscnoc mc 
+inner join masfacilities f on f.facilityid = mc.facilityid 
+inner join mascgmscnocitems mci on mci.nocid=mc.nocid
+where mc.status='C'  and nvl(mci.approvedqty,0)>0 and f.facilitytypeid in (364,378) " + mcyrida + @"
+group by mc.accyrsetid,mci.itemid
+)nc on  nc.itemid=m.itemid 
+
+where    m.ISFREEZ_ITPR is null  "+ whmcid + @"
+order by (case when nvl(iss.ISS_Qty,0)>0 then Round(nvl(iss.ISS_Qty,0)/nvl(a.ai,1)*100,2) else 0 end) desc ";
+            }
+            var myList = _context.AIvsIssuanceDbSet
+    .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
 
         }
 

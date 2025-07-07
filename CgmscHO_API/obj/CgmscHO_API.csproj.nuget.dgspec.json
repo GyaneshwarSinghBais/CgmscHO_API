@@ -1,29 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj": {}
+    "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj": {}
   },
   "projects": {
-    "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj": {
+    "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj",
+        "projectUniqueName": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj",
         "projectName": "CgmscHO_API",
-        "projectPath": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj",
-        "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\obj\\",
+        "projectPath": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj",
+        "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
+        "outputPath": "H:\\gyan04-07-2025\\CgmscHO_API\\CgmscHO_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Home\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
-          "https://nuget.grapecity.com/nuget": {}
+          "http://nuget.grapecity.com/nuget": {}
         },
         "frameworks": {
           "net6.0": {
@@ -35,6 +33,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -113,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

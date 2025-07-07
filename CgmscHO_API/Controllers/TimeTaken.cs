@@ -96,6 +96,11 @@ order by to_date(fdate,'dd-MM-yyyy') ";
             {
                 whmcid = " and mc.mcid = " + mcid;
             }
+            string whmmpara = "";
+            if (mmpara != "0")
+            {
+                whmmpara = " where mm='" + mmpara + "'";
+            }
             string qry = "";
             qry = @" select itemcode,itemname,strength1,unit,basicrate,Tax as GST,finalrategst,RCStart,RCEndDT,itemid,mm
 from 
@@ -128,7 +133,7 @@ inner join masitems m on m.itemid=d.itemid
 inner join masitemtypes ty on ty.itemtypeid=m.itemtypeid
 where blacklisted='No' 
 group  by m.itemcode ,m.itemname,m.strength1,m.unit,m.itemid
-) where mm='" + mmpara + @"' order by RCEndDT desc ";
+) "+whmmpara+@" order by RCEndDT desc ";
 
 
 
