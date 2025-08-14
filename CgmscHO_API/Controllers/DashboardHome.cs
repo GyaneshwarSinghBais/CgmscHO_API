@@ -1268,7 +1268,128 @@ mc.mcid, m.itemid,tb.facilityid,(select ACCYRSETID from masaccyearsettings  wher
         }
 
 
+        [HttpGet("SupplierPendingPayments")]
+        public async Task<ActionResult<IEnumerable<SupplierPendingPaymentsDTO>>> SupplierPendingPayments(Int32 budgetId)
+        {
+            string whBudgetId = "";
+            if (budgetId != 0)
+            {
 
+                whBudgetId = "  and b.budgetid = " + budgetId;
+            }
+
+            string qry = "";
+            qry = @"  select SUPPLIERID,SUPPLIERNAME,count(distinct PONOID) nosPO, round(sum(LIBNEW)/100000,2)as RecLibLacs
+from 
+(
+select itemid,ponoid,SUPPLIERNAME,SUPPLIERID,LIBNEW from v_popaymentstatus p
+inner join masbudget b on b.budgetid = p.budgetid
+where PaymentstatusNew='Not Paid'
+and RECEIPTQTY>0
+and LIBNEW>0
+and 1=1 "+ whBudgetId + @"
+) group by SUPPLIERID,SUPPLIERNAME
+order by round(sum(LIBNEW)/100000,2) desc ";
+
+            var myList = _context.SupplierPendingPaymentsDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("RCValidSatus")]
+        public async Task<ActionResult<IEnumerable<RCValidSatusDTO>>> RCValidSatus(Int32 yearId, Int32 mcId, string hoType)
+        {
+            string whyearId = "";
+            string whmcId = "";
+            string whhoType = "";
+
+            if (yearId != 0)
+            {
+
+                whyearId = "  and i.accyrsetid =  " + yearId;
+            }
+
+            if (mcId != 0)
+            {
+
+                whmcId = "  and mc.mcid= " + mcId;
+            }
+
+            if (hoType != "0")
+            {
+
+                if (hoType == "DHS")
+                {
+
+                    whhoType = " and ISAIRETURN_DHS is null and (nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0))>0 " ;
+                }
+                if (hoType == "DME")
+                {
+
+                    whhoType = "  and ISAIRETURN_DME is null and (nvl(i.DME_INDENTQTY,0))>0 " ;
+                }
+
+            }
+            else //All
+            {      
+                whhoType = "  and ISAIRETURN_DHS is null and ISAIRETURN_DME is null ";
+            }
+
+
+            string qry = "";
+            qry = @" 
+
+select edltype,count(distinct itemid) as nosIndent,sum(RCValidcnt) as RCValidcnt,sum(RCNotValidcnt) as RCNotValidcnt, sum(Pricecnt) as Pricecnt,sum(Evalutioncnt) as Evalutioncnt,sum(LiveCnt) as LiveCnt,sum(Rentendercn) as Rentendercn
+from 
+(
+select m.itemid, m.itemcode,m.itemname,m.unit as sku,m.unitcount,case when m.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end as edltype,
+(nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0)) dhsaiqty,nvl(i.DME_INDENTQTY,0) dmeaiqty,
+case when r.rcenddate is not null then 'RC Valid' else 'NO RC' end as RCStatus,r.rcenddate as rcenddate,nvl(r.rcrate,0) rcrate,
+nvl(round(to_date(r.rcenddate,'dd-MM-YYYY')-sysdate,0),0) rcremainingdays,nvl(r.noofsuppliers,0) noofsuppliers,
+ts.ACTION tenderstatus,ACTIONCODE
+,case when r.rcenddate is  null and ACTIONCODE ='Price Opened in' then 1 else 0 end as Pricecnt
+,case when r.rcenddate is  null and ACTIONCODE ='Cover-A in' or ACTIONCODE ='Claim Objection in'  then 1 else 0 end as Evalutioncnt
+,case when r.rcenddate is  null and ACTIONCODE ='Live in' then 1 else 0 end as LiveCnt
+,case when r.rcenddate is  null and ACTIONCODE ='To be Retender' then 1 else 0 end as Rentendercn
+,case when r.rcenddate is not null then 1 else 0  end as RCValidcnt
+,case when r.rcenddate is not null then 0 else 1  end as RCNotValidcnt
+from itemindent i
+inner join masitems m on m.itemid = i.itemid
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.mcid = c.mcid
+left outer join
+(
+select itemid, max(RCENDDT) as rcenddate,max(FINALRATEGST) rcrate,count(supplierid) noofsuppliers from v_rcvalid r 
+--where r.itemcode='D159'
+group by itemid
+) r on r.itemid = m.itemid
+
+
+
+left outer join
+             (
+             select ts.ITEMID, ACTION, ACTIONCODE,COV_A_OPDATE, COV_B_OPDATE, PRICEBIDDATE, SCHEMEID,COVA_BIDS, COVA_BIDB 
+             from v_tenderstatusallnew ts
+             inner join masitems m on m.itemid=ts.itemid
+                inner join masitemcategories c on c.categoryid = m.categoryid
+                inner join masitemmaincategory mc on mc.mcid = c.mcid
+             where 1=1 "+ whmcId + @"
+             ) ts on ts.itemid = m.itemid
+
+where 1=1 and m.isfreez_itpr is null "+ whyearId + " "+ whmcId + @" 
+"+ whhoType + @"
+) group by edltype
+order by edltype ";
+
+            var myList = _context.RCValidSatusDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
 
     }
 }

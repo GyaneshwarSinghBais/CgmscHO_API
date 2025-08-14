@@ -1853,7 +1853,7 @@ order by nvl(isedl2021,'N') ";
         }
 
         [HttpGet("TotalRC1")]
-        public async Task<ActionResult<IEnumerable<TotalRCDTO>>> TotalRC1(string mcatid)
+        public async Task<ActionResult<IEnumerable<TotalRC1DTO>>> TotalRC1(string mcatid, string isEdl)
         {
 
             string whMCatID = "";
@@ -1864,22 +1864,38 @@ order by nvl(isedl2021,'N') ";
                 whMCatID = "  and mc.mcid = " + mcatid;
             }
 
+            string whIsEdl = "";
 
-            string qry = @" select mcid, MCATEGORY,sum(EDL) as EDL,sum(NEDL) as NEDL,sum(EDL)+sum(NEDL) as Total
-from 
-(
-select m.itemid,mc.mcid,mc.MCATEGORY,case when m.isedl2021='Y' then 1 else 0 end as EDL, case when m.isedl2021='Y' then 0 else 1 end as NEDL from masitems m
-inner join masitemcategories c on c.categoryid=m.categoryid
-inner join masitemmaincategory mc on mc.MCID=c.MCID
-inner join 
-(
-select distinct itemid from v_rcvalid
-) r on r.itemid=m.itemid
-where m.ISFREEZ_ITPR is null
-" + whMCatID + @"
-) group by MCATEGORY,mcid
-order by mcid";
-            var myList = _context.TotalRCDbSet
+
+            if (isEdl != "0")
+            {
+                whIsEdl = "  and nvl(m.isedl2021,'N')='"+ isEdl + "' " ;
+            }
+
+            string qry = @" select mcid, MCATEGORY,sum(EDL) as MEDL,sum(NEDL) as MNEDL,sum(EDL)+sum(NEDL) as MTotal,sum(RCEDL) as EDL,sum(RCNEDL) as NEDL
+          ,sum(RCEDL)+sum(RCNEDL) as Total
+         from 
+         (
+         select m.itemid,mc.mcid,mc.MCATEGORY,
+         case when m.isedl2021='Y' then 1 else 0 end as EDL, 
+         case when m.isedl2021='Y' then 0 else 1 end as NEDL 
+         ,r.itemid as RCItemid
+         ,case when m.isedl2021='Y' and r.itemid is not null   then 1 else 0 end as RCEDL, 
+         case when nvl(m.isedl2021,'N')='N' and r.itemid is not null then 1 else 0 end as RCNEDL 
+
+         from masitems m
+         inner join masitemcategories c on c.categoryid=m.categoryid
+         inner join masitemmaincategory mc on mc.MCID=c.MCID
+         left outer join 
+         (
+         select distinct itemid from v_rcvalid
+         ) r on r.itemid=m.itemid
+         where m.ISFREEZ_ITPR is null
+         " + whMCatID + @"
+         
+         ) group by MCATEGORY,mcid
+         order by mcid";
+            var myList = _context.TotalRC1DbSet
            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
             return myList;
@@ -2513,6 +2529,106 @@ where 1=1  "+ whSchemeId + @" order by  convid desc ";
                             inner join masschemes  s on s.SCHEMEID=tr.SCHEMEID
                             where 1=1 "+ whSchemeId + @" order by  TSID desc ";
             var myList = _context.SchemeTenderStatusDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("RcDetail1")]
+        public async Task<ActionResult<IEnumerable<RcDetail1DTO>>> RcDetail1(string mcid, string isEDL)
+        {
+
+            string whmcid = "";
+            string whisEDL = "";
+
+
+            if (mcid != "0")
+            {
+                whmcid = " and mc.mcid = "+ mcid + "   ";
+            }
+
+            if (isEDL != "0")
+            {
+                whisEDL = " and nvl(m.isedl2021,'N')='"+ isEDL + @"' " ;
+            }
+
+
+            string qry = @" select itemcode,itemname,strength1,unit,suppliername,basicrate,Tax as GST,finalrategst,RCStart,RCEndDT,itemid
+from 
+(
+select m.itemcode ,m.itemname,m.strength1,m.unit,m.itemid,min(d.rcstart) as RCStart,max(d.RCEndDT) as RCEndDT,
+extract(month from  max(RCEndDT)) || '-' || extract(year from  max(RCEndDT)) amonth,extract(month from  max(RCEndDT)) monthname,
+to_char(max(RCEndDT),'MON')||'-'||to_char(max(RCEndDT), 'yyyy') mm,
+'01'||'-'||to_char(max(RCEndDT),'MON')||'-'||to_char(max(RCEndDT), 'yyyy') fdate,
+round( max(RCEndDT)-sysdate,0) as days,min(basicrate) as basicrate,min(finalrategst) as finalrategst,min(Tax) as Tax,suppliername
+from (
+select a.ContractStartDate rcstart,a.ContractEndDate, case when ci.basicratenew is null then ci.basicrate else ci.basicratenew end basicrate,
+ ci.finalrategst,
+case when (ci.isextended='Y') then ci.rcextendedupto else ContractEndDate  end RCEndDT
+ ,case when   ci.percentvaluegst is null then   ci.percentvalue  else ci.percentvaluegst end Tax   
+, ci.itemid,ms.schemeid,s.supplierid  
+, case when sysdate between s.blacklistfdate and  s.blacklisttdate then 'Yes' else 'No' end as blacklisted,
+case when (ci.isextended='Y') then round(rcextendedupto-sysdate,0) else  round(a.ContractEndDate-sysdate,0)  end as DayRemaining
+,s.suppliername
+from aoccontractitems ci
+inner join aoccontracts a on a.contractid=ci.contractid
+inner join massuppliers s on s.supplierid=a.supplierid
+inner join masschemes ms on ms.schemeid=a.schemeid
+inner join masitems m on m.itemid=ci.itemid
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.mcid=c.mcid
+where  ForceCloseRC is null  and a.status = 'C'   "+ whmcid + @"
+and  (sysdate between a.contractstartdate and a.contractenddate or 
+sysdate between a.contractstartdate and  (case when ci.isextended='Y' then ci.rcextendedupto else a.contractenddate end))
+) d
+inner join masitems m on m.itemid=d.itemid
+inner join masitemtypes ty on ty.itemtypeid=m.itemtypeid
+where blacklisted='No'  "+ whisEDL + @"
+group  by m.itemcode ,m.itemname,m.strength1,m.unit,m.itemid,suppliername
+)  where 1=1 order by RCEndDT desc ";
+            var myList = _context.RcDetail1DbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+        [HttpGet("ItemDetails1")]
+        public async Task<ActionResult<IEnumerable<ItemDetails1DTO>>> ItemDetails1(string mcid, string isedl)
+        {
+
+            string whmcid = "";
+            string whIdEdl = "";
+
+            if (mcid != "0")
+            {
+                whmcid = " and mc.mcid = " + mcid + "   ";
+            }
+
+            if (isedl != "0")
+            {
+                whIdEdl = " and nvl(m.isedl2021,'N')='"+ isedl + "'   ";
+            }
+
+
+            string qry = @" select m.itemid,m.itemcode,m.itemname,m.strength1,m.unit,mc.mcid,mc.MCATEGORY
+,case when  nvl(r.itemid,0) !=0   then 'Valid' else 'Not Valid' end as RCEDL 
+
+
+from masitems m
+inner join masitemcategories c on c.categoryid=m.categoryid
+inner join masitemmaincategory mc on mc.MCID=c.MCID
+left outer join 
+(
+select distinct itemid from v_rcvalid
+) r on r.itemid=m.itemid
+where m.ISFREEZ_ITPR is null
+"+ whmcid + @"  "+ whIdEdl + @"
+
+order by m.itemname ";
+            var myList = _context.ItemDetails1DbSet
            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
             return myList;

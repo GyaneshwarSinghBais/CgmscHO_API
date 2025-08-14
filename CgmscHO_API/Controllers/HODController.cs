@@ -849,10 +849,17 @@ order by m.itemname";
 
         //gajju
         [HttpGet("DirectorateAIDetails")]
-        public async Task<ActionResult<IEnumerable<DirectorateIndentPOStatusDTO>>> DirectorateAIDetails(string yearid, string mcid, string hodid, string groupid, string itemtypeid)
+        public async Task<ActionResult<IEnumerable<DirectorateIndentPOStatusDTO>>> DirectorateAIDetails(string yearid, string mcid, string hodid, string groupid, string itemtypeid, string pogiven)
         {
             string qry = "";
             string whyearid = "";
+            string whPogiven = "";
+
+            if (pogiven != "0")
+            {
+                whPogiven = "and nvl(POQTY,0) >0" ;
+            }
+
             if (yearid == "0")
             {
                 FacOperations f = new FacOperations(_context);
@@ -961,7 +968,7 @@ where t.status = 'C' and t.issuetype in ('RS') )
 where op.AIFINYEAR= "+ whyearid + @"  "+ whhodid + @"   and  op.status not in ( 'OC','WA1','I' ) 
 ) a group by a.itemid
 ) po on po.itemid=m.itemid
-where 1=1 and m.ISFREEZ_ITPR is null "+ whmcid + @"  "+ whgroupid + @"  "+ whitemtypeid + @" order by g.groupname  ";
+where 1=1 and m.ISFREEZ_ITPR is null "+ whmcid + @"  "+ whgroupid + @"  "+ whitemtypeid + @" "+ whPogiven + @" order by g.groupname  ";
 
             var myList = _context.DirectorateIndentPOStatusDbSet
 .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
@@ -1258,6 +1265,217 @@ order by fm.ID ";
 
             var myList = _context.MonthwiseIssueDbSet
 .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+
+        }
+
+
+
+        [HttpGet("variousStatusAgainstCYAI")]
+        public async Task<ActionResult<IEnumerable<variousStatusAgainstCYAIDTO>>> variousStatusAgainstCYAI(string yearId, string mcid)
+        {
+            string qry = "";
+
+            string whyearId = "";
+            string whmcid = "";
+
+            if (yearId != "0")
+            {
+                whyearId = " and i.accyrsetid = "+ yearId + " ";
+            }
+            if (mcid != "0")
+            {
+                whmcid = " and mc.mcid = "+ mcid + " ";
+            }
+
+
+            qry = @" select m.itemcode,m.itemname,m.unit as sku,m.unitcount,case when m.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end as edltype,
+(nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0)) dhsaiqty,nvl(i.DME_INDENTQTY,0) dmeaiqty,
+case when r.rcenddate is not null then 'RC Valid' else 'NO RC' end as RCStatus,r.rcenddate as rcenddate,nvl(r.rcrate,0) rcrate,
+nvl(round(to_date(r.rcenddate,'dd-MM-YYYY')-sysdate,0),0) rcremainingdays,nvl(r.noofsuppliers,0) noofsuppliers,
+nvl(dhsi.iss_qty,0) dhsissueqty,
+round(case when (nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0))>0
+then (nvl(dhsi.iss_qty,0)/(nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0)))*100 else
+case when (nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0)) = 0 and nvl(dhsi.iss_qty,0) > 0 then 100 else 0 end end,2) as issueperagdhsai,
+nvl(dmei.iss_qty,0) dmeissueqty,
+round(case when (nvl(i.DME_INDENTQTY,0))>0
+then (nvl(dmei.iss_qty,0)/(nvl(i.DME_INDENTQTY,0)))*100 else
+case when (nvl(i.DME_INDENTQTY,0)) = 0 and nvl(dmei.iss_qty,0) > 0 then 100 else 0 end end,2) as issueperagdmeai,
+nvl(l3i.AvgIssueqty_Last3FY,0) AvgIssueqty_Last3FY,nvl(STK.READYSTOCK,0) READYSTOCK,nvl(STK.UQCSTOCK,0) UQCSTOCK,nvl(STK.PIPELINESTOCK,0) PIPELINESTOCK,
+ts.ACTION tenderstatus
+from itemindent i
+inner join masitems m on m.itemid = i.itemid
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.mcid = c.mcid
+left outer join
+(
+select itemid, max(RCENDDT) as rcenddate,max(FINALRATEGST) rcrate,count(supplierid) noofsuppliers from v_rcvalid r 
+group by itemid
+) r on r.itemid = m.itemid
+left outer join (
+select m.itemid, sum(tbo.issueqty) ISS_Qty 
+ from tbindents tb
+ inner join tbindentitems tbi on tbi.indentid=tb.indentid 
+  inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+  inner join masitems m on m.itemid = tbi.itemid
+   inner join masitemcategories c on c.categoryid = m.categoryid
+ inner join masitemmaincategory mc on mc.mcid = c.mcid
+ inner join maswarehouses w on w.warehouseid = tb.warehouseid
+ inner join masfacilities f on f.facilityid = tb.facilityid
+ inner join masfacilitytypes ft on ft.facilitytypeid = f.facilitytypeid
+ where tb.Status = 'C' and tb.issuetype = 'NO' and tb.issuetype='NO' and mc.mcid = 1 and ft.hodid = 2
+ and  tb.indentdate between ( select startdate from masaccyearsettings where accyrsetid=546)  
+ and ( select enddate from masaccyearsettings where accyrsetid=546 )  
+  group by m.itemid
+) dhsi on dhsi.itemid=m.itemid
+left outer join (
+select m.itemid, sum(tbo.issueqty) ISS_Qty 
+ from tbindents tb
+ inner join tbindentitems tbi on tbi.indentid=tb.indentid 
+  inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+  inner join masitems m on m.itemid = tbi.itemid
+  inner join masitemcategories c on c.categoryid = m.categoryid
+ inner join masitemmaincategory mc on mc.mcid = c.mcid
+ inner join maswarehouses w on w.warehouseid = tb.warehouseid
+ inner join masfacilities f on f.facilityid = tb.facilityid
+ inner join masfacilitytypes ft on ft.facilitytypeid = f.facilitytypeid
+ where tb.Status = 'C' and tb.issuetype = 'NO' and tb.issuetype='NO' and mc.mcid = 1 and ft.hodid = 3
+ and  tb.indentdate between ( select startdate from masaccyearsettings where accyrsetid=546)  
+ and ( select enddate from masaccyearsettings where accyrsetid=546 )  
+  group by m.itemid
+) dmei on dmei.itemid=m.itemid
+left outer join
+(
+select itemid,round( sum(issueqty)/3,0) as AvgIssueqty_Last3FY from (
+            select  m.itemid,sum(tbo.issueqty) issueqty 
+            from tboutwards tbo 
+             inner join tbindentitems tbi on tbi.indentitemid = tbo.indentitemid
+             inner join tbindents t on t.indentid = tbi.indentid 
+             inner join masitems m on m.itemid = tbi.itemid
+             inner join masitemcategories c on c.categoryid = m.categoryid
+            inner join masitemmaincategory mc on mc.mcid = c.mcid
+             where  t.issuetype = 'NO' and t.status = 'C' 
+             and mc.mcid = 1 
+             and t.indentdate between  (select startdate  from masaccyearsettings where accyrsetid = 542) 
+             and  (select enddate  from masaccyearsettings where accyrsetid = 545) 
+             group by m.itemid
+             having sum(tbo.issueqty)>0   
+             ) group by itemid
+             ) l3i on l3i.itemid = m.itemid
+left outer join
+             (
+             select ts.ITEMID, ACTION, ACTIONCODE,COV_A_OPDATE, COV_B_OPDATE, PRICEBIDDATE, SCHEMEID,COVA_BIDS, COVA_BIDB 
+             from v_tenderstatusallnew ts
+             inner join masitems m on m.itemid=ts.itemid
+                inner join masitemcategories c on c.categoryid = m.categoryid
+                inner join masitemmaincategory mc on mc.mcid = c.mcid
+             where mc.mcid=1
+             ) ts on ts.itemid = m.itemid
+left outer join
+(
+select m.itemid,m.itemcode,sum(READY)+sum(IWHPIPE) as READYSTOCK,sum(UQC) UQCSTOCK ,sum(TOTLPIPELINE) as PIPELINESTOCK
+from VWHSTOCKWITHEXP s 
+inner join masitems m on m.itemid=s.itemid
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.mcid = c.mcid
+where mc.mcid=1
+group by m.itemid,m.itemcode
+) stk on stk.itemid = m.itemid
+             
+where 1=1 "+ whyearId + @"  "+ whmcid + @" and ISAIRETURN_DHS is null and ISAIRETURN_DME is null
+and m.isfreez_itpr is null
+order by nvl(round(to_date(r.rcenddate,'dd-MM-YYYY')-sysdate,0),0) ";
+
+            var myList = _context.variousStatusAgainstCYAIDbSet
+    .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+
+        }
+
+
+
+        [HttpGet("GenerateIndentReportByEDLType")]
+        public async Task<ActionResult<IEnumerable<GenerateIndentReportByEDLTypeDTO>>> GenerateIndentReportByEDLType(string HodType = "0", Int32 yearId = 546, Int32 mcid = 1)
+        {
+            string qry = "";
+
+            string whHodType = "";
+            string whYearId = "";
+            string whMcId = "";
+
+
+
+            if (yearId != 0)
+            {
+                whYearId = " and i.accyrsetid = " + yearId + " ";
+            }
+
+            if (mcid != 0)
+            {
+                whMcId = " and mc.mcid = " + mcid + " ";
+            }
+
+
+            if (HodType == "0") //All
+            {     
+              whHodType = " and ISAIRETURN_DHS is null and ISAIRETURN_DME is null ";
+            }
+            else if (HodType == "DHS")
+            {
+              whHodType = " and ISAIRETURN_DHS is null and (nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0))>0 ";
+            }
+
+            else if (HodType == "DME")
+            {
+              whHodType = " and ISAIRETURN_DME is null and (nvl(i.DME_INDENTQTY,0))>0 ";
+            }
+
+            qry = @" 
+
+select edltype,count(distinct itemid) as nosIndent,sum(RCValidcnt) as RCValidcnt,sum(RCNotValidcnt) as RCNotValidcnt, sum(Pricecnt) as Pricecnt,sum(Evalutioncnt) as Evalutioncnt,sum(LiveCnt) as LiveCnt,sum(Rentendercn) as Rentendercn
+from 
+(
+select m.itemid, m.itemcode,m.itemname,m.unit as sku,m.unitcount,case when m.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end as edltype,
+(nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0)) dhsaiqty,nvl(i.DME_INDENTQTY,0) dmeaiqty,
+case when r.rcenddate is not null then 'RC Valid' else 'NO RC' end as RCStatus,r.rcenddate as rcenddate,nvl(r.rcrate,0) rcrate,
+nvl(round(to_date(r.rcenddate,'dd-MM-YYYY')-sysdate,0),0) rcremainingdays,nvl(r.noofsuppliers,0) noofsuppliers,
+ts.ACTION tenderstatus,ACTIONCODE
+,case when r.rcenddate is  null and ACTIONCODE ='Price Opened in' then 1 else 0 end as Pricecnt
+,case when r.rcenddate is  null and ACTIONCODE ='Cover-A in' or ACTIONCODE ='Claim Objection in'  then 1 else 0 end as Evalutioncnt
+,case when r.rcenddate is  null and ACTIONCODE ='Live in' then 1 else 0 end as LiveCnt
+,case when r.rcenddate is  null and ACTIONCODE ='To be Retender' then 1 else 0 end as Rentendercn
+,case when r.rcenddate is not null then 1 else 0  end as RCValidcnt
+,case when r.rcenddate is not null then 0 else 1  end as RCNotValidcnt
+from itemindent i
+inner join masitems m on m.itemid = i.itemid
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.mcid = c.mcid
+left outer join
+(
+select itemid, max(RCENDDT) as rcenddate,max(FINALRATEGST) rcrate,count(supplierid) noofsuppliers from v_rcvalid r 
+--where r.itemcode='D159'
+group by itemid
+) r on r.itemid = m.itemid
+
+
+
+left outer join
+             (
+             select ts.ITEMID, ACTION, ACTIONCODE,COV_A_OPDATE, COV_B_OPDATE, PRICEBIDDATE, SCHEMEID,COVA_BIDS, COVA_BIDB 
+             from v_tenderstatusallnew ts
+             inner join masitems m on m.itemid=ts.itemid
+                inner join masitemcategories c on c.categoryid = m.categoryid
+                inner join masitemmaincategory mc on mc.mcid = c.mcid
+             where 1=1 "+ whMcId + @"
+             ) ts on ts.itemid = m.itemid
+
+where  m.isfreez_itpr is null "+ whYearId + @" "+ whMcId + @" 
+"+ whHodType +@"
+) group by edltype
+order by edltype ";
+
+            var myList = _context.GenerateIndentReportByEDLTypeDbSet
+    .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
             return myList;
 
         }

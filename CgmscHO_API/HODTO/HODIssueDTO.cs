@@ -14,6 +14,9 @@ namespace CgmscHO_API.Models
     
         public Int32? ACCYRSETID { get; set; }
         public string? ACCYEAR { get; set; }
-       
+        public  Double? ISS_QTY { get; set; }
+
+        
+
     }
 }

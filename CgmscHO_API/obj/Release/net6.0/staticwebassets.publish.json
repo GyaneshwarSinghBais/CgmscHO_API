@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "w31VzEX6IqcLGR08Zt6gGkijw6xrB9V94b9hPBczUZ8=",
-  "Source": "CgmscHO_API",
-  "BasePath": "_content/CgmscHO_API",
-  "Mode": "Default",
-  "ManifestType": "Publish",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"1c4Yd0E51GrfTQSyg68F6/OtOZiowHemHahhkCVQ03o=","Source":"CgmscHO_API","BasePath":"_content/CgmscHO_API","Mode":"Default","ManifestType":"Publish","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

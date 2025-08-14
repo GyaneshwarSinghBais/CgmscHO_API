@@ -11,7 +11,9 @@ namespace CgmscHO_API.Models
         public Int64? EDL { get; set; }
         public Int64? NEDL { get; set; }
         public Int64? TOTAL { get; set; }
-
+        //public Int64? MEDL { get; set; }
+       // public Int64? MNEDL { get; set; }
+       // public Int64? RCTOTAL { get; set; }
 
 
 

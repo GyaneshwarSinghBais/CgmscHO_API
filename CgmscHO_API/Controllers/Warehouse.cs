@@ -821,6 +821,24 @@ and tbi.ISDROP is null order by tbi.ENTRYDATE desc  ";
 
         }
 
+
+        [HttpPut("updateTBIndentTravale1")]
+        public IActionResult updateTBIndentTravale1(Int64 travelId, string? latitude, string? longitude, string? isSynced)
+        {
+            string dt1 = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt");
+
+
+            string qry = @" update TBINDENTTRAVALE set ISDROP = 'Y' ,DROPDATE = '" + dt1 + "',DROPLONGITUDE = '" + longitude + "',DROPLATITUDE = '" + latitude + @"' ,ISSYNCED = '" + isSynced + @"'
+                        where travaleid = " + travelId + "  ";
+            _context.Database.ExecuteSqlRaw(qry);
+            return Ok("Successfully Saved");
+
+        }
+
+
+
+
+
         [HttpPut("insertFistLatLontToFacility")]
         public IActionResult insertFistLatLontToFacility(Int64 facilityId, string latitude, string longitude)
         {

@@ -8,6 +8,7 @@ using CgmscHO_API.FacilityDTO;
 using CgmscHO_API.FinanceDTO;
 using CgmscHO_API.HodDTO;
 using CgmscHO_API.HODTO;
+using CgmscHO_API.LogAuditDTO;
 using CgmscHO_API.MasterDTO;
 using CgmscHO_API.PublicDTO;
 using CgmscHO_API.QCDTO;
@@ -224,6 +225,8 @@ namespace CgmscHO_API.Models
         public DbSet<WHInTransitIssuesDTO> WHInTransitIssuesDbSet { get; set; }
 
         public DbSet<TransportVoucherDTO> TransportVoucherDBSet { get; set; }
+        public DbSet<RcDetail1DTO> RcDetail1DbSet { get; set; }
+        
 
         //Courier App  Start
         public DbSet<PickDockets> PickDocketDbSet { get; set; }
@@ -377,7 +380,40 @@ namespace CgmscHO_API.Models
         public DbSet<SchemeTenderStatusDTO> SchemeTenderStatusDbSet { get; set; }
         public DbSet<NsqDrugDetailsDTO> NsqDrugDetailsDbSet { get; set; }
         public DbSet<AIvsIssuanceDTO> AIvsIssuanceDbSet { get; set; }
+        public DbSet<annualIndentClassificationDTO> annualIndentClassificationDbSet { get; set; }
+        public DbSet<ItemDetails1DTO> ItemDetails1DbSet { get; set; }
+        public DbSet<TotalRC1DTO> TotalRC1DbSet { get; set; }
+        public DbSet<AIissueDetailDTO> AIissueDetailDbSet { get; set; }
+        public DbSet<variousStatusAgainstCYAIDTO> variousStatusAgainstCYAIDbSet { get; set; }
+        public DbSet<GenerateIndentReportByEDLTypeDTO> GenerateIndentReportByEDLTypeDbSet { get; set; }
+        public DbSet<UserLoginLogDTO> UserLoginLogDbSet { get; set; }
+        public DbSet<UserPageViewLogDTO> UserPageViewLogDbSet { get; set; }
+        public DbSet<MontlyItemDemographyDTO> MontlyItemDemographyDbSet { get; set; }
+        public DbSet<StockStatusDTO> StockStatusDbSet { get; set; }
+        public DbSet<WhStockOutInDTO> WhStockOutInDbSet { get; set; }
+        public DbSet<IssuePerDetailDTO> IssuePerDetailDbSet { get; set; }
+        public DbSet<StockOUtDetailsDTO> StockOUtDetailsDbSet { get; set; }
+        public DbSet<WhStockOutInDetailDTO> WhStockOutInDetailDbSet { get; set; }
+        public DbSet<YearWiseIssueReportDTO> YearWiseIssueReportDbSet { get; set; }
+        public DbSet<SupplierPendingPaymentsDTO> SupplierPendingPaymentsDbSet { get; set; }
+        public DbSet<RCValidSatusDTO> RCValidSatusDbSet { get; set; }
+
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -410,11 +446,21 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<SchemeTenderStatusDTO>().HasNoKey();
             modelBuilder.Entity<NsqDrugDetailsDTO>().HasNoKey();
             modelBuilder.Entity<AIvsIssuanceDTO>().HasNoKey();
-
-
-
-
-
+            modelBuilder.Entity<annualIndentClassificationDTO>().HasNoKey();
+            modelBuilder.Entity<RcDetail1DTO>().HasNoKey();
+            modelBuilder.Entity<ItemDetails1DTO>().HasNoKey();
+            modelBuilder.Entity<TotalRC1DTO>().HasNoKey();
+            modelBuilder.Entity<AIissueDetailDTO>().HasNoKey();
+            modelBuilder.Entity<variousStatusAgainstCYAIDTO>().HasNoKey();
+            modelBuilder.Entity<GenerateIndentReportByEDLTypeDTO>().HasNoKey();
+            modelBuilder.Entity<MontlyItemDemographyDTO>().HasNoKey();
+            modelBuilder.Entity<StockStatusDTO>().HasNoKey();
+            modelBuilder.Entity<WhStockOutInDTO>().HasNoKey();
+            modelBuilder.Entity<IssuePerDetailDTO>().HasNoKey();
+            modelBuilder.Entity<StockOUtDetailsDTO>().HasNoKey();
+            modelBuilder.Entity<WhStockOutInDetailDTO>().HasNoKey();
+            modelBuilder.Entity<YearWiseIssueReportDTO>().HasNoKey();
+            
 
 
 
