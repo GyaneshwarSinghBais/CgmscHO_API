@@ -1023,9 +1023,7 @@ order by faci.nocid desc";
             var myList = _context.ReceiptMasterDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
-            return myList;
-
-            return myList;
+            return myList;         
 
         }
 

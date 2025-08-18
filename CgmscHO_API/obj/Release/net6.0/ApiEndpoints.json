@@ -1,5 +1,113 @@
 [
   {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABCanalysisSummary",
+    "RelativePath": "api/Analysis/ABCanalysisSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isedl",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABCanalysisSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABCanalysisSummaryDetail",
+    "RelativePath": "api/Analysis/ABCanalysisSummaryDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isedl",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABCanalysisSummaryDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABCanalysisWithRCvalid",
+    "RelativePath": "api/Analysis/ABCanalysisWithRCvalid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlstatus",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABCanalysisWithRCvalidDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "CgmscHO_API.Controllers.ANPRController",
     "Method": "InsertMASWHVEHICLETRANSPORT",
     "RelativePath": "api/ANPR/insertMASWHVEHICLETRANSPORT",
@@ -3953,6 +4061,52 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.DashboardHome",
+    "Method": "RCValidDrillDown",
+    "RelativePath": "api/DashboardHome/RCValidDrillDown",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "hoType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "drillType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DashHomeDTO.RCValidDrillDownDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardHome",
     "Method": "RCValidSatus",
     "RelativePath": "api/DashboardHome/RCValidSatus",
     "HttpMethod": "GET",
@@ -6375,6 +6529,63 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "NearExpiryBatchWise",
+    "RelativePath": "api/HO/NearExpiryBatchWise",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.NearExpiryBatchWiseDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "NearExpiryItemsWH",
+    "RelativePath": "api/HO/NearExpiryItemsWH",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.NearExpiryItemsWHDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
     "Method": "NearExpReport",
     "RelativePath": "api/HO/NearExpReport",
     "HttpMethod": "GET",
@@ -6883,6 +7094,78 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StockStatusDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "WarehoueWiseStockOut",
+    "RelativePath": "api/HO/WarehoueWiseStockOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StockOut1DTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "WarehoueWiseStockOutDetail",
+    "RelativePath": "api/HO/WarehoueWiseStockOutDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "whId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "colFlag",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StockOutDetail1DTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -8433,6 +8716,68 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.IWHPipelineSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.LogAuditController",
+    "Method": "getUserLoginLogs",
+    "RelativePath": "api/LogAudit/getUserLoginLogs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usertype",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.LogAuditDTO.getUserLoginLogsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.LogAuditController",
+    "Method": "getUserPageViewLogs",
+    "RelativePath": "api/LogAudit/getUserPageViewLogs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usertype",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.LogAuditDTO.getUserPageViewLogsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -1,4 +1,5 @@
-﻿using CgmscHO_API.ANPRDTO;
+﻿using CgmscHO_API.AnalysisDTO;
+using CgmscHO_API.ANPRDTO;
 using CgmscHO_API.DashHomeDTO;
 using CgmscHO_API.DirectorateDTO;
 using CgmscHO_API.DistrictDTO;
@@ -397,17 +398,23 @@ namespace CgmscHO_API.Models
         public DbSet<YearWiseIssueReportDTO> YearWiseIssueReportDbSet { get; set; }
         public DbSet<SupplierPendingPaymentsDTO> SupplierPendingPaymentsDbSet { get; set; }
         public DbSet<RCValidSatusDTO> RCValidSatusDbSet { get; set; }
+        public DbSet<getUserLoginLogsDTO> getUserLoginLogsDbSet { get; set; }
+        public DbSet<getUserPageViewLogsDTO> getUserPageViewLogsDbSet { get; set; }
 
+        public DbSet<NearExpiryItemsWHDTO> NearExpiryItemsWHDbSet { get; set; }
+        public DbSet<NearExpiryBatchWiseDTO> NearExpiryBatchWiseDbSet { get; set; }
+        public DbSet<StockOut1DTO> StockOut1DbSet { get; set; }
+
+        public DbSet<StockOutDetail1DTO> StockOutDetail1DbSet { get; set; }
+
+        public DbSet<ABCanalysisSummaryDTO> ABCanalysisSummaryDbSet { get; set; }
+
+        public DbSet<ABCanalysisSummaryDetailDTO> ABCanalysisSummaryDetailDbSet { get; set; }
+
+        public DbSet<RCValidDrillDownDTO> RCValidDrillDownDbSet { get; set; }
+
+        public DbSet<ABCanalysisWithRCvalidDTO> ABCanalysisWithRCvalidDbSet { get; set; }
         
-
-
-
-
-
-
-
-
-
 
 
 
@@ -460,10 +467,17 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<StockOUtDetailsDTO>().HasNoKey();
             modelBuilder.Entity<WhStockOutInDetailDTO>().HasNoKey();
             modelBuilder.Entity<YearWiseIssueReportDTO>().HasNoKey();
+            modelBuilder.Entity<getUserLoginLogsDTO>().HasNoKey();
+            modelBuilder.Entity<getUserPageViewLogsDTO>().HasNoKey();
+            modelBuilder.Entity<NearExpiryItemsWHDTO>().HasNoKey();
+            modelBuilder.Entity<NearExpiryBatchWiseDTO>().HasNoKey();
+            modelBuilder.Entity<StockOut1DTO>().HasNoKey();
+            modelBuilder.Entity<StockOutDetail1DTO>().HasNoKey();
+            modelBuilder.Entity<ABCanalysisSummaryDTO>().HasNoKey();
+            modelBuilder.Entity<ABCanalysisSummaryDetailDTO>().HasNoKey();
+            modelBuilder.Entity<RCValidDrillDownDTO>().HasNoKey();
+            modelBuilder.Entity<ABCanalysisWithRCvalidDTO>().HasNoKey();
             
-
-
-
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");
 
 

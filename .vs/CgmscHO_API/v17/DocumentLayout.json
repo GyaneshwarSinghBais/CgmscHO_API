@@ -3,36 +3,56 @@
   "WorkspaceRootPath": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\controllers\\hocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\hodto\\whstockoutindetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\whstockoutindetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\controllers\\cgmscstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\cgmscstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\dashboardhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\dashhomedto\\rcvalidsatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\rcvalidsatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\controllers\\analysiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\analysiscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\controllers\\logauditcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\logauditcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\analysisdto\\abcanalysissummarydetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\analysisdto\\abcanalysissummarydetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\logauditdto\\userloginlogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\logauditdto\\userloginlogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\controllers\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\hodto\\supplierpendingpaymentsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\supplierpendingpaymentsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\analysisdto\\abcanalysiswithrcvaliddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\analysisdto\\abcanalysiswithrcvaliddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\models\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\dashhomedto\\rcvaliddrilldowndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\dashhomedto\\rcvaliddrilldowndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\controllers\\hocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\controllers\\hocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\analysisdto\\abcanalysissummarydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\analysisdto\\abcanalysissummarydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\cgmscho_api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\cgmscho_api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\hodto\\stockout1dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\stockout1dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|g:\\gyan\\dpdmis app\\cgmscho_api\\cgmscho_api\\hodto\\stockoutdetail1dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DC7CC1F-8A0E-4C53-BFE8-35D0335D47A3}|CgmscHO_API\\CgmscHO_API.csproj|solutionrelative:cgmscho_api\\hodto\\stockoutdetail1dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,104 +70,164 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WhStockOutInDetailDTO.cs",
-              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\WhStockOutInDetailDTO.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\WhStockOutInDetailDTO.cs",
-              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\WhStockOutInDetailDTO.cs",
-              "RelativeToolTip": "CgmscHO_API\\HODTO\\WhStockOutInDetailDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBEAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T12:00:35.665Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "RCValidSatusDTO.cs",
-              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\RCValidSatusDTO.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\RCValidSatusDTO.cs",
-              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\RCValidSatusDTO.cs",
-              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\RCValidSatusDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAAgAAAAAAAAAA==",
+              "Title": "Warehouse.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\Warehouse.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\Warehouse.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\Warehouse.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\Warehouse.cs",
+              "ViewState": "AgIAANMDAAAAAAAAAAAAwOMDAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T09:54:01.915Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SupplierPendingPaymentsDTO.cs",
-              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\SupplierPendingPaymentsDTO.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\SupplierPendingPaymentsDTO.cs",
-              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\SupplierPendingPaymentsDTO.cs",
-              "RelativeToolTip": "CgmscHO_API\\HODTO\\SupplierPendingPaymentsDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T07:41:47.477Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DashboardHome.cs",
-              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DashboardHome.cs",
-              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
-              "RelativeToolTip": "CgmscHO_API\\Controllers\\DashboardHome.cs",
-              "ViewState": "AgIAABIFAAAAAAAAAAAlwCYFAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T06:55:03.738Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserLoginLogDTO.cs",
-              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\LogAuditDTO\\UserLoginLogDTO.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\LogAuditDTO\\UserLoginLogDTO.cs",
-              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\LogAuditDTO\\UserLoginLogDTO.cs",
-              "RelativeToolTip": "CgmscHO_API\\LogAuditDTO\\UserLoginLogDTO.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T06:51:47.749Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LogAuditController.cs",
-              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\LogAuditController.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\LogAuditController.cs",
-              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\LogAuditController.cs",
-              "RelativeToolTip": "CgmscHO_API\\Controllers\\LogAuditController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwB4AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T06:50:51.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OraDbContext.cs",
-              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
-              "RelativeDocumentMoniker": "CgmscHO_API\\Models\\OraDbContext.cs",
-              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
-              "RelativeToolTip": "CgmscHO_API\\Models\\OraDbContext.cs",
-              "ViewState": "AgIAALIBAAAAAAAAAAAwwMwBAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T06:43:08.136Z",
+              "WhenOpened": "2025-08-18T09:56:25.601Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CGMSCStockController.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\CGMSCStockController.cs",
+              "ViewState": "AgIAAOMDAAAAAAAAAAAYwAIEAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T09:56:19.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ABCanalysisWithRCvalidDTO.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\AnalysisDTO\\ABCanalysisWithRCvalidDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\AnalysisDTO\\ABCanalysisWithRCvalidDTO.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\AnalysisDTO\\ABCanalysisWithRCvalidDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\AnalysisDTO\\ABCanalysisWithRCvalidDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T09:18:56.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RCValidDrillDownDTO.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\RCValidDrillDownDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\DashHomeDTO\\RCValidDrillDownDTO.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\DashHomeDTO\\RCValidDrillDownDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\DashHomeDTO\\RCValidDrillDownDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T13:38:53.662Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DashboardHome.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\DashboardHome.cs",
+              "ViewState": "AgIAAAsDAAAAAAAAAAAtwB0DAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T12:56:10.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ABCanalysisSummaryDetailDTO.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDetailDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDetailDTO.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDetailDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDetailDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T11:16:51.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ABCanalysisSummaryDTO.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDTO.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\AnalysisDTO\\ABCanalysisSummaryDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T10:57:51.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CgmscHO_API.csproj",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj",
+              "RelativeDocumentMoniker": "CgmscHO_API\\CgmscHO_API.csproj",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\CgmscHO_API.csproj",
+              "RelativeToolTip": "CgmscHO_API\\CgmscHO_API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-15T07:17:17.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AnalysisController.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\AnalysisController.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\AnalysisController.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\AnalysisController.cs",
+              "RelativeToolTip": "CgmscHO_API\\Controllers\\AnalysisController.cs",
+              "ViewState": "AgIAAKACAAAAAAAAAAAhwCgCAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T10:38:10.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "StockOut1DTO.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\StockOut1DTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\StockOut1DTO.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\StockOut1DTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\HODTO\\StockOut1DTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T07:14:12.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OraDbContext.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\Models\\OraDbContext.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Models\\OraDbContext.cs",
+              "RelativeToolTip": "CgmscHO_API\\Models\\OraDbContext.cs",
+              "ViewState": "AgIAAMgBAAAAAAAAAAAswN4BAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T06:11:10.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "StockOutDetail1DTO.cs",
+              "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\StockOutDetail1DTO.cs",
+              "RelativeDocumentMoniker": "CgmscHO_API\\HODTO\\StockOutDetail1DTO.cs",
+              "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\HODTO\\StockOutDetail1DTO.cs",
+              "RelativeToolTip": "CgmscHO_API\\HODTO\\StockOutDetail1DTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T06:10:32.184Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "HOController.cs",
               "DocumentMoniker": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOController.cs",
               "RelativeDocumentMoniker": "CgmscHO_API\\Controllers\\HOController.cs",
               "ToolTip": "G:\\gyan\\DPDMIS APP\\CgmscHO_API\\CgmscHO_API\\Controllers\\HOController.cs",
               "RelativeToolTip": "CgmscHO_API\\Controllers\\HOController.cs",
-              "ViewState": "AgIAAMcYAAAAAAAAAAAawB4ZAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAOcRAAAAAAAAAAAYwCYfAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-12T06:42:55.501Z",
               "EditorCaption": ""

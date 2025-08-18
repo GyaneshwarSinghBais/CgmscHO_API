@@ -1391,5 +1391,111 @@ order by edltype ";
 
         }
 
+        [HttpGet("RCValidDrillDown")]
+        public async Task<ActionResult<IEnumerable<RCValidDrillDownDTO>>> RCValidDrillDown(
+    int yearId,
+    int mcId,
+    string hoType,
+    string drillType,   // RCValid, RCNotValid, Price, Evalution, Live, Retender, nosIndent
+    string edlType      // EDL or Non EDL
+)
+        {
+            string whyearId = "";
+            string whmcId = "";
+            string whhoType = "";
+            string whDrill = "";
+            string whEdl = "";
+
+            if (yearId != 0)
+            {
+                whyearId = " and i.accyrsetid = " + yearId;
+            }
+
+            if (mcId != 0)
+            {
+                whmcId = " and mc.mcid = " + mcId;
+            }
+
+            if (hoType != "0")
+            {
+                if (hoType == "DHS")
+                {
+                    whhoType = " and ISAIRETURN_DHS is null and (nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0))>0 ";
+                }
+                if (hoType == "DME")
+                {
+                    whhoType = " and ISAIRETURN_DME is null and (nvl(i.DME_INDENTQTY,0))>0 ";
+                }
+            }
+            else //All
+            {
+                whhoType = " and ISAIRETURN_DHS is null and ISAIRETURN_DME is null ";
+            }
+
+            if (!string.IsNullOrEmpty(edlType) && edlType != "0")
+            {
+                whEdl = " and case when m.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end = '" + edlType + "' ";
+            }
+
+            // DrillType filters
+            switch (drillType)
+            {
+                case "RCValid":
+                    whDrill = " and r.rcenddate is not null ";
+                    break;
+                case "RCNotValid":
+                    whDrill = " and r.rcenddate is null ";
+                    break;
+                case "Price":
+                    whDrill = " and r.rcenddate is null and ts.actioncode = 'Price Opened in' ";
+                    break;
+                case "Evalution":
+                    whDrill = " and r.rcenddate is null and (ts.actioncode = 'Cover-A in' or ts.actioncode = 'Claim Objection in') ";
+                    break;
+                case "Live":
+                    whDrill = " and r.rcenddate is null and ts.actioncode = 'Live in' ";
+                    break;
+                case "Retender":
+                    whDrill = " and r.rcenddate is null and ts.actioncode = 'To be Retender' ";
+                    break;
+                case "nosIndent":
+                    whDrill = " "; // just distinct items, no extra condition
+                    break;
+            }
+
+            string qry = @"
+    select distinct 
+           m.itemid, m.itemcode, m.itemname, m.unit as sku, m.unitcount,
+           case when m.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end as edltype,
+           nvl(i.DHS_INDENTQTY,0) + nvl(i.MITANIN,0) as dhsaiqty,
+           nvl(i.DME_INDENTQTY,0) as dmeaiqty,
+           r.rcenddate, r.rcrate, r.noofsuppliers,
+           ts.action as TenderStatus, ts.actioncode as ActionCode
+    from itemindent i
+    inner join masitems m on m.itemid = i.itemid
+    inner join masitemcategories c on c.categoryid = m.categoryid
+    inner join masitemmaincategory mc on mc.mcid = c.mcid
+    left join (
+        select itemid, max(RCENDDT) as rcenddate, max(FINALRATEGST) rcrate, count(supplierid) noofsuppliers
+        from v_rcvalid r group by itemid
+    ) r on r.itemid = m.itemid
+    left join (
+        select ts.itemid, ts.action, ts.actioncode, ts.cov_a_opdate, ts.cov_b_opdate, ts.pricebiddate
+        from v_tenderstatusallnew ts
+        inner join masitems m on m.itemid = ts.itemid
+        inner join masitemcategories c on c.categoryid = m.categoryid
+        inner join masitemmaincategory mc on mc.mcid = c.mcid
+        where 1=1 " + whmcId + @"
+    ) ts on ts.itemid = m.itemid
+    where 1=1 and m.isfreez_itpr is null " + whyearId + whmcId + whhoType + whEdl + whDrill;
+
+            var myList = await _context.RCValidDrillDownDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToListAsync();
+
+            return myList;
+        }
+
+
     }
 }

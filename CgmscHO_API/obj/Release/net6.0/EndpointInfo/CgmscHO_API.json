@@ -5,6 +5,189 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Analysis/ABCanalysisSummary": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "yearid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isedl",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisSummaryDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisSummaryDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisSummaryDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/ABCanalysisSummaryDetail": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "yearid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isedl",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisSummaryDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisSummaryDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisSummaryDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/ABCanalysisWithRCvalid": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "yearid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "edlstatus",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisWithRCvalidDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisWithRCvalidDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABCanalysisWithRCvalidDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ANPR/insertMASWHVEHICLETRANSPORT": {
       "post": {
         "tags": [
@@ -7022,6 +7205,83 @@
         }
       }
     },
+    "/api/DashboardHome/RCValidDrillDown": {
+      "get": {
+        "tags": [
+          "DashboardHome"
+        ],
+        "parameters": [
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "mcId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "hoType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "drillType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "edlType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RCValidDrillDownDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RCValidDrillDownDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RCValidDrillDownDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/District/DistFACwiseStockPostionNew": {
       "get": {
         "tags": [
@@ -12126,6 +12386,231 @@
         }
       }
     },
+    "/api/HO/NearExpiryItemsWH": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NearExpiryItemsWHDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NearExpiryItemsWHDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NearExpiryItemsWHDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/NearExpiryBatchWise": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NearExpiryBatchWiseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NearExpiryBatchWiseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NearExpiryBatchWiseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/WarehoueWiseStockOut": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "edlType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockOut1DTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockOut1DTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockOut1DTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/WarehoueWiseStockOutDetail": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "edlType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "whId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "colFlag",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockOutDetail1DTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockOutDetail1DTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockOutDetail1DTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/HOD/WarehouseInfo": {
       "get": {
         "tags": [
@@ -14591,6 +15076,114 @@
         "responses": {
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/LogAudit/getUserLoginLogs": {
+      "get": {
+        "tags": [
+          "LogAudit"
+        ],
+        "parameters": [
+          {
+            "name": "usertype",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "roleid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getUserLoginLogsDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getUserLoginLogsDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getUserLoginLogsDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LogAudit/getUserPageViewLogs": {
+      "get": {
+        "tags": [
+          "LogAudit"
+        ],
+        "parameters": [
+          {
+            "name": "usertype",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "roleid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getUserPageViewLogsDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getUserPageViewLogsDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getUserPageViewLogsDTO"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -19476,6 +20069,194 @@
   },
   "components": {
     "schemas": {
+      "ABCanalysisSummaryDetailDTO": {
+        "type": "object",
+        "properties": {
+          "iteM_ID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "druG_NAME": {
+            "type": "string",
+            "nullable": true
+          },
+          "strengtH1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemtypename": {
+            "type": "string",
+            "nullable": true
+          },
+          "edlcat": {
+            "type": "string",
+            "nullable": true
+          },
+          "rcStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "rcendDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "rcremainingdays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cntsup": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenderstatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "readyforissue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pending": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "iwhPipeline": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "supplierPipeline": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ordeR_VALUE": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cumulativE_VALUE": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cumulativE_PERCENT": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "abC_CATEGORY": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricecnt": {
+            "type": "string",
+            "nullable": true
+          },
+          "evalutioncnt": {
+            "type": "string",
+            "nullable": true
+          },
+          "liveCnt": {
+            "type": "string",
+            "nullable": true
+          },
+          "rentendercn": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ABCanalysisSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "abC_CATEGORY": {
+            "type": "string",
+            "nullable": true
+          },
+          "noOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ordeR_VALUE": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rcValid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcNotValid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ABCanalysisWithRCvalidDTO": {
+        "type": "object",
+        "properties": {
+          "abC_CATEGORY": {
+            "type": "string",
+            "nullable": true
+          },
+          "noOfItems": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ordeR_VALUE": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rcValid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcNotValid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pricecnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "evalutioncnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "liveCnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rentendercn": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AIissueDetailDTO": {
         "type": "object",
         "properties": {
@@ -22972,6 +23753,110 @@
         },
         "additionalProperties": false
       },
+      "getUserLoginLogsDTO": {
+        "type": "object",
+        "properties": {
+          "logid": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "userid": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleid": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "roleidname": {
+            "type": "string",
+            "nullable": true
+          },
+          "rolecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "usertype": {
+            "type": "string",
+            "nullable": true
+          },
+          "logintime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipaddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "useragent": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "getUserPageViewLogsDTO": {
+        "type": "object",
+        "properties": {
+          "logid": {
+            "type": "string",
+            "nullable": true
+          },
+          "userid": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleid": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleidname": {
+            "type": "string",
+            "nullable": true
+          },
+          "rolecode": {
+            "type": "string",
+            "nullable": true
+          },
+          "usertype": {
+            "type": "string",
+            "nullable": true
+          },
+          "pageurl": {
+            "type": "string",
+            "nullable": true
+          },
+          "pagename": {
+            "type": "string",
+            "nullable": true
+          },
+          "viewtime": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipaddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "useragent": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GetVehicleNoDTO": {
         "type": "object",
         "properties": {
@@ -25937,6 +26822,122 @@
         },
         "additionalProperties": false
       },
+      "NearExpiryBatchWiseDTO": {
+        "type": "object",
+        "properties": {
+          "warehouseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "eqpName": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "batchNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "expDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "expQty": {
+            "type": "string",
+            "nullable": true
+          },
+          "exValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NearExpiryItemsWHDTO": {
+        "type": "object",
+        "properties": {
+          "warehouseid": {
+            "type": "string",
+            "nullable": true
+          },
+          "warehousename": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "edltype": {
+            "type": "string",
+            "nullable": true
+          },
+          "eqpname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "strengtH1": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "expmonth": {
+            "type": "string",
+            "nullable": true
+          },
+          "mon": {
+            "type": "string",
+            "nullable": true
+          },
+          "expqty": {
+            "type": "string",
+            "nullable": true
+          },
+          "exvalue": {
+            "type": "string",
+            "nullable": true
+          },
+          "colorType": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordeerTpe": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "NearExpMonthHomeDTO": {
         "type": "object",
         "properties": {
@@ -28248,6 +29249,69 @@
         },
         "additionalProperties": false
       },
+      "RCValidDrillDownDTO": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "edlType": {
+            "type": "string",
+            "nullable": true
+          },
+          "dhsAiQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "dmeAiQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rcEndDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "rcRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noOfSuppliers": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenderStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "actionCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RCValidSatusDTO": {
         "type": "object",
         "properties": {
@@ -29323,6 +30387,129 @@
           },
           "details": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockOut1DTO": {
+        "type": "object",
+        "properties": {
+          "edlType": {
+            "type": "string",
+            "nullable": true
+          },
+          "warehouseid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "warehousename": {
+            "type": "string",
+            "nullable": true
+          },
+          "noofitems": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockout": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockoutiwhpipe": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockoutpopipe": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockin": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockiniwhpipe": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockinpopipe": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockOutDetail1DTO": {
+        "type": "object",
+        "properties": {
+          "warehouseid": {
+            "type": "string",
+            "nullable": true
+          },
+          "warehousename": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "strengtH1": {
+            "type": "string",
+            "nullable": true
+          },
+          "edlType": {
+            "type": "string",
+            "nullable": true
+          },
+          "readyforissue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pending": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stockOut": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stockIn": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stockOutIWHPipe": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stockOutPoPipe": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           }
         },
