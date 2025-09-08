@@ -1,6 +1,170 @@
 [
   {
     "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrix",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrix",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrixDetail",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrixDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrixWithStockOut",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrixWithStockOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixWithStockOutDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrixWithStockOutDetail",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrixWithStockOutDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "iCateogry",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "columnFlag",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixWithStockOutDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
     "Method": "ABCanalysisSummary",
     "RelativePath": "api/Analysis/ABCanalysisSummary",
     "HttpMethod": "GET",
@@ -90,7 +254,7 @@
         "IsRequired": false
       },
       {
-        "Name": "edlstatus",
+        "Name": "isEDL",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -98,6 +262,78 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABCanalysisWithRCvalidDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "pipelineSlippage",
+    "RelativePath": "api/Analysis/pipelineSlippage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.pipelineSlippageDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "pipelineSlippageItemDetail",
+    "RelativePath": "api/Analysis/pipelineSlippageItemDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "flag",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.PipelineSlippageDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "PipelineSlippagePOItemDetailDTO",
+    "RelativePath": "api/Analysis/PipelineSlippagePOItemDetailDTO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "flag",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.PipelineSlippagePOItemDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -5278,6 +5514,197 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "ExcessLiftDetail",
+    "RelativePath": "api/HO/CMEExcessLiftDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ExcessLiftDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMEexcessLiftSummary",
+    "RelativePath": "api/HO/CMEexcessLiftSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ExcessLiftSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMESlowMovingDetails",
+    "RelativePath": "api/HO/CMESlowMovingDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "percent",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMESlowMovingDetailsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMESlowMovingSummary",
+    "RelativePath": "api/HO/CMESlowMovingSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "percent",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMESlowMovingSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMEwithoutAIDetail",
+    "RelativePath": "api/HO/CMEwithoutAIDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMEwithoutAIDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMEwithoutAISummary",
+    "RelativePath": "api/HO/CMEwithoutAISummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMEwithoutAISummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
     "Method": "dhsDmeYearConsumption",
     "RelativePath": "api/HO/dhsDmeYearConsumption",
     "HttpMethod": "GET",
@@ -6256,6 +6683,26 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.HODYearWisePODTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "HoldStockinNos",
+    "RelativePath": "api/HO/HoldStockinNos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.HoldStockinNosDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

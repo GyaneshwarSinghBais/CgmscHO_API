@@ -148,7 +148,7 @@
             }
           },
           {
-            "name": "edlstatus",
+            "name": "isEDL",
             "in": "query",
             "schema": {
               "type": "string"
@@ -180,6 +180,412 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/ABCanalysisWithRCvalidDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/ABC_VED_SDE_matrix": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "yearid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isEDL",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/ABC_VED_SDE_matrixDetail": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "yearid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isEDL",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/ABC_VED_SDE_matrixWithStockOut": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "yearid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isEDL",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "catType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixWithStockOutDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixWithStockOutDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixWithStockOutDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/ABC_VED_SDE_matrixWithStockOutDetail": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "yearid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isEDL",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "catType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "iCateogry",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "columnFlag",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixWithStockOutDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixWithStockOutDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ABC_VED_SDE_matrixWithStockOutDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/pipelineSlippage": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pipelineSlippageDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pipelineSlippageDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/pipelineSlippageDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/pipelineSlippageItemDetail": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "flag",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PipelineSlippageDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PipelineSlippageDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PipelineSlippageDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Analysis/PipelineSlippagePOItemDetailDTO": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "parameters": [
+          {
+            "name": "flag",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PipelineSlippagePOItemDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PipelineSlippagePOItemDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PipelineSlippagePOItemDetailDTO"
                   }
                 }
               }
@@ -12611,6 +13017,375 @@
         }
       }
     },
+    "/api/HO/HoldStockinNos": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HoldStockinNosDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HoldStockinNosDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HoldStockinNosDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/CMESlowMovingSummary": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "percent",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMESlowMovingSummaryDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMESlowMovingSummaryDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMESlowMovingSummaryDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/CMESlowMovingDetails": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "percent",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMESlowMovingDetailsDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMESlowMovingDetailsDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMESlowMovingDetailsDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/CMEexcessLiftSummary": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExcessLiftSummaryDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExcessLiftSummaryDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExcessLiftSummaryDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/CMEExcessLiftDetail": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExcessLiftDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExcessLiftDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExcessLiftDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/CMEwithoutAISummary": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMEwithoutAISummaryDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMEwithoutAISummaryDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMEwithoutAISummaryDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HO/CMEwithoutAIDetail": {
+      "get": {
+        "tags": [
+          "HO"
+        ],
+        "parameters": [
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMEwithoutAIDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMEwithoutAIDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMEwithoutAIDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/HOD/WarehouseInfo": {
       "get": {
         "tags": [
@@ -20069,6 +20844,336 @@
   },
   "components": {
     "schemas": {
+      "ABC_VED_SDE_matrixDetailDTO": {
+        "type": "object",
+        "properties": {
+          "iteM_ID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "druG_NAME": {
+            "type": "string",
+            "nullable": true
+          },
+          "strengtH1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemtypename": {
+            "type": "string",
+            "nullable": true
+          },
+          "edlcat": {
+            "type": "string",
+            "nullable": true
+          },
+          "edltype": {
+            "type": "string",
+            "nullable": true
+          },
+          "rcValid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcNotValid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pricecnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "evalutioncnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "liveCnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rentendercn": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "abc_category": {
+            "type": "string",
+            "nullable": true
+          },
+          "vedcat": {
+            "type": "string",
+            "nullable": true
+          },
+          "sde_class": {
+            "type": "string",
+            "nullable": true
+          },
+          "abC_VED_SDE_CATEGORY": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "accyrsetid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ABC_VED_SDE_matrixDTO": {
+        "type": "object",
+        "properties": {
+          "abC_VED_SDE_CATEGORY": {
+            "type": "string",
+            "nullable": true
+          },
+          "nos": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcvalid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcNotValid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcNotValidPricecnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcNotValidEvalutioncnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rCnotValidLiveCnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rCnotValidRentendercn": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ABC_VED_SDE_matrixWithStockOutDetailDTO": {
+        "type": "object",
+        "properties": {
+          "iteM_ID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "druG_NAME": {
+            "type": "string",
+            "nullable": true
+          },
+          "strengtH1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemtypename": {
+            "type": "string",
+            "nullable": true
+          },
+          "edltype": {
+            "type": "string",
+            "nullable": true
+          },
+          "edlcat": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ordeR_VALUE": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "readywtock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "uqcstock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "supplierpipeline": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "transferQTY": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockOut": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockIn": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockOutPoPipe": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockOutPoQty": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcValid": {
+            "type": "string",
+            "nullable": true
+          },
+          "rcNotValid": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricecnt": {
+            "type": "string",
+            "nullable": true
+          },
+          "evalutioncnt": {
+            "type": "string",
+            "nullable": true
+          },
+          "liveCnt": {
+            "type": "string",
+            "nullable": true
+          },
+          "rentendercn": {
+            "type": "string",
+            "nullable": true
+          },
+          "abc_category": {
+            "type": "string",
+            "nullable": true
+          },
+          "vedcat": {
+            "type": "string",
+            "nullable": true
+          },
+          "sde_class": {
+            "type": "string",
+            "nullable": true
+          },
+          "abC_VED_SDE_CATEGORY": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ABC_VED_SDE_matrixWithStockOutDTO": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "cntItems": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockout": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockin": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockoutpopipe": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcvalid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rcnotvalid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pricecnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "evalutioncnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "livecnt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rentendercn": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ABCanalysisSummaryDetailDTO": {
         "type": "object",
         "properties": {
@@ -20844,6 +21949,216 @@
           "issuedcr": {
             "type": "number",
             "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CMESlowMovingDetailsDTO": {
+        "type": "object",
+        "properties": {
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "ai": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "issueqty": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "issuePer": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "balanceAnnualIndentQTY": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "warehouseReadystock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "whrEadyPerAgainstBalindent": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "facilityid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stockparameter": {
+            "type": "string",
+            "nullable": true
+          },
+          "warehouseid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CMESlowMovingSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "facilityid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mcid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nositems": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockparameter": {
+            "type": "string",
+            "nullable": true
+          },
+          "colorpara": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CMEwithoutAIDetailDTO": {
+        "type": "object",
+        "properties": {
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitcount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "facai": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "issueqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "issValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "facilityid": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "issueYearID": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CMEwithoutAISummaryDTO": {
+        "type": "object",
+        "properties": {
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "item_count": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "issued_value_rs": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "facilityid": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -22447,6 +23762,87 @@
           },
           "mmid": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExcessLiftDetailDTO": {
+        "type": "object",
+        "properties": {
+          "facilityid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "ai": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "issueqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "issValuers": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "issuenous": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExcessLiftSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "facilityid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "category_label": {
+            "type": "string",
+            "nullable": true
+          },
+          "count_of_Code": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sum_of_Excess_Lifted_Value_in_Rs": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           }
         },
@@ -24302,6 +25698,66 @@
           "inwno": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HoldStockinNosDTO": {
+        "type": "object",
+        "properties": {
+          "slNo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "groupname": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "edlCategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemtypename": {
+            "type": "string",
+            "nullable": true
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "batchno": {
+            "type": "string",
+            "nullable": true
+          },
+          "mfgdate": {
+            "type": "string",
+            "nullable": true
+          },
+          "expdate": {
+            "type": "string",
+            "nullable": true
+          },
+          "holdstock_nos": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -28190,6 +29646,133 @@
             "nullable": true
           },
           "details": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PipelineSlippageDetailDTO": {
+        "type": "object",
+        "properties": {
+          "timduration": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "absqty_sum": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "receiptabsqty_sum": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pipelineqty_sum": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "min_per": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "worst_d": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nospo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "pipelineSlippageDTO": {
+        "type": "object",
+        "properties": {
+          "timduration": {
+            "type": "string",
+            "nullable": true
+          },
+          "nos": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nosPO": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PipelineSlippagePOItemDetailDTO": {
+        "type": "object",
+        "properties": {
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "suppliername": {
+            "type": "string",
+            "nullable": true
+          },
+          "pono": {
+            "type": "string",
+            "nullable": true
+          },
+          "soissuedate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "extendeddate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "poqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "receivedQTY": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "timduration": {
             "type": "string",
             "nullable": true
           }

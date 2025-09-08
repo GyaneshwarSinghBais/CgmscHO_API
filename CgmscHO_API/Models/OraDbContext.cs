@@ -121,8 +121,8 @@ namespace CgmscHO_API.Models
         public DbSet<InitiatedPendingIssueDetailsDTO> GetInitiatedPendingIssueDetailsDTODbSet { get; set; }
         public DbSet<IWHPipelineSummaryDTO> GetIWHPipelineSummaryDbSet { get; set; }
         public DbSet<IWHPipelineDetailsDTO> GetIWHPipelineDetailsDTODbSet { get; set; }
-       
-        
+
+        public DbSet<masSchemeDTO> masSchemeDbSet { get; set; }
 
 
         // public DbSet<tbFacilityOutwardsUpdateModel> tbFacilityOutwardsUpdateModelDbSet { get; set; }
@@ -414,26 +414,23 @@ namespace CgmscHO_API.Models
         public DbSet<RCValidDrillDownDTO> RCValidDrillDownDbSet { get; set; }
 
         public DbSet<ABCanalysisWithRCvalidDTO> ABCanalysisWithRCvalidDbSet { get; set; }
-        
+        public DbSet<ABC_VED_SDE_matrixDTO> ABC_VED_SDE_matrixDbSet { get; set; }
+        public DbSet<ABC_VED_SDE_matrixDetailDTO> ABC_VED_SDE_matrixDetailDbSet { get; set; }
+        public DbSet<ABC_VED_SDE_matrixWithStockOutDTO> ABC_VED_SDE_matrixWithStockOutDbSet { get; set; }
+        public DbSet<ABC_VED_SDE_matrixWithStockOutDetailDTO> ABC_VED_SDE_matrixWithStockOutDetailDbSet { get; set; }
 
+        public DbSet<HoldStockinNosDTO> HoldStockinNosDbSet { get; set; }
+        public DbSet<CMESlowMovingSummaryDTO> CMESlowMovingSummaryDbSet { get; set; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public DbSet<CMESlowMovingDetailsDTO> CMESlowMovingDetailsDbSet { get; set; }
+        public DbSet<ExcessLiftSummaryDTO> ExcessLiftSummaryDbSet { get; set; }
+        public DbSet<ExcessLiftDetailDTO> ExcessLiftDetailDbSet { get; set; }
+        public DbSet<CMEwithoutAISummaryDTO> CMEwithoutAISummaryDbSet { get; set; }
+        public DbSet<CMEwithoutAIDetailDTO> CMEwithoutAIDetailDbSet { get; set; }
+        public DbSet<pipelineSlippageDTO> pipelineSlippageDbSet { get; set; }
+        public DbSet<PipelineSlippageDetailDTO> PipelineSlippageDetailDbSet { get; set; }
+        public DbSet<PipelineSlippagePOItemDetailDTO> PipelineSlippagePOItemDetailDbSet { get; set; }
+        public DbSet<MasItemsPODTO> MasItemsPODbSet { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -477,7 +474,21 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<ABCanalysisSummaryDetailDTO>().HasNoKey();
             modelBuilder.Entity<RCValidDrillDownDTO>().HasNoKey();
             modelBuilder.Entity<ABCanalysisWithRCvalidDTO>().HasNoKey();
-            
+            modelBuilder.Entity<ABC_VED_SDE_matrixDTO>().HasNoKey();
+            modelBuilder.Entity<ABC_VED_SDE_matrixDetailDTO>().HasNoKey();
+            modelBuilder.Entity<ABC_VED_SDE_matrixWithStockOutDTO>().HasNoKey();
+            modelBuilder.Entity<ABC_VED_SDE_matrixWithStockOutDetailDTO>().HasNoKey();
+            modelBuilder.Entity<HoldStockinNosDTO>().HasNoKey();
+            modelBuilder.Entity<CMESlowMovingSummaryDTO>().HasNoKey();
+            modelBuilder.Entity<CMESlowMovingDetailsDTO>().HasNoKey();
+            modelBuilder.Entity<ExcessLiftSummaryDTO>().HasNoKey();
+            modelBuilder.Entity<ExcessLiftDetailDTO>().HasNoKey();
+            modelBuilder.Entity<CMEwithoutAISummaryDTO>().HasNoKey();
+            modelBuilder.Entity<CMEwithoutAIDetailDTO>().HasNoKey();
+            modelBuilder.Entity<pipelineSlippageDTO>().HasNoKey();
+            modelBuilder.Entity<PipelineSlippageDetailDTO>().HasNoKey();
+            modelBuilder.Entity<PipelineSlippagePOItemDetailDTO>().HasNoKey();
+
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");
 
 

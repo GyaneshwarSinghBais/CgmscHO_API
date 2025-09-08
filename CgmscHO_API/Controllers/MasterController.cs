@@ -718,5 +718,293 @@ select userid, case when USERID=2931 then 'HO-QC' else case when USERID=4474 the
       .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
             return myList;
         }
+
+
+        [HttpGet("MasitemsPO")]
+        public async Task<ActionResult<IEnumerable<MasItemsPODTO>>> MasitemsPO(string itemid, string yrid, string mcid, string edl, string groupid, string itemtypeid, string edlcat, string schemeid, string supplierid, string ABC, string VED, string SDE, string MatCAT)
+        {
+            string matrixJoin = "";
+            string whclauseItem = "";
+            string whclause = "";
+            if (itemid != "0")
+            {
+                whclauseItem = " and mi.itemid=" + itemid;
+            }
+            if (yrid != "0")
+            {
+                whclauseItem = " and op.ACCYRSETID=" + yrid;
+            }
+
+            if (mcid != "0")
+            {
+                whclause += " and mc.MCID =" + mcid;
+            }
+            if (edl == "Y")
+            {
+                whclause += " and (case when mi.isedl2021= 'Y' then 'EDL' else 'Non EDL' end)='EDL'";
+            }
+            else if (edl == "N")
+            {
+                whclause += " and (case when mi.isedl2021= 'Y' then 'EDL' else 'Non EDL' end)='Non EDL'";
+            }
+            else
+            {
+
+            }
+
+            if (groupid != "0")
+            {
+                whclause += " and g.groupid=" + groupid;
+            }
+            if (itemtypeid != "0")
+            {
+                whclause += " and ty.ITEMTYPEID=" + itemtypeid;
+            }
+            if (edlcat != "N")
+            {
+                whclause += " and e.edlcat=" + edlcat;
+            }
+
+            if (schemeid != "0")
+            {
+                whclauseItem += " and op.schemeid=" + schemeid;
+            }
+            if (supplierid != "0")
+            {
+                whclauseItem += " and op.SUPPLIERID =" + supplierid;
+            }
+            matrixJoin = " left outer join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+            if (ABC != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_CATEGORY ='" + ABC + "'";
+            }
+            if (VED != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.VEDCAT ='" + VED + "'";
+            }
+            if (SDE != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.SDE_CLASS ='" + SDE + "'";
+            }
+            if (MatCAT != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_VED_SDE_CATEGORY ='" + MatCAT + "'";
+            }
+
+
+
+            //string whSupplier = "";
+
+            string qry = @" select distinct mi.itemid, mi.itemname||'-'||mi.strength1||'-'|| mi.itemcode as name, mi.itemcode, mi.itemname, mi.strength1, mi.unit, mi.unitcount, g.groupid, g.groupname, ty.ITEMTYPEID, ty.ITEMTYPENAME
+, e.edlcat, e.edl,case when mi.isedl2021= 'Y' then 'EDL' else 'Non EDL' end as EDLtype
+,nvl(ab.SDE_CLASS,'NA') as SDE,nvl(ab.VEDCAT,'NA') as VED ,nvl(ab.ABC_CATEGORY,'NA') as ABC,nvl(ab.ABC_VED_SDE_CATEGORY,'NA') as Matrix
+from masitems mi
+inner join soordereditems si on si.itemid=mi.itemid
+inner join soorderplaced op on op.ponoid=si.ponoid
+left outer join masedl e on e.edlcat= mi.edlcat
+ inner join masitemcategories c on c.categoryid= mi.categoryid
+inner join masitemmaincategory mc on mc.MCID= c.MCID
+left outer join masitemtypes ty on ty.ITEMTYPEID= mi.ITEMTYPEID
+left outer join masitemgroups g on g.groupid= mi.groupid
+" + matrixJoin + @"
+where 1=1 and op.status not in ('OC', 'WA1', 'I')  " + whclauseItem + @" " + whclause + @"
+order by mi.itemname ";
+            //and mi.ISFREEZ_ITPR is null
+            var myList = _context.MasItemsPODbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
+        [HttpGet("MasSupplierPO")]
+        public async Task<ActionResult<IEnumerable<SuplierDTO>>> MasSupplierPO(string yrid, string itemid, string mcid, string schemeid, string ABC, string VED, string SDE, string MatCAT)
+        {
+            string whclauseItem = "";
+            string matrixJoin = " left outer join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+            if (schemeid != "0")
+            {
+                whclauseItem += " and op.schemeid=" + schemeid;
+            }
+            if (mcid != "0")
+            {
+                whclauseItem += " and mc.MCID =" + mcid;
+            }
+            if (itemid != "0")
+            {
+                whclauseItem = " and mi.itemid=" + itemid;
+            }
+            if (yrid != "0")
+            {
+                whclauseItem = " and op.ACCYRSETID=" + yrid;
+            }
+            if (ABC != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_CATEGORY ='" + ABC + "'";
+            }
+            if (VED != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.VEDCAT ='" + VED + "'";
+            }
+            if (SDE != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.SDE_CLASS ='" + SDE + "'";
+            }
+            if (MatCAT != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_VED_SDE_CATEGORY ='" + MatCAT + "'";
+            }
+
+
+
+            string qry = @"select sp.suppliername as SUPPLIERNAME,sp.supplierid as SUPPLIERID from massuppliers sp 
+inner join soorderplaced op on op.SUPPLIERID=sp.SUPPLIERID
+inner join soordereditems si on si.ponoid=op.ponoid
+ inner join masitems mi on mi.itemid=si.itemid 
+ inner join masitemcategories ic on ic.categoryid = mi.categoryid
+ inner join masitemmaincategory mc on mc.MCID=ic.MCID
+" + matrixJoin + @"
+where op.status not in ('OC', 'WA1', 'I') " + whclauseItem + @"
+group by  sp.suppliername,sp.supplierid
+order by sp.suppliername";
+            var myList = _context.SuplierDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("MasSchemePO")]
+        public async Task<ActionResult<IEnumerable<masSchemeDTO>>> MasSchemePO(string yrid, string supplierid, string itemid, string mcid, string schemeid, string ABC, string VED, string SDE, string MatCAT)
+        {
+            string whclauseItem = "";
+            string matrixJoin = " left outer join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+            if (schemeid != "0")
+            {
+                whclauseItem += " and op.schemeid=" + schemeid;
+            }
+            if (supplierid != "0")
+            {
+                whclauseItem += " and op.SUPPLIERID=" + supplierid;
+            }
+            if (mcid != "0")
+            {
+                whclauseItem += " and mc.MCID =" + mcid;
+            }
+            if (itemid != "0")
+            {
+                whclauseItem = " and mi.itemid=" + itemid;
+            }
+            if (yrid != "0")
+            {
+                whclauseItem = " and op.ACCYRSETID=" + yrid;
+            }
+            if (ABC != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_CATEGORY ='" + ABC + "'";
+            }
+            if (VED != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.VEDCAT ='" + VED + "'";
+            }
+            if (SDE != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.SDE_CLASS ='" + SDE + "'";
+            }
+            if (MatCAT != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_VED_SDE_CATEGORY ='" + MatCAT + "'";
+            }
+
+
+
+            string qry = @"select distinct sc.SCHEMEID,sc.SCHEMENAME from masschemes sc
+inner join soorderplaced op on op.SCHEMEID=sc.SCHEMEID
+inner join soordereditems si on si.ponoid=op.ponoid
+ inner join masitems mi on mi.itemid=si.itemid 
+ inner join masitemcategories ic on ic.categoryid = mi.categoryid
+ inner join masitemmaincategory mc on mc.MCID=ic.MCID
+" + matrixJoin + @"
+  where op.status not in ('OC', 'WA1', 'I') " + whclauseItem + @"
+  order by sc.SCHEMEID desc ";
+            var myList = _context.masSchemeDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
+
+        [HttpGet("MasPOSummary")]
+        public async Task<ActionResult<IEnumerable<MasPODTO>>> MasPOSummary(string yrid, string supplierid, string itemid, string mcid, string schemeid, string ABC, string VED, string SDE, string MatCAT)
+        {
+            string whclauseItem = "";
+            string matrixJoin = " left outer join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+            if (schemeid != "0")
+            {
+                whclauseItem += " and op.schemeid=" + schemeid;
+            }
+            if (supplierid != "0")
+            {
+                whclauseItem += " and op.SUPPLIERID=" + supplierid;
+            }
+            if (mcid != "0")
+            {
+                whclauseItem += " and mc.MCID =" + mcid;
+            }
+            if (itemid != "0")
+            {
+                whclauseItem = " and mi.itemid=" + itemid;
+            }
+            if (yrid != "0")
+            {
+                whclauseItem = " and op.ACCYRSETID=" + yrid;
+            }
+            if (ABC != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_CATEGORY ='" + ABC + "'";
+            }
+            if (VED != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.VEDCAT ='" + VED + "'";
+            }
+            if (SDE != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.SDE_CLASS ='" + SDE + "'";
+            }
+            if (MatCAT != "0")
+            {
+                matrixJoin = " inner join mv_ABC_VED_SDE_Matrix_LastThreeYear ab on ab.ITEM_ID = mi.itemid ";
+                whclauseItem += " and ab.ABC_VED_SDE_CATEGORY ='" + MatCAT + "'";
+            }
+
+
+
+            string qry = @"  select op.PONO||' DT:'||to_char(PODATE,'dd-MM-yyy')||'-'||mi.itemcode||'-'||mi.itemname||'-'|| sp.suppliername as NAME,op.PONOID as PONOID from  soorderplaced op
+  inner join massuppliers sp on sp.SUPPLIERID=op.SUPPLIERID
+  inner join soordereditems si on si.ponoid= op.ponoid
+  inner join masitems mi on mi.itemid= si.itemid
+ inner join masitemcategories ic on ic.categoryid = mi.categoryid
+ inner join masitemmaincategory mc on mc.MCID= ic.MCID
+" + matrixJoin + @"
+  where op.status not in ('OC', 'WA1', 'I') " + whclauseItem + @"
+  order by op.PONOID desc";
+            var myList = _context.MasPODbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
     }
 }

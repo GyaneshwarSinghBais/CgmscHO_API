@@ -3,13 +3,13 @@
     public class ABCanalysisWithRCvalidDTO
     {
         public string? ABC_CATEGORY { get; set; }
-        public int? NoOfItems { get; set; }
+        public Int32? NoOfItems { get; set; }
         public decimal? ORDER_VALUE { get; set; }
-        public int? RCValid { get; set; }
-        public int? RCNotValid { get; set; }
-        public int? Pricecnt { get; set; }
-        public int? Evalutioncnt { get; set; }
-        public int? LiveCnt { get; set; }
-        public int? Rentendercn { get; set; }
+        public Int32? RCValid { get; set; }
+        public Int32? RCNotValid { get; set; }
+        public Int32? Pricecnt { get; set; }
+        public Int32? Evalutioncnt { get; set; }
+        public Int32? LiveCnt { get; set; }
+        public Int32? Rentendercn { get; set; }
     }
 }
