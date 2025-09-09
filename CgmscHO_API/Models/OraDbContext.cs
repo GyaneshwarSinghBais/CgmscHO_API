@@ -13,6 +13,7 @@ using CgmscHO_API.LogAuditDTO;
 using CgmscHO_API.MasterDTO;
 using CgmscHO_API.PublicDTO;
 using CgmscHO_API.QCDTO;
+using CgmscHO_API.TransactionDTO;
 using CgmscHO_API.WarehouseDTO;
 using Microsoft.EntityFrameworkCore;
 
@@ -431,6 +432,8 @@ namespace CgmscHO_API.Models
         public DbSet<PipelineSlippageDetailDTO> PipelineSlippageDetailDbSet { get; set; }
         public DbSet<PipelineSlippagePOItemDetailDTO> PipelineSlippagePOItemDetailDbSet { get; set; }
         public DbSet<MasItemsPODTO> MasItemsPODbSet { get; set; }
+        public DbSet<HoldBatchHistoryDTO> HoldBatchHistoryDbSet { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -488,6 +491,8 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<pipelineSlippageDTO>().HasNoKey();
             modelBuilder.Entity<PipelineSlippageDetailDTO>().HasNoKey();
             modelBuilder.Entity<PipelineSlippagePOItemDetailDTO>().HasNoKey();
+            modelBuilder.Entity<HoldBatchHistoryDTO>().HasNoKey();
+            
 
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");
 

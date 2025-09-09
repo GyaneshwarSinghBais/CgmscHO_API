@@ -9712,6 +9712,92 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasitemsPO",
+    "RelativePath": "api/Master/MasitemsPO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "groupid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemtypeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlcat",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.MasItemsPODTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
     "Method": "MasPOs",
     "RelativePath": "api/Master/MasPOs",
     "HttpMethod": "GET",
@@ -9725,6 +9811,72 @@
       },
       {
         "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.MasPODTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasPOSummary",
+    "RelativePath": "api/Master/MasPOSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -9815,6 +9967,72 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasSchemePO",
+    "RelativePath": "api/Master/MasSchemePO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.masSchemeDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
     "Method": "MasSupplier",
     "RelativePath": "api/Master/MasSupplier",
     "HttpMethod": "GET",
@@ -9849,6 +10067,67 @@
     "Parameters": [
       {
         "Name": "wh",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.SuplierDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasSupplierPO",
+    "RelativePath": "api/Master/MasSupplierPO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -11597,6 +11876,52 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.MasterDTO.SupplyDuration, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "HoldBatchHistory",
+    "RelativePath": "api/Transaction/HoldBatchHistory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "nsqholdflag",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.HoldBatchHistoryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
