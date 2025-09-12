@@ -2206,31 +2206,55 @@ where 1=1 " + whcatType + @"  " + whcolumnFlag + @" " + whIcategory + @" ";
 
 
         [HttpGet("pipelineSlippage")]
-        public async Task<ActionResult<IEnumerable<pipelineSlippageDTO>>> pipelineSlippage()
+        public async Task<ActionResult<IEnumerable<pipelineSlippageDTO>>> pipelineSlippage(Int32 mcid, string isEDL)
         {
+            string whmcid = "";
+            string whisedl = "";
 
+            if (mcid != 0)
+            {
+                whmcid = "  and mc.mcid="+ mcid + @" ";
+            }
 
-            string qry = @" select Timduration,count(distinct itemid) as nos,count(distinct ponoid) as NosPO from 
-(
-select  soi.warehouseid, mi.itemcode,OI.itemid,op.ponoid,op.soissuedate,op.extendeddate,sum(soi.ABSQTY) as absqty,nvl(rec.receiptabsqty,0)receiptabsqty,
-receiptdelayexception,DURATION as SupplyDuration ,round(sysdate-op.soissuedate,0) as days,
+            if (isEDL != "0")
+            {
+                whisedl = " and nvl(mi.isedl2021,'N')='"+ isEDL + @"' ";
+            }
 
-case when round(sysdate-op.soissuedate,0) >DURATION and  (round(sysdate-op.soissuedate,0)-DURATION)>=14 then '>14 Days'
-else case when (round(sysdate-op.soissuedate,0) >DURATION and round(sysdate-op.soissuedate,0)-DURATION<14) then '1-14 Days'
+            string qry = @"  select Timduration,count(distinct itemid) as nos,count(distinct ponoid) as NosPO 
+from (
+   select w.warehouseid,w.warehousename,yr.accyrsetid,yr.ACCYEAR,mc.mcid,mc.mcategory,sc.schemename,sc.schemeid,
+mi.itemcode,
+sp.suppliername,sp.supplierid,
+OI.itemid,op.ponoid,
+op.soissuedate,op.extendeddate,sum(soi.ABSQTY) as absqty,round(sum(soi.ABSQTY)*c.finalrategst,0) as POValue,
+
+nvl(rec.receiptabsqty,0)receiptabsqty,round(nvl(rec.receiptabsqty,0)*c.finalrategst,0) ReceivedValue,
+receiptdelayexception,t.DURATION as SupplyDuration ,round(sysdate-op.soissuedate,0) as days,
+case when round(sysdate-op.soissuedate,0) >t.DURATION and  (round(sysdate-op.soissuedate,0)-t.DURATION)>=14 then '>14 Days'
+else case when (round(sysdate-op.soissuedate,0) >t.DURATION and round(sysdate-op.soissuedate,0)-t.DURATION<14) then '1-14 Days'
 else 'Timeline' end end as Timduration,
-
 case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
 else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then  sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
-else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end as pipelineQTY
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end as pipelineQTY,
+round((case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then  sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and 
+round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end)*c.finalrategst,0) as pipelinevalue
 ,round((nvl(rec.receiptabsqty,0)/sum(soi.ABSQTY)) *100,2) as per
-,DURATION-round(sysdate-op.soissuedate,0) d
+,t.DURATION-round(sysdate-op.soissuedate,0) d
 from   soOrderPlaced OP  
+inner join masschemes sc on sc.schemeid=op.schemeid
+inner join massuppliers sp on sp.supplierid=op.supplierid
 inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
 inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+inner join aoccontractitems c on c.contractitemid = oi.contractitemid
 inner join masitems mi on mi.itemid = oi.itemid
 inner join masitemcategories c on c.categoryid = mi.categoryid
 inner join masitemmaincategory mc on mc.mcid = c.mcid
 inner join sotranches t on t.ponoid=OP.ponoid
+inner join masaccyearsettings yr on yr.accyrsetid=OP.accyrsetid
+inner join maswarehouses w on w.WAREHOUSEID=soi.WAREHOUSEID
 left outer join 
 (
 select tr.ponoid,tri.itemid,sum(tri.receiptabsqty) receiptabsqty, tr.warehouseid from tbreceipts tr 
@@ -2238,16 +2262,61 @@ inner join tbreceiptitems tri on tri.receiptid=tr.receiptid
 where tr.receipttype='NO' and tr.status='C' and tr.notindpdmis is null and tri.notindpdmis is null
 group by tr.ponoid,tri.itemid,tr.warehouseid
 ) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid and rec.warehouseid=soi.warehouseid
- where op.status  in ('C','O') and mc.mcid=1 and nvl(mi.isedl2021,'N')='Y' 
- group by DURATION,soi.warehouseid, mi.itemcode,op.ponoid,op.soissuedate,op.extendeddate,OI.itemid ,rec.receiptabsqty,
- op.soissuedate,op.extendeddate ,receiptdelayexception  
+ where op.status  in ('C','O') "+ whmcid + @" "+ whisedl + @" 
+ group by t.DURATION,soi.warehouseid, mi.itemcode,op.ponoid,op.soissuedate,op.extendeddate,OI.itemid ,rec.receiptabsqty,c.finalrategst,
+ op.soissuedate,op.extendeddate ,op.receiptdelayexception  
+ ,w.warehouseid,w.warehousename,yr.accyrsetid,yr.ACCYEAR,mc.mcid,mc.mcategory, soi.warehouseid
+,sc.schemename,sc.schemeid,sp.suppliername,sp.supplierid
+
+
  having (case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
 else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then  sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
 else case when op.extendeddate is not null and op.receiptdelayexception = 1
 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end) >0
 and round((nvl(rec.receiptabsqty,0)/sum(soi.ABSQTY)) *100,2)<90
-) group by Timduration
- ";
+)
+group by Timduration  ";
+
+
+
+//            string qry = @" select Timduration,count(distinct itemid) as nos,count(distinct ponoid) as NosPO from 
+//(
+//select  soi.warehouseid, mi.itemcode,OI.itemid,op.ponoid,op.soissuedate,op.extendeddate,sum(soi.ABSQTY) as absqty,nvl(rec.receiptabsqty,0)receiptabsqty,
+//receiptdelayexception,DURATION as SupplyDuration ,round(sysdate-op.soissuedate,0) as days,
+
+//case when round(sysdate-op.soissuedate,0) >DURATION and  (round(sysdate-op.soissuedate,0)-DURATION)>=14 then '>14 Days'
+//else case when (round(sysdate-op.soissuedate,0) >DURATION and round(sysdate-op.soissuedate,0)-DURATION<14) then '1-14 Days'
+//else 'Timeline' end end as Timduration,
+
+//case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+//else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then  sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+//else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end as pipelineQTY
+//,round((nvl(rec.receiptabsqty,0)/sum(soi.ABSQTY)) *100,2) as per
+//,DURATION-round(sysdate-op.soissuedate,0) d
+//from   soOrderPlaced OP  
+//inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
+//inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+//inner join masitems mi on mi.itemid = oi.itemid
+//inner join masitemcategories c on c.categoryid = mi.categoryid
+//inner join masitemmaincategory mc on mc.mcid = c.mcid
+//inner join sotranches t on t.ponoid=OP.ponoid
+//left outer join 
+//(
+//select tr.ponoid,tri.itemid,sum(tri.receiptabsqty) receiptabsqty, tr.warehouseid from tbreceipts tr 
+//inner join tbreceiptitems tri on tri.receiptid=tr.receiptid 
+//where tr.receipttype='NO' and tr.status='C' and tr.notindpdmis is null and tri.notindpdmis is null
+//group by tr.ponoid,tri.itemid,tr.warehouseid
+//) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid and rec.warehouseid=soi.warehouseid
+// where op.status  in ('C','O') and mc.mcid=1 and nvl(mi.isedl2021,'N')='Y' 
+// group by DURATION,soi.warehouseid, mi.itemcode,op.ponoid,op.soissuedate,op.extendeddate,OI.itemid ,rec.receiptabsqty,
+// op.soissuedate,op.extendeddate ,receiptdelayexception  
+// having (case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+//else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then  sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+//else case when op.extendeddate is not null and op.receiptdelayexception = 1
+//and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end) >0
+//and round((nvl(rec.receiptabsqty,0)/sum(soi.ABSQTY)) *100,2)<90
+//) group by Timduration
+// ";
 
 
 
@@ -2260,8 +2329,22 @@ and round((nvl(rec.receiptabsqty,0)/sum(soi.ABSQTY)) *100,2)<90
         }
 
         [HttpGet("pipelineSlippageItemDetail")]
-        public async Task<ActionResult<IEnumerable<PipelineSlippageDetailDTO>>> pipelineSlippageItemDetail(int flag)
+        public async Task<ActionResult<IEnumerable<PipelineSlippageDetailDTO>>> pipelineSlippageItemDetail(int flag, Int32 mcid, string isEDL)
         {
+            string whmcid = "";
+            String whisedl = "";
+
+            if (mcid != 0)
+            {
+                whmcid = "  and mc.mcid=" + mcid + @" ";
+            }
+
+            if (isEDL != "0")
+            {
+                whisedl = " and nvl(mi.isedl2021,'N')='" + isEDL + @"' ";
+            }
+
+
             // flag: 1 => ">14 Days", 2 => "1-14 Days"
             if (flag != 1 && flag != 2)
                 return BadRequest("flag must be 1 (\">14 Days\") or 2 (\"1-14 Days\").");
@@ -2331,8 +2414,7 @@ WITH x AS (
          AND rec.itemid = OI.itemid
          AND rec.warehouseid = soi.warehouseid
     WHERE op.status IN ('C','O')
-      AND mc.mcid = 1
-      AND NVL(mi.isedl2021,'N') = 'Y'
+      "+ whmcid + @" "+ whisedl + @"
     GROUP BY
         DURATION,
         soi.warehouseid,
@@ -2397,8 +2479,22 @@ ORDER BY worst_d ASC, min_per ASC, itemcode;
 
 
         [HttpGet("PipelineSlippagePOItemDetailDTO")]
-        public async Task<ActionResult<IEnumerable<PipelineSlippagePOItemDetailDTO>>> PipelineSlippagePOItemDetailDTO(int flag)
+        public async Task<ActionResult<IEnumerable<PipelineSlippagePOItemDetailDTO>>> PipelineSlippagePOItemDetailDTO(int flag, Int32 mcid, string isEDL)
         {
+            string whmcid = "";
+            String whisedl = "";
+
+            if (mcid != 0)
+            {
+                whmcid = "  and mc.mcid=" + mcid + @" ";
+            }
+
+            if (isEDL != "0")
+            {
+                whisedl = " and nvl(mi.isedl2021,'N')='" + isEDL + @"' ";
+            }
+
+
             // flag: 1 => ">14 Days", 2 => "1-14 Days"
             if (flag != 1 && flag != 2)
                 return BadRequest("flag must be 1 (\">14 Days\") or 2 (\"1-14 Days\").");
@@ -2437,7 +2533,7 @@ inner join tbreceiptitems tri on tri.receiptid=tr.receiptid
 where tr.receipttype='NO' and tr.status='C' and tr.notindpdmis is null and tri.notindpdmis is null
 group by tr.ponoid,tri.itemid,tr.warehouseid
 ) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid and rec.warehouseid=soi.warehouseid
- where op.status  in ('C','O') and mc.mcid=1 and nvl(mi.isedl2021,'N')='Y' 
+ where op.status  in ('C','O') "+ whmcid + @" "+ whisedl + @" 
  group by DURATION,soi.warehouseid, mi.itemcode,op.ponoid,op.soissuedate,op.extendeddate,OI.itemid ,rec.receiptabsqty,
  op.soissuedate,op.extendeddate ,receiptdelayexception  ,op.pono,mi.itemname,mi.strength1,mi.unit,suppliername
  having (case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 120 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 

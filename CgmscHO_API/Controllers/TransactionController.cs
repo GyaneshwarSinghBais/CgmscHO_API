@@ -379,6 +379,299 @@ left outer join
             return myList;
         }
 
+
+        [HttpGet("NonSupplySummary")]
+        public async Task<ActionResult<IEnumerable<NonSupplySummaryDTO>>> NonSupplySummary(string fromDate, string ToDate)
+        {
+          
+            string whBtwDate = " ";
+            string qry = "";
+
+            string whToDate = "";
+            string whMcid = "";
+            string whItemid = "";
+
+          
+            //validate fromDate
+
+            if (string.IsNullOrEmpty(fromDate) || fromDate == "undefined" || fromDate == "0")
+            {
+
+                return BadRequest("From Date can not be null or 0");
+            }
+
+
+            //validate ToDate for condition if ToDate is null or 0 the set to current date
+            if (string.IsNullOrEmpty(ToDate) || ToDate == "undefined" || ToDate == "0")
+            {
+                whToDate = "sysdate";
+            }
+            else
+            {
+                whToDate = "'" + ToDate + "'";
+            }
+
+
+            qry = @" select supplierid,suppliername,count(distinct ponoid) as nos
+from 
+(
+select sc.schemeid,sc.schemecode tenderno
+,sc.schemename tendername
+,m.itemcode,m.itemname,m.strength1,m.unit
+
+,MCATEGORY
+,case when nvl(m.isedl2021,'N') = 'Y' then 'Yes' else 'No' end as EDLType
+,so.ponoid,so.pono,
+
+to_char(so.soissuedate,'dd-MM-yyyy') as  podate
+,to_char(so.extendeddate,'dd-MM-yyyy') as extendeddate
+
+
+,nvl(soi.absqty,0) as poqty, 
+nvl(rec.receiptabsqty,0) receiptqty
+,nvl(pip.pipelineQTY,0) pipelineqty,
+round((nvl(rec.receiptabsqty,0)/nvl(soi.absqty,0)*100),2) supplyper,
+t.duration ,s.supplierid,s.suppliername,round(sysdate-so.soissuedate,0) noofdays 
+
+from soorderplaced so
+inner join soordereditems soi on soi.ponoid=so.ponoid and so.status not in ( 'OC','WA1','I' ) 
+inner join masitems m on m.itemid=soi.itemid
+inner join sotranches t on t.ponoid = so.ponoid
+inner join massuppliers s on s.supplierid = so.supplierid
+inner join masschemes sc on sc.schemeid = so.schemeid
+left outer join aoccontractitems ci on ci.contractitemid = soi.contractitemid
+left outer join aoccontracts c on c.contractid = ci.contractid
+inner join masitemcategories cc on cc.categoryid=m.categoryid
+inner join masitemmaincategory mc on mc.mcid=cc.mcid
+left outer join 
+(
+select tr.ponoid,tri.itemid,sum(nvl(tri.receiptabsqty,0)) receiptabsqty from tbreceipts tr 
+inner join tbreceiptitems tri on tri.receiptid=tr.receiptid 
+where tr.receipttype='NO' and tr.status='C' 
+group by tr.ponoid,tri.itemid
+) rec on rec.ponoid=so.PoNoID and rec.itemid=SOI.itemid
+left outer join
+(
+select  m.itemcode,OI.itemid,op.ponoid,op.soissuedate,op.extendeddate,sum(soi.ABSQTY) as absqty,nvl(rec.receiptabsqty,0)receiptabsqty,
+receiptdelayexception ,round(sysdate-op.soissuedate,0) as days,
+case when m.nablreq = 'Y' and  round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then  sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate and round(sysdate-op.soissuedate,0) <= 90 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end as pipelineQTY
+from   soOrderPlaced OP  
+inner join SoOrderedItems OI on OI.PoNoID=OP.PoNoID
+inner join soorderdistribution soi on soi.orderitemid=OI.orderitemid
+inner join masitems m on m.itemid = oi.itemid
+left outer join 
+(
+select tr.ponoid,tri.itemid,sum(tri.receiptabsqty) receiptabsqty from tbreceipts tr 
+inner join tbreceiptitems tri on tri.receiptid=tr.receiptid 
+where tr.receipttype='NO' and tr.status='C' and tr.notindpdmis is null and tri.notindpdmis is null
+group by tr.ponoid,tri.itemid
+) rec on rec.ponoid=OP.PoNoID and rec.itemid=OI.itemid 
+ where op.status  in ('C','O')
+
+ --and m.itemcode = 'D117'
+ group by m.itemcode,m.nablreq,op.ponoid,op.soissuedate,op.extendeddate,OI.itemid ,rec.receiptabsqty,
+ op.soissuedate,op.extendeddate ,receiptdelayexception  
+ having (case when m.nablreq = 'Y' and  round(sysdate-op.soissuedate,0) <= 150 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0)
+else case when op.extendeddate is null and round(sysdate-op.soissuedate,0) <= 130 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+else case when op.receiptdelayexception = 1 and sysdate <= op.extendeddate+1 then  sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) 
+else case when op.extendeddate is not null and op.receiptdelayexception = 1 and  (op.extendeddate+1) <= op.soissuedate 
+and round(sysdate-op.soissuedate,0) <= 130 then sum(soi.ABSQTY)-nvl(rec.receiptabsqty,0) else 0 end end end end) >0
+) pip on pip.ponoid=so.PoNoID and pip.itemid=SOI.itemid
+where MC.MCID IN (1,2) 
+and  so.soissuedate between '"+ fromDate + @"' and "+ whToDate + @"
+and (nvl(rec.receiptabsqty,0)/nvl(soi.absqty,0)*100) < 70
+and nvl(pip.pipelineQTY,0) = 0
+) group by supplierid,suppliername
+order by suppliername ";
+
+            var myList = _context.NonSupplySummaryDbSet
+      .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
+
+        [HttpGet("NonSupplySummaryDetail")]
+        public async Task<ActionResult<IEnumerable<NonSupplySummaryDetailDTO>>> NonSupplySummaryDetail(string fromDate, string ToDate, Int32 supplierId,string itemCode, Int32 schemeId, Int32 ponoId)
+        {
+
+            string whBtwDate = " ";
+            string qry = "";
+
+            string whToDate = "";
+            string whSupplierId = "";
+            string whItemCode = "";
+            string whSchemeId = "";
+            string whPonoId = "";
+
+
+            //validate fromDate
+
+            if (string.IsNullOrEmpty(fromDate) || fromDate == "undefined" || fromDate == "0")
+            {
+
+                return BadRequest("From Date can not be null or 0");
+            }
+
+
+            //validate ToDate for condition if ToDate is null or 0 the set to current date
+            if (string.IsNullOrEmpty(ToDate) || ToDate == "undefined" || ToDate == "0")
+            {
+                whToDate = "sysdate";
+            }
+            else
+            {
+                whToDate = "'" + ToDate + "'";
+            }
+
+            if(supplierId != 0)
+            {
+                whSupplierId = "    AND s.supplierid = "+ supplierId + " ";
+              
+            }
+
+            if(itemCode != "0")
+            {
+                whItemCode = "  AND   m.itemcode = '"+ itemCode + "' ";
+            }
+
+            if (schemeId != 0)
+            {
+                whSchemeId = "   AND   sc.schemeid = "+ schemeId + "";
+            }
+
+            if (ponoId != 0)
+            {
+                whPonoId = "  AND   so.ponoid = "+ ponoId + "  ";
+            }
+
+
+            qry = @" /* Drill-down details for a particular supplier (one row per PO × Item) */
+SELECT
+  sc.schemeid,
+  sc.schemecode                AS tenderno,
+  sc.schemename                AS tendername,
+  m.itemcode,
+  m.itemname,
+  m.strength1,
+  m.unit,
+  mc.mcategory,
+  CASE WHEN NVL(m.isedl2021,'N') = 'Y' THEN 'Yes' ELSE 'No' END AS edltype,
+  so.ponoid,
+  so.pono,
+  TO_CHAR(so.soissuedate,'dd-MM-yyyy')  AS podate,
+  TO_CHAR(so.extendeddate,'dd-MM-yyyy') AS extendeddate,
+  NVL(soi.absqty,0)                      AS poqty,
+  NVL(rec.receiptabsqty,0)               AS receiptqty,
+  NVL(pip.pipelineqty,0)                 AS pipelineqty,
+  ROUND( (NVL(rec.receiptabsqty,0) / NULLIF(NVL(soi.absqty,0),0)) * 100, 2 ) AS supplyper,
+  t.duration,
+  s.supplierid,
+  s.suppliername,
+  ROUND(SYSDATE - so.soissuedate, 0)     AS noofdays
+FROM soorderplaced so
+JOIN soordereditems       soi ON soi.ponoid = so.ponoid
+                             AND so.status NOT IN ('OC','WA1','I')
+JOIN masitems             m   ON m.itemid  = soi.itemid
+JOIN sotranches           t   ON t.ponoid  = so.ponoid
+JOIN massuppliers         s   ON s.supplierid = so.supplierid
+JOIN masschemes           sc  ON sc.schemeid  = so.schemeid
+LEFT JOIN aoccontractitems ci ON ci.contractitemid = soi.contractitemid
+LEFT JOIN aoccontracts     c  ON c.contractid     = ci.contractid
+JOIN masitemcategories     cc ON cc.categoryid    = m.categoryid
+JOIN masitemmaincategory   mc ON mc.mcid          = cc.mcid
+/* receipts aggregated by PO × Item */
+LEFT JOIN (
+  SELECT tr.ponoid, tri.itemid, SUM(NVL(tri.receiptabsqty,0)) AS receiptabsqty
+  FROM tbreceipts tr
+  JOIN tbreceiptitems tri ON tri.receiptid = tr.receiptid
+  WHERE tr.receipttype = 'NO'
+    AND tr.status      = 'C'
+  GROUP BY tr.ponoid, tri.itemid
+) rec
+  ON rec.ponoid = so.ponoid AND rec.itemid = soi.itemid
+/* pipeline qty (0 means nothing still legitimately pending) */
+LEFT JOIN (
+  SELECT
+    m.itemcode,
+    oi.itemid,
+    op.ponoid,
+    op.soissuedate,
+    op.extendeddate,
+    SUM(soi.absqty)                      AS absqty,
+    NVL(rec.receiptabsqty,0)             AS receiptabsqty,
+    op.receiptdelayexception,
+    ROUND(SYSDATE - op.soissuedate, 0)   AS days,
+    CASE
+      WHEN m.nablreq = 'Y' AND ROUND(SYSDATE - op.soissuedate, 0) <= 150
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      WHEN op.extendeddate IS NULL AND ROUND(SYSDATE - op.soissuedate, 0) <= 90
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      WHEN op.receiptdelayexception = 1 AND SYSDATE <= op.extendeddate + 1
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      WHEN op.extendeddate IS NOT NULL
+           AND op.receiptdelayexception = 1
+           AND (op.extendeddate + 1) <= op.soissuedate
+           AND ROUND(SYSDATE - op.soissuedate, 0) <= 90
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      ELSE 0
+    END AS pipelineqty
+  FROM soorderplaced op
+  JOIN soordereditems oi       ON oi.ponoid = op.ponoid
+  JOIN soorderdistribution soi ON soi.orderitemid = oi.orderitemid
+  JOIN masitems m              ON m.itemid = oi.itemid
+  LEFT JOIN (
+    SELECT tr.ponoid, tri.itemid, SUM(tri.receiptabsqty) AS receiptabsqty
+    FROM tbreceipts tr
+    JOIN tbreceiptitems tri ON tri.receiptid = tr.receiptid
+    WHERE tr.receipttype = 'NO'
+      AND tr.status      = 'C'
+      AND tr.notindpdmis IS NULL
+      AND tri.notindpdmis IS NULL
+    GROUP BY tr.ponoid, tri.itemid
+  ) rec ON rec.ponoid = op.ponoid AND rec.itemid = oi.itemid
+  WHERE op.status IN ('C','O')
+  GROUP BY
+    m.itemcode, m.nablreq, oi.itemid,
+    op.ponoid, op.soissuedate, op.extendeddate,
+    rec.receiptabsqty, op.receiptdelayexception
+  HAVING
+    CASE
+      WHEN m.nablreq = 'Y' AND ROUND(SYSDATE - op.soissuedate, 0) <= 150
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      WHEN op.extendeddate IS NULL AND ROUND(SYSDATE - op.soissuedate, 0) <= 130
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      WHEN op.receiptdelayexception = 1 AND SYSDATE <= op.extendeddate + 1
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      WHEN op.extendeddate IS NOT NULL
+           AND op.receiptdelayexception = 1
+           AND (op.extendeddate + 1) <= op.soissuedate
+           AND ROUND(SYSDATE - op.soissuedate, 0) <= 130
+        THEN SUM(soi.absqty) - NVL(rec.receiptabsqty,0)
+      ELSE 0
+    END > 0
+) pip
+  ON pip.ponoid = so.ponoid AND pip.itemid = soi.itemid
+WHERE
+  mc.mcid IN (1,2)                                   -- Drugs / Consumables & Others
+  AND so.soissuedate BETWEEN  '"+ fromDate + @"' AND "+ whToDate + @"
+  "+ whSupplierId + @"                           -- << particular supplier >>
+  "+ whItemCode + @"
+ "+ whSchemeId + @"
+ "+ whPonoId + @" 
+  AND (NVL(rec.receiptabsqty,0) / NULLIF(NVL(soi.absqty,0),0)) * 100 < 70
+  AND NVL(pip.pipelineqty,0) = 0
+ORDER BY
+  so.soissuedate DESC,
+  m.itemcode;
+ ";
+
+            var myList = _context.NonSupplySummaryDetailDbSet
+      .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
     }
 }
 

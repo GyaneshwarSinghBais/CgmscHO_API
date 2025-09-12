@@ -278,7 +278,18 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.pipelineSlippageDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -302,6 +313,16 @@
       {
         "Name": "flag",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -328,6 +349,16 @@
       {
         "Name": "flag",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -11922,6 +11953,88 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.HoldBatchHistoryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "NonSupplySummary",
+    "RelativePath": "api/Transaction/NonSupplySummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.NonSupplySummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "NonSupplySummaryDetail",
+    "RelativePath": "api/Transaction/NonSupplySummaryDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ponoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.NonSupplySummaryDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

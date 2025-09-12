@@ -433,7 +433,10 @@ namespace CgmscHO_API.Models
         public DbSet<PipelineSlippagePOItemDetailDTO> PipelineSlippagePOItemDetailDbSet { get; set; }
         public DbSet<MasItemsPODTO> MasItemsPODbSet { get; set; }
         public DbSet<HoldBatchHistoryDTO> HoldBatchHistoryDbSet { get; set; }
+        public DbSet<NonSupplySummaryDTO> NonSupplySummaryDbSet { get; set; }
+        public DbSet<NonSupplySummaryDetailDTO> NonSupplySummaryDetailDbSet { get; set; }
         
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -492,6 +495,7 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<PipelineSlippageDetailDTO>().HasNoKey();
             modelBuilder.Entity<PipelineSlippagePOItemDetailDTO>().HasNoKey();
             modelBuilder.Entity<HoldBatchHistoryDTO>().HasNoKey();
+            modelBuilder.Entity<NonSupplySummaryDetailDTO>().HasNoKey();
             
 
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");

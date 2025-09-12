@@ -465,6 +465,23 @@
         "tags": [
           "Analysis"
         ],
+        "parameters": [
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "isEDL",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -510,6 +527,21 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "isEDL",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -558,6 +590,21 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "isEDL",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -20514,6 +20561,145 @@
         }
       }
     },
+    "/api/Transaction/NonSupplySummary": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NonSupplySummaryDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NonSupplySummaryDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NonSupplySummaryDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Transaction/NonSupplySummaryDetail": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "supplierId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "itemCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "schemeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ponoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NonSupplySummaryDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NonSupplySummaryDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NonSupplySummaryDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Warehouse/ReagIndentIssueDetails": {
       "get": {
         "tags": [
@@ -29382,6 +29568,125 @@
           },
           "districtname": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NonSupplySummaryDetailDTO": {
+        "type": "object",
+        "properties": {
+          "schemeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenderNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "mCategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "edlType": {
+            "type": "string",
+            "nullable": true
+          },
+          "poNoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "poNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "podate": {
+            "type": "string",
+            "nullable": true
+          },
+          "extendedDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "poQty": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "receiptQty": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pipelineQty": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "supplyPer": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "supplierId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "supplierName": {
+            "type": "string",
+            "nullable": true
+          },
+          "noOfDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NonSupplySummaryDTO": {
+        "type": "object",
+        "properties": {
+          "supplierId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "supplierName": {
+            "type": "string",
+            "nullable": true
+          },
+          "nos": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
