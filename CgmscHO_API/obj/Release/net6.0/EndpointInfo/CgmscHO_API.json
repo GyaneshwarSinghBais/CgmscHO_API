@@ -4345,6 +4345,53 @@
         }
       }
     },
+    "/api/CGMSCStock/GetWHStockAAM": {
+      "get": {
+        "tags": [
+          "CGMSCStock"
+        ],
+        "parameters": [
+          {
+            "name": "facid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetWHStockItemsDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetWHStockItemsDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetWHStockItemsDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Courier/getPickDocketDetails": {
       "get": {
         "tags": [
@@ -6619,6 +6666,100 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/LibDetailsDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DashboardFinance/getFitUnfit": {
+      "get": {
+        "tags": [
+          "DashboardFinance"
+        ],
+        "parameters": [
+          {
+            "name": "fitunfit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getFitUnfitDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getFitUnfitDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getFitUnfitDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DashboardFinance/getFitUnfitSummary": {
+      "get": {
+        "tags": [
+          "DashboardFinance"
+        ],
+        "parameters": [
+          {
+            "name": "fitunfit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getFitUnfitSummaryDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getFitUnfitSummaryDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/getFitUnfitSummaryDTO"
                   }
                 }
               }
@@ -16053,6 +16194,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "ipAddress",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -20700,6 +20848,149 @@
         }
       }
     },
+    "/api/Transaction/DmeFacNocSummary": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DmeFacNocSummaryDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DmeFacNocSummaryDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DmeFacNocSummaryDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Transaction/DmeFacNocDetail": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facilityId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DmeFacNocDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DmeFacNocDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DmeFacNocDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Warehouse/ReagIndentIssueDetails": {
       "get": {
         "tags": [
@@ -23944,6 +24235,151 @@
         },
         "additionalProperties": false
       },
+      "DmeFacNocDetailDTO": {
+        "type": "object",
+        "properties": {
+          "mcid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "eDlType": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "districtname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength1": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitc": {
+            "type": "string",
+            "nullable": true
+          },
+          "facAIQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cgmsCissueqty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cntNoc": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nocQty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nocValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "posku": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "povalue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "receiptqtySKU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "recvalue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "facilityid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DmeFacNocSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "edL_CNT": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "edL_VAL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noN_EDL_CNT": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "noN_EDL_VAL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "districtname": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DMEissueItemsDTO": {
         "type": "object",
         "properties": {
@@ -25466,6 +25902,161 @@
         },
         "additionalProperties": false
       },
+      "getFitUnfitDTO": {
+        "type": "object",
+        "properties": {
+          "sectionname": {
+            "type": "string",
+            "nullable": true
+          },
+          "presentfile": {
+            "type": "string",
+            "nullable": true
+          },
+          "fundHead": {
+            "type": "string",
+            "nullable": true
+          },
+          "suppliername": {
+            "type": "string",
+            "nullable": true
+          },
+          "poYear": {
+            "type": "string",
+            "nullable": true
+          },
+          "pono": {
+            "type": "string",
+            "nullable": true
+          },
+          "podate": {
+            "type": "string",
+            "nullable": true
+          },
+          "fmrcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "program": {
+            "type": "string",
+            "nullable": true
+          },
+          "mcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "strengtH1": {
+            "type": "string",
+            "nullable": true
+          },
+          "poqty": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalpovalue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "receiptqty": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "receiptvalue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "mrcdate": {
+            "type": "string",
+            "nullable": true
+          },
+          "qcpasseddt": {
+            "type": "string",
+            "nullable": true
+          },
+          "sddate": {
+            "type": "string",
+            "nullable": true
+          },
+          "fitunfit": {
+            "type": "string",
+            "nullable": true
+          },
+          "validity": {
+            "type": "string",
+            "nullable": true
+          },
+          "nsqstock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "holdstock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "suppenindsd": {
+            "type": "string",
+            "nullable": true
+          },
+          "ponoid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "itemid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "supplierid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "getFitUnfitSummaryDTO": {
+        "type": "object",
+        "properties": {
+          "sectionname": {
+            "type": "string",
+            "nullable": true
+          },
+          "fundhead": {
+            "type": "string",
+            "nullable": true
+          },
+          "nospo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "recvaluelacs": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GetHeaderInfoDTO": {
         "type": "object",
         "properties": {
@@ -25957,6 +26548,44 @@
           "vehicalno": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetWHStockItemsDTO": {
+        "type": "object",
+        "properties": {
+          "itemid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "itemname": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemcode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemtypename": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitcount": {
+            "type": "string",
+            "nullable": true
+          },
+          "strength1": {
+            "type": "string",
+            "nullable": true
+          },
+          "readySTK": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "uqcSTK": {
+            "type": "integer",
+            "format": "int64"
           }
         },
         "additionalProperties": false

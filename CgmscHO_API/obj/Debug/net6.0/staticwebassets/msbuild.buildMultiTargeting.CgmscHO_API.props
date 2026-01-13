@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\CgmscHO_API.props" />
-</Project>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CgmscHO_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15a9ac20ffb99ebb59e33a5f773064421170d5fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a28efec817021ba95c0e25594b355776112e59a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CgmscHO_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CgmscHO_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

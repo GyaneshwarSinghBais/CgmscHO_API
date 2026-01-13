@@ -23,6 +23,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+using CgmscHO_API.DashHomeDTO;
 
 namespace CgmscHO_API.Controllers
 {
@@ -2714,6 +2715,46 @@ left outer join
             return myList;
         }
 
+        [HttpGet("GetWHStockAAM")]
+        public async Task<ActionResult<IEnumerable<GetWHStockItemsDTO>>> GetWHStockAAM(string facid)
+        {
+            FacOperations f = new FacOperations(_context);
+            Int64 whid = f.getWHID(facid);
+            string qry = @" select  m.itemid, m.itemcode,ty.itemtypename,m.itemname,m.strength1, m.multiple, m.unitcount,nvl(ReadyForIssue,0)*nvl(m.unitcount,1) as ReadySTK,nvl(Pending,0)*nvl(m.unitcount,1) as UqcSTK  from masitems m 
+inner join masitemcategories c on c.categoryid = m.categoryid
+inner join masitemmaincategory mc on mc.MCID = c.MCID 
+left outer join masitemtypes ty  on ty.itemtypeid = m.itemtypeid
+left outer join 
+(
 
+ select A.itemid,
+ (case when sum( A.ReadyForIssue)>0 then sum( A.ReadyForIssue) else 0 end) as ReadyForIssue,(case when sum(nvl(Pending,0)) >0 then sum(nvl(Pending,0)) else 0 end) Pending 
+                  from 
+                 (  
+                 select mi.itemid,  (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) else (case when mi.Qctest ='N' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0) )  end ) end ) ReadyForIssue,  
+                   case when  mi.qctest='N' then 0 else (case when b.qastatus = 0 or b.qastatus = 3 then (nvl(b.absrqty,0)- nvl(iq.issueqty,0)) end) end  Pending  
+             
+                  from tbreceiptbatches b  
+                  inner join tbreceiptitems i on b.receiptitemid=i.receiptitemid 
+                  inner join tbreceipts t on t.receiptid=i.receiptid 
+                  inner join masitems mi on mi.itemid=i.itemid 
+                 inner join MASWAREHOUSES w  on w.warehouseid=t.warehouseid  
+                 left outer join 
+                  (  
+                   select  tb.warehouseid,tbi.itemid,tbo.inwno,sum(nvl(tbo.issueqty,0)) issueqty   
+                   from tboutwards tbo, tbindentitems tbi , tbindents tb 
+                   where  tbo.indentitemid=tbi.indentitemid and tbi.indentid=tb.indentid and tb.status = 'C' and tb.notindpdmis is null and tbo.notindpdmis is null and tbi.notindpdmis is null 
+                   group by tbi.itemid,tb.warehouseid,tbo.inwno  
+                 ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.warehouseid=t.warehouseid 
+                 Where  1=1 and w.warehouseid= " + whid + @" and T.Status = 'C' and (b.ExpDate >= SysDate or nvl(b.ExpDate,SysDate) >= SysDate) And (b.Whissueblock = 0 or b.Whissueblock is null)  
+                 and t.notindpdmis is null and b.notindpdmis is null  and i.notindpdmis is null 
+                 ) A group by A.itemid 
+) st on st.itemid=m.itemid
+where m.shc = 'Y'  and m.ISFREEZ_ITPR is NULL
+order by ty.itemtypename, m.itemname";
+            var myList = _context.getGetWHStockItemsDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
     }
 }

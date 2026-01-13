@@ -67,7 +67,7 @@ namespace CgmscHO_API.Controllers
             //var result = _context.Usruser
             //   .FirstOrDefault(u => u.EMAILID == email);
 
-            string qry = @" select distinct u.userid,u.emailid,u.pwd,u.firstname,u.usertype,u.districtid,case when u.AppRole='WH' then u.warehouseid  else u.facilityid end as facilityid,u.DEPMOBILE ,fh.FOOTER3,ft.facilitytypeid,
+            string qry = @" select distinct u.userid,u.emailid,u.pwd,u.firstname,u.usertype,u.districtid,case when u.AppRole='WH' then u.warehouseid when u.usertype = 'SUP' then u.supplierid else u.facilityid end as facilityid,u.DEPMOBILE ,fh.FOOTER3,ft.facilitytypeid,
                             ay.FACTYPEID, case when ft.facilitytypeid in (371,377)  then   nvl(ay.ISWHINDENT,'N') else 'Y' end as WHAIPermission  
                             ,ft.FACILITYTYPECODE, fh.footer2,nvl(u.AppRole,'No') as AppRole
                             ,ur.rolename,ur.roleid
@@ -136,10 +136,10 @@ namespace CgmscHO_API.Controllers
         }
 
         [HttpPost("getOTPSaved")]
-        public string getOTPSaved(string userid)
+        public string getOTPSaved(string userid,  string ipAddress)
         {
             FacOperations fc = new FacOperations(_context);
-            string sRandomOTP = fc.insertUpdateOTP1(userid);
+            string sRandomOTP = fc.insertUpdateOTP1(userid, ipAddress);
             return sRandomOTP;
         }
 

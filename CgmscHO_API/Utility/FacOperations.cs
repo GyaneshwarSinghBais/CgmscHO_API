@@ -158,10 +158,13 @@ namespace CgmscHO_API.Utility
 
 //            return value;
 //        }
-        public string insertUpdateOTP1(string userid)
+        public string insertUpdateOTP1(string userid, string ipAddress)
         {
+            string module = "HO_API_login";
+            string templateId = "1407161537152057950";
             string mobNo = getMobileNumber(userid);
-           // string mobNo = "9691611103";
+            string macAddress = GetMACAddress();
+            // string mobNo = "9691611103";
 
             string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
             string sRandomOTP = GenerateRandomOTP(5, saAllowedCharacters);
@@ -179,10 +182,32 @@ namespace CgmscHO_API.Utility
             var myListInsert = _context.ProgressRecDbSet
               .FromSqlInterpolated(FormattableStringFactory.Create(strInsertQuery)).ToList();
 
+            // insert SMSlog with MACADDRESS and IPADDRESS
+            string strInsertSmsLog = @"insert into smslog(mobno, sms, entrydate, module, templateid, MACADDRESS, IPADDRESS)
+                values(" + mobNo + ", '" + senddata + "', TO_DATE('" + now + "','MM/DD/YYYY hh24:mi:ss'), '" + module + "', '" + templateId + "', '" + macAddress + "', '" + ipAddress + "')";
+            var myListInsertSmsLog = _context.ProgressRecDbSet
+              .FromSqlInterpolated(FormattableStringFactory.Create(strInsertSmsLog)).ToList();
+
             return sRandomOTP;
 
 
         }
+
+        public string GetMACAddress()
+        {
+            string macAddresses = "";
+
+            foreach (System.Net.NetworkInformation.NetworkInterface nic in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (nic.OperationalStatus == System.Net.NetworkInformation.OperationalStatus.Up)
+                {
+                    macAddresses += nic.GetPhysicalAddress().ToString();
+                    break;
+                }
+            }
+            return macAddresses;
+        }
+
         public bool IsOTPVerified(string otp, string userid)
         {
             bool value = false;

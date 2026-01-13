@@ -672,6 +672,374 @@ ORDER BY
       .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
             return myList;
         }
+
+
+
+        [HttpGet("DmeFacNocSummary")]
+        public async Task<ActionResult<IEnumerable<DmeFacNocSummaryDTO>>> DmeFacNocSummary(string fromDate, string ToDate, string mcid, string yearId)
+        {
+
+         
+            string qry = "";
+
+            string whToDate = "";
+            string whMcid = "";
+            string whYearId = "";
+           // string whYearId1 = "";
+
+
+            //validate fromDate
+
+            if (string.IsNullOrEmpty(fromDate) || fromDate == "undefined" || fromDate == "0")
+            {
+
+                return BadRequest("From Date can not be null or 0");
+            }
+
+
+            //validate ToDate for condition if ToDate is null or 0 the set to current date
+            if (string.IsNullOrEmpty(ToDate) || ToDate == "undefined" || ToDate == "0")
+            {
+                whToDate = "sysdate";   // keep sysdate as is
+            }
+            else
+            {
+                whToDate = "TO_DATE('" + ToDate + "','dd-mm-yyyy')";
+            }
+
+            string whFromDate = "TO_DATE('" + fromDate + "','dd-mm-yyyy')";
+
+
+
+            if ( mcid != "0")
+            {
+                whMcid = " and mc.mcid in (" + mcid + ") ";
+            }
+
+            if (yearId != "0")
+            {
+                whYearId = " and a.accyrsetid = " + yearId + " ";
+               // whYearId1 = " accyrsetid = " + yearId + " ";
+            }
+
+
+
+            qry = @" select
+    mcategory,
+    facilityname,
+
+   
+   nvl( sum(case when isedl2021 = 'Y' then cntNOCItems end),0) as EDL_CNT,
+   nvl( sum(case when isedl2021 = 'Y' then nvl(NOCValue,0) end),0 )   as EDL_VAL,
+
+   
+   nvl( sum(case when isedl2021 = 'N' then cntNOCItems end),0) as NON_EDL_CNT,
+    nvl(sum(case when isedl2021 = 'N' then nvl(NOCValue,0) end),0)    as NON_EDL_VAL
+,districtname,facilityid
+from (
+    select MCATEGORY,
+           ISEDL2021,
+           FACILITYNAME,districtname,
+           count(distinct itemid) cntNOCItems,
+           sum(NOCValue) as NOCValue,facilityid
+    from (
+
+
+        select x.mcid,
+               x.mcategory,
+               x.isedl2021,
+               x.facilityname,x.districtname,
+               x.itemid,
+               itemcode,
+               itemname,
+               strength1,
+               unit,
+               unitc,
+               nvl(x.facindentqty,0) facindentqty,
+               nvl(x.chcaprqty,0) chcaprqty,
+               nvl(x.cmhoqty,0) cmhoqty,
+               nvl(x.dhsaprqty,0) dhsaprqty,
+             
+               sum(NocQty) NocQty,
+               sum(NOCValue) as NOCValue,
+               round(sum(poQTY)/unit,0) as POSKU,
+               sum(povalue) as povalue,
+               round(sum(nvl(receiptqty,0))/unit,0) as ReceiptqtySKU,
+               sum(recvalue) as recvalue,
+               categoryname,
+               categoryid,x.facilityid
+        from (
+            select m.itemid,
+                   m.unit as unitc,
+                   m.itemcode,
+                   m.itemname,
+                   nvl(m.isedl2021,'N') as isedl2021,
+                   m.strength1,
+                   m.unitcount,
+                   iin.facindentqty,
+                   iin.chcaprqty,
+                   iin.cmhoqty,
+                   iin.dhsaprqty,
+                   mn.nocid,
+                   mn.facilityid,
+                   f.facilityname,d.districtname,
+                   mni.approvedqty NocQty,
+                   nvl(so.absqty,0) poQTY,
+                   nvl(so.povalue,0) as povalue,
+                   so.receiptqty,
+                   nvl(so.recvalue,0) as recvalue,
+                   nvl(m.unitcount,1) as unit,
+                   mic.categoryname,
+                   m.categoryid,
+                   mc.mcid,
+                   mc.mcategory,
+                   round(mni.approvedqty*rt.SKUFINALRATE,0) as NOCValue
+            from mascgmscnoc mn
+            inner join mascgmscnocitems mni on mni.nocid=mn.nocid  and nvl(mni.ISCANCEL,'N') ='N'
+            inner join masitems m on m.itemid=mni.itemid
+            inner join masfacilities f on f.facilityid=mn.facilityid
+            inner join masdistricts d on d.districtid=f.districtid
+            inner join masfacilitytypes ft on ft.facilitytypeid=f.facilitytypeid
+            inner join masitemcategories mic on mic.categoryid = m.categoryid
+            inner join masitemmaincategory mc on mc.mcid=mic.mcid
+            left outer join v_itemrate rt on rt.itemid=m.itemid
+            left outer join (
+                select a.ANUALINDENTID,a.facilityid,a.itemid,
+                       round(nvl(a.facilityindentqty,0)/nvl(m.unitcount,1),0) facindentqty,
+                       a.status flag,
+                       round(nvl(a.bmoapprovedqty,0)/nvl(m.unitcount,1),0) chcaprqty,
+                       round(nvl(a.cmhoapprovedqty,0)/nvl(m.unitcount,1),0) cmhoqty,
+                       round(nvl(a.cmhodistqty,0)/nvl(m.unitcount,1),0) dhsaprqty 
+                from anualindent a
+                inner join masitems m on m.itemid=a.itemid
+                inner join masfacilities f on f.facilityid=a.facilityid
+                where 1=1 "+ whYearId + @"
+                  and a.status='C'
+            ) iin on iin.facilityid=mn.facilityid and iin.itemid=mni.itemid
+            left outer join (
+                select facilityid,nocid,lpitemid,edlitemcode,
+                       sum(nvl(absqty,0)) absqty,
+                       sum(povalue) as povalue,
+                       sum(receiptqty) receiptqty,
+                       sum(recvalue) as recvalue
+                from (
+                    select f.facilityid, si.nocid, so.ponoid, si.lpitemid,
+                           vp.edlitemcode,
+                           sum(nvl(si.absqty,0)) absqty,
+                           sum(nvl(si.itemvalue,0)) as povalue,
+                           nvl(r.receiptqty,0) receiptqty,
+                           nvl(r.receiptqty,0)*nvl(singleunitprice,0) as recvalue
+                    from lpsoorderplaced so
+                    inner join lpSOORDEREDITEMS si on si.ponoid=so.ponoid
+                    inner join masfacilities f on f.facilityid=so.psaid
+                    inner join vmasitems vp on vp.itemid=si.lpitemid
+                    left outer join (
+                        select tb.ponoid,m.itemid,m.edlitemcode,
+                               sum(tbr.absrqty) receiptqty,
+                               f.facilityid
+                        from tbfacilityreceipts tb
+                        inner join tbfacilityreceiptitems tbi on tbi.facreceiptid=tb.facreceiptid
+                        inner join tbfacilityreceiptbatches tbr on tbr.facreceiptitemid=tbi.facreceiptitemid
+                        inner join masfacilities f on f.facilityid=tb.facilityid
+                        inner join vmasitems m on m.itemid=tbi.itemid
+                        where tb.ponoid is not null
+                          and m.edlitemcode is not null
+                        group by tb.ponoid,m.itemid,m.edlitemcode,f.facilityid
+                    ) r on r.ponoid=so.ponoid and r.itemid=si.lpitemid and r.facilityid=f.facilityid
+                    where si.nocid is not null
+                      and vp.edlitemcode is not null
+                      and so.podate between "+ whFromDate + @"
+                                         and "+ whToDate + @"
+                    group by si.nocid,si.lpitemid,vp.edlitemcode,so.ponoid,r.receiptqty,si.singleunitprice,f.facilityid
+                )
+                group by nocid,lpitemid,edlitemcode,facilityid
+            ) so on so.nocid=mni.nocid and so.edlitemcode=m.itemcode and so.facilityid=f.facilityid
+            where ft.hodid in(3)
+              and mni.approvedqty>0
+              and mn.status='C'
+             "+ whMcid + @"
+             and mn.nocdate between " + whFromDate + @" and " + whToDate + @"
+        ) x
+       
+      
+        group by x.mcid,x.mcategory,x.facilityid,x.facilityname,
+                 x.itemcode,x.unit,x.unitc,x.itemid,x.itemname,
+                 x.facindentqty,x.chcaprqty,x.cmhoqty,x.dhsaprqty,
+                 x.isedl2021,x.strength1,categoryname,categoryid,x.districtname,x.facilityid
+      
+
+    ) 
+    group by MCATEGORY, ISEDL2021, FACILITYNAME,districtname,facilityid
+) final
+group by mcategory, facilityname,districtname,facilityid
+order by districtname, facilityname ";
+
+            var myList = _context.DmeFacNocSummaryDbSet
+      .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
+
+        [HttpGet("DmeFacNocDetail")]
+        public async Task<ActionResult<IEnumerable<DmeFacNocDetailDTO>>> DmeFacNocDetail(
+    string fromDate, string toDate, string mcid, string yearId, string facilityId)
+        {
+            if (string.IsNullOrEmpty(fromDate) || fromDate == "undefined" || fromDate == "0")
+                return BadRequest("From Date can not be null or 0");
+
+            string whFromDate = "TO_DATE('" + fromDate + "','dd-mm-yyyy')";
+            string whToDate = string.IsNullOrEmpty(toDate) || toDate == "undefined" || toDate == "0"
+                ? "sysdate"
+                : "TO_DATE('" + toDate + "','dd-mm-yyyy')";
+
+            string whMcid = (mcid != "0") ? " and mc.mcid in (" + mcid + ") " : "";
+            string whYearId = (yearId != "0") ? " and a.accyrsetid = " + yearId + " " : "";
+            string whFacility = (facilityId != "0") ? " and x.facilityid in (" + facilityId + ") " : "";
+
+            var qry = @"
+        select x.mcid,
+               x.mcategory,
+               case when x.isedl2021 = 'Y' then 'EDL' else 'Non EDL' end as EDlType,
+               x.facilityname,
+               x.districtname,
+               x.itemid,
+               itemcode,
+               itemname,
+               strength1,
+               unit,
+               unitc,
+               nvl(x.facindentqty,0) FacAIQty,
+               nvl(iss.issueqty,0) CGMSCissueqty,
+               count(distinct nocid) cntNoc,
+               sum(NocQty) NocQty,
+               sum(NOCValue) as NOCValue,
+               round(sum(poQTY)/unit,0) as POSKU,
+               sum(povalue) as povalue,
+               round(sum(nvl(receiptqty,0))/unit,0) as ReceiptqtySKU,
+               sum(recvalue) as recvalue,
+               x.facilityid
+        from (
+            /* your inner query — same as you pasted, just replace date conditions */
+            select m.itemid, 
+
+ m.unit as unitc,
+                   m.itemcode,
+                   m.itemname,
+                   nvl(m.isedl2021,'N') as isedl2021,
+                   m.strength1,
+                   m.unitcount,
+                   iin.facindentqty,
+                   iin.chcaprqty,
+                   iin.cmhoqty,
+                   iin.dhsaprqty,
+                   mn.nocid,
+                   mn.facilityid,
+                   f.facilityname,d.districtname,
+                   mni.approvedqty NocQty,
+                   nvl(so.absqty,0) poQTY,
+                   nvl(so.povalue,0) as povalue,
+                   so.receiptqty,
+                   nvl(so.recvalue,0) as recvalue,
+                   nvl(m.unitcount,1) as unit,
+                   mic.categoryname,
+                   m.categoryid,
+                   mc.mcid,
+                   mc.mcategory,
+                   round(mni.approvedqty*rt.SKUFINALRATE,0) as NOCValue
+            from mascgmscnoc mn
+            inner join mascgmscnocitems mni on mni.nocid=mn.nocid  and nvl(mni.ISCANCEL,'N') ='N'
+            inner join masitems m on m.itemid=mni.itemid
+            inner join masfacilities f on f.facilityid=mn.facilityid
+            inner join masdistricts d on d.districtid=f.districtid
+            inner join masfacilitytypes ft on ft.facilitytypeid=f.facilitytypeid
+            inner join masitemcategories mic on mic.categoryid = m.categoryid
+            inner join masitemmaincategory mc on mc.mcid=mic.mcid
+            left outer join v_itemrate rt on rt.itemid=m.itemid
+            left outer join (
+                select a.ANUALINDENTID,a.facilityid,a.itemid,
+                       round(nvl(a.facilityindentqty,0)/nvl(m.unitcount,1),0) facindentqty,
+                       a.status flag,
+                       round(nvl(a.bmoapprovedqty,0)/nvl(m.unitcount,1),0) chcaprqty,
+                       round(nvl(a.cmhoapprovedqty,0)/nvl(m.unitcount,1),0) cmhoqty,
+                       round(nvl(a.cmhodistqty,0)/nvl(m.unitcount,1),0) dhsaprqty 
+                from anualindent a
+                inner join masitems m on m.itemid=a.itemid
+                inner join masfacilities f on f.facilityid=a.facilityid
+                where a.accyrsetid=546
+                  and a.status='C'
+            ) iin on iin.facilityid=mn.facilityid and iin.itemid=mni.itemid
+            left outer join (
+                select facilityid,nocid,lpitemid,edlitemcode,
+                       sum(nvl(absqty,0)) absqty,
+                       sum(povalue) as povalue,
+                       sum(receiptqty) receiptqty,
+                       sum(recvalue) as recvalue
+                from (
+                    select f.facilityid, si.nocid, so.ponoid, si.lpitemid,
+                           vp.edlitemcode,
+                           sum(nvl(si.absqty,0)) absqty,
+                           sum(nvl(si.itemvalue,0)) as povalue,
+                           nvl(r.receiptqty,0) receiptqty,
+                           nvl(r.receiptqty,0)*nvl(singleunitprice,0) as recvalue
+                    from lpsoorderplaced so
+                    inner join lpSOORDEREDITEMS si on si.ponoid=so.ponoid
+                    inner join masfacilities f on f.facilityid=so.psaid
+                    inner join vmasitems vp on vp.itemid=si.lpitemid
+                    left outer join (
+                        select tb.ponoid,m.itemid,m.edlitemcode,
+                               sum(tbr.absrqty) receiptqty,
+                               f.facilityid
+                        from tbfacilityreceipts tb
+                        inner join tbfacilityreceiptitems tbi on tbi.facreceiptid=tb.facreceiptid
+                        inner join tbfacilityreceiptbatches tbr on tbr.facreceiptitemid=tbi.facreceiptitemid
+                        inner join masfacilities f on f.facilityid=tb.facilityid
+                        inner join vmasitems m on m.itemid=tbi.itemid
+                        where tb.ponoid is not null
+                          and m.edlitemcode is not null
+                        group by tb.ponoid,m.itemid,m.edlitemcode,f.facilityid
+                    ) r on r.ponoid=so.ponoid and r.itemid=si.lpitemid and r.facilityid=f.facilityid
+                    where si.nocid is not null
+                      and vp.edlitemcode is not null
+                      and so.podate between (select startdate from masaccyearsettings where accyrsetid=546)
+                                         and (select enddate from masaccyearsettings where accyrsetid=546)
+                    group by si.nocid,si.lpitemid,vp.edlitemcode,so.ponoid,r.receiptqty,si.singleunitprice,f.facilityid
+                )
+                group by nocid,lpitemid,edlitemcode,facilityid
+            ) so on so.nocid=mni.nocid and so.edlitemcode=m.itemcode and so.facilityid=f.facilityid
+
+            where ft.hodid in (3)
+              and mni.approvedqty > 0
+              and mn.status='C'
+              " + whMcid + @"
+              and mn.nocdate between " + whFromDate + @" and " + whToDate + @"
+        ) x
+        left outer join (
+            select f.facilityid,
+                   tbi.itemid,
+                   sum(nvl(tbo.issueqty,0)) issueqty
+            from tbindents tb
+            inner join tbindentitems tbi on tbi.indentid=tb.indentid
+            inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+            inner join masfacilities f on f.facilityid=tb.facilityid
+            where tb.status = 'C'
+              and tb.indentdate between " + whFromDate + @" and " + whToDate + @"
+            group by tbi.itemid, f.facilityid
+        ) iss on iss.itemid=x.itemid and iss.facilityid=x.facilityid
+        where 1=1 " + whFacility + @"
+        group by x.mcid, x.mcategory, x.facilityid, x.facilityname,
+                 x.itemcode, x.unit, x.unitc, x.itemid, x.itemname,
+                 x.facindentqty, x.isedl2021, x.strength1, iss.issueqty,
+                 x.districtname, x.facilityid
+    ";
+
+            var myList = _context.DmeFacNocDetailDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToList();
+
+            return myList;
+        }
+
+
     }
 }
 

@@ -2135,6 +2135,32 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.CGMSCStockController",
+    "Method": "GetWHStockAAM",
+    "RelativePath": "api/CGMSCStock/GetWHStockAAM",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DashHomeDTO.GetWHStockItemsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.CGMSCStockController",
     "Method": "getYear",
     "RelativePath": "api/CGMSCStock/getYear",
     "HttpMethod": "GET",
@@ -3560,6 +3586,58 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.FinanceDTO.RecFundsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardFinance",
+    "Method": "getFitUnfit",
+    "RelativePath": "api/DashboardFinance/getFitUnfit",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fitunfit",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.FinanceDTO.getFitUnfitDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardFinance",
+    "Method": "getFitUnfitSummary",
+    "RelativePath": "api/DashboardFinance/getFitUnfitSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fitunfit",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.FinanceDTO.getFitUnfitSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -9325,6 +9403,11 @@
         "Name": "userid",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "ipAddress",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -11907,6 +11990,93 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.MasterDTO.SupplyDuration, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "DmeFacNocDetail",
+    "RelativePath": "api/Transaction/DmeFacNocDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facilityId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.DmeFacNocDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "DmeFacNocSummary",
+    "RelativePath": "api/Transaction/DmeFacNocSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.DmeFacNocSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

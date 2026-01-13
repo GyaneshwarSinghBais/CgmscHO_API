@@ -435,7 +435,13 @@ namespace CgmscHO_API.Models
         public DbSet<HoldBatchHistoryDTO> HoldBatchHistoryDbSet { get; set; }
         public DbSet<NonSupplySummaryDTO> NonSupplySummaryDbSet { get; set; }
         public DbSet<NonSupplySummaryDetailDTO> NonSupplySummaryDetailDbSet { get; set; }
+        public DbSet<DmeFacNocSummaryDTO> DmeFacNocSummaryDbSet { get; set; }
+        public DbSet<DmeFacNocDetailDTO> DmeFacNocDetailDbSet { get; set; }
+        public DbSet<GetWHStockItemsDTO> getGetWHStockItemsDbSet { get; set; }
+        public DbSet<getFitUnfitDTO> getFitUnfitDbSet { get; set; }
+        public DbSet<getFitUnfitSummaryDTO> getFitUnfitSummaryDbSet { get; set; }
         
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -496,6 +502,10 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<PipelineSlippagePOItemDetailDTO>().HasNoKey();
             modelBuilder.Entity<HoldBatchHistoryDTO>().HasNoKey();
             modelBuilder.Entity<NonSupplySummaryDetailDTO>().HasNoKey();
+            modelBuilder.Entity<DmeFacNocSummaryDTO>().HasNoKey();
+            modelBuilder.Entity<DmeFacNocDetailDTO>().HasNoKey();
+            modelBuilder.Entity<getFitUnfitDTO>().HasNoKey();
+            modelBuilder.Entity<getFitUnfitSummaryDTO>().HasNoKey();
             
 
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");

@@ -11,928 +11,928 @@ namespace SMSRef
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://140.238.246.250/ws_stock/", ConfigurationName="SMSRef.ServiceSoap")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://141.148.193.157/ws_stock/", ConfigurationName="SMSRef.ServiceSoap")]
     public interface ServiceSoap
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PASSNOCNUM_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PASSNOCNUM_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.PASSNOCNUM_NICResponsePASSNOCNUM_NICResult> PASSNOCNUM_NICAsync(string mNICindentid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetPDFData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetPDFData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetPDFDataAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetMongoNocPDF", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetMongoNocPDF", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetMongoNocPDFAsync(string nicIndentid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ExportToPDF", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ExportToPDF", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task ExportToPDFAsync(string PoNoID, string mFacID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WSWHIssueData_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WSWHIssueData_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WSWHIssueData_NICResponseWSWHIssueData_NICResult> WSWHIssueData_NICAsync(string mNICindentid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WSWHIssueItemData_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WSWHIssueItemData_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WSWHIssueItemData_NICResponseWSWHIssueItemData_NICResult> WSWHIssueItemData_NICAsync(string mNICindentid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WSWHIssueBatchesData_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WSWHIssueBatchesData_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WSWHIssueBatchesData_NICResponseWSWHIssueBatchesData_NICResult> WSWHIssueBatchesData_NICAsync(string mNICindentid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ImageURL", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ImageURL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> ImageURLAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/sendsmsHIMIS", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/sendsmsHIMIS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> sendsmsHIMISAsync(string mobile, string sms, string mtemplateid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SendMail", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SendMail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> SendMailAsync(string SupplierEmail, string mSubject, string mailBody, string smsTo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacBatchWiseStock_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacBatchWiseStock_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FacBatchWiseStock_NICAsync(string facilityid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CGMSCMasitems_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CGMSCMasitems_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CGMSCMasitems_NICAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacBatchStock_With_Json_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacBatchStock_With_Json_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FacBatchStock_With_Json_NICAsync(string facilityid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/storage_dtl", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/storage_dtl", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> storage_dtlAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Receipt_complete", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Receipt_complete", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> Receipt_completeAsync(string indentid, string flag);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getWardIssueDetails", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getWardIssueDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getWardIssueDetailsAsync(string facilityid, string issuetype, string yearid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WardDetails", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WardDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WardDetailsAsync(string facility);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WardIssueno", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WardIssueno", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WardIssuenoAsync(string facilityid, string wardiid, string reqDate, string reqby, string issuedate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DashboardDisplay", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DashboardDisplay", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DashboardDisplayAsync(string logintype);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACstockUnderDr", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACstockUnderDr", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACstockUnderDrAsync(string facilityid, string Catid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACstockMoving", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACstockMoving", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACstockMovingAsync(string facilityid, string Catid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACstockMovingDrug", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACstockMovingDrug", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACstockMovingDrugAsync(string facilityid, string drugcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckDrSignup", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckDrSignup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckDrSignupAsync(string mobileno);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/LoginDr", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/LoginDr", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> LoginDrAsync(string mobileno, string pin);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ForgotPassword", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ForgotPassword", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> ForgotPasswordAsync(string mobileno);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SignUpDr", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SignUpDr", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> SignUpDrAsync(string Mobno, string otp, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetOTP", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetOTP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetOTPAsync(string Mobno);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Wardlogin", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Wardlogin", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> WardloginAsync(string userid, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getWardUser", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getWardUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getWardUserResponseGetWardUserResult> getWardUserAsync(string wid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FillincompleteData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FillincompleteData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.FillincompleteDataResponseFillincompleteDataResult> FillincompleteDataAsync(string issueid, string wID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getIssuedData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getIssuedData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getIssuedDataResponseGetIssuedDataResult> getIssuedDataAsync(string wID, string issueid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getIssuedDataNA", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getIssuedDataNA", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getIssuedDataNAResponseGetIssuedDataNAResult> getIssuedDataNAAsync(string wID, string issueid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getOPDStockData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getOPDStockData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getOPDStockDataResponseGetOPDStockDataResult> getOPDStockDataAsync(string wID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/BindDocter", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/BindDocter", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.BindDocterResponseBindDocterResult> BindDocterAsync(string wid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/BindPatientType", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/BindPatientType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.BindPatientTypeResponseBindPatientTypeResult> BindPatientTypeAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/btnSearchPatient", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/btnSearchPatient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.btnSearchPatientResponseBtnSearchPatientResult> btnSearchPatientAsync(string whcluase);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IssueDashboardData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IssueDashboardData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.IssueDashboardDataResponseIssueDashboardDataResult> IssueDashboardDataAsync(string wardid, string fromdate, string todate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IssueDashboardDataNos", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IssueDashboardDataNos", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.IssueDashboardDataNosResponseIssueDashboardDataNosResult> IssueDashboardDataNosAsync(string wardid, string fromdate, string todate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IssueDashboardDrugWise", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IssueDashboardDrugWise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.IssueDashboardDrugWiseResponseIssueDashboardDrugWiseResult> IssueDashboardDrugWiseAsync(string wardid, string fromdate, string todate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getOPDStockReport", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getOPDStockReport", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getOPDStockReportResponseGetOPDStockReportResult> getOPDStockReportAsync(string wID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getOPDFACStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getOPDFACStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getOPDFACStockResponseGetOPDFACStockResult> getOPDFACStockAsync(string wID, string facid, string typeid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getRPTPatientData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getRPTPatientData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getRPTPatientDataResponseGetRPTPatientDataResult> getRPTPatientDataAsync(string issueid, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getRPTDrugData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getRPTDrugData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getRPTDrugDataResponseGetRPTDrugDataResult> getRPTDrugDataAsync(string issueid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getitemtype", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getitemtype", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getitemtypeResponseGetitemtypeResult> getitemtypeAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getNonEDL", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getNonEDL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getNonEDLResponseGetNonEDLResult> getNonEDLAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getEDLdata", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getEDLdata", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.getEDLdataResponseGetEDLdataResult> getEDLdataAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PopulateWardIndent", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PopulateWardIndent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.PopulateWardIndentResponsePopulateWardIndentResult> PopulateWardIndentAsync(string yearid, string stid, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getIndentNo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getIndentNo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getIndentNoAsync(string wardid, string accyrsetid, string yearcode, string IndentDT);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getIndentNoAlready", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getIndentNoAlready", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getIndentNoAlreadyAsync(string indentid, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SaveIndentITems", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SaveIndentITems", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> SaveIndentITemsAsync(string mNocID, string mItemID, string mStockInhand, string indeqty, string msqty);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowSavedIndents", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowSavedIndents", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowSavedIndentsResponseShowSavedIndentsResult> ShowSavedIndentsAsync(string mNocID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DelIndentItems", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DelIndentItems", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DelIndentItemsAsync(string mNocID, string mItemID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CompleteWardIndent", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CompleteWardIndent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CompleteWardIndentAsync(string mNocID, string mremarks);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IndentReportM", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IndentReportM", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.IndentReportMResponseIndentReportMResult> IndentReportMAsync(string nocid, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IndentReportC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IndentReportC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.IndentReportCResponseIndentReportCResult> IndentReportCAsync(string mNocID, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WardReceiptDash", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WardReceiptDash", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WardReceiptDashResponseWardReceiptDashResult> WardReceiptDashAsync(string myearid, string stid, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WardReceiptDetails", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WardReceiptDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WardReceiptDetailsResponseWardReceiptDetailsResult> WardReceiptDetailsAsync(string myearid, string wardid, string stid, string issueid, string receiptid, string facid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GenWardReceiptNo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GenWardReceiptNo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GenWardReceiptNoAsync(string wardid, string ReceiptDT, string issueid, string facilityid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getReceiptNoAlready", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getReceiptNoAlready", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getReceiptNoAlreadyAsync(string receiptid, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowRecData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowRecData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowRecDataResponseShowRecDataResult> ShowRecDataAsync(string wardid, string receiptid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SaveReceiptITems", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SaveReceiptITems", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> SaveReceiptITemsAsync(string mreceiptid, string missueitemid, string mItemID, string receqty, string recitemid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getOPStockNo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getOPStockNo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getOPStockNoAsync(string wardid, string indentDT);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ValidateRecWithIssueDT", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ValidateRecWithIssueDT", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> ValidateRecWithIssueDTAsync(string IssueDT, string RecDT);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckExpDT", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckExpDT", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckExpDTAsync(string expdate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckMfgDT", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckMfgDT", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckMfgDTAsync(string mfgDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SaveOPBatch", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SaveOPBatch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> SaveOPBatchAsync(string mreceiptitemid, string iwno, string mReceiptID, string itemid, string absqty, string wardid, string rackid, string mbatchno, string mexpdate, string mmfgdt);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DelOPBatch", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DelOPBatch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DelOPBatchAsync(string mReceiptID, string mreceiptitemid, string itemid, string absqty, string inwno);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/checkstockBeforFreez", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/checkstockBeforFreez", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> checkstockBeforFreezAsync(string recid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FreezOPStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FreezOPStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FreezOPStockAsync(string recid, string name, string mob);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FreezOPStockNoItems", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FreezOPStockNoItems", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FreezOPStockNoItemsAsync(string recid, string name, string mob, string ch);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckOPStockStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckOPStockStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> CheckOPStockStatusAsync(string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowWardOPInfo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowWardOPInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowWardOPInfoResponseShowWardOPInfoResult> ShowWardOPInfoAsync(string receiptid, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowWardInfo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowWardInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowWardInfoResponseShowWardInfoResult> ShowWardInfoAsync(string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SaveWardRack", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SaveWardRack", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> SaveWardRackAsync(string racno, string facilityid, string wardid, string rackid, string etype);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowRacks", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowRacks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowRacksResponseShowRacksResult> ShowRacksAsync(string wardid, string facid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/BindRack", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/BindRack", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.BindRackResponseBindRackResult> BindRackAsync(string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowAlreadyOPStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowAlreadyOPStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowAlreadyOPStockResponseShowAlreadyOPStockResult> ShowAlreadyOPStockAsync(string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowOPData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowOPData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowOPDataResponseShowOPDataResult> ShowOPDataAsync(string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/showPrescription", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/showPrescription", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.showPrescriptionResponse> showPrescriptionAsync(SMSRef.showPrescriptionRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ShowWardRecData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ShowWardRecData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ShowWardRecDataResponseShowWardRecDataResult> ShowWardRecDataAsync(string wardid, string receiptid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DelOPBatches", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DelOPBatches", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DelOPBatchesAsync(string wardid, string itemid, string inwno, string receiptitemid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/YearIDData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/YearIDData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.YearIDDataResponseYearIDDataResult> YearIDDataAsync(string mdate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/InsertPinfo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/InsertPinfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> InsertPinfoAsync(string OPDID, string MOBNO, string WARDID, string NAME, string AGE, string ADDRESS, string FGENDER);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/UpdatePInfo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/UpdatePInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> UpdatePInfoAsync(string OPDID, string AdharNO, string MOBNO, string First, string age, string gender, string address, string WARDID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/InsertOPDInfo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/InsertOPDInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> InsertOPDInfoAsync(string ISSUENO, string ISSUEDATE, string ISSUETYPE, string STATUS, string WARDID, string PATID, string DRID, string PRESDATE, string patienttypeid, string OPDID, string PATOther, string remarks);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/UpdateOPDInfo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/UpdateOPDInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> UpdateOPDInfoAsync(string OPDID, string MPATID, string MDRID, string MPRESDATE, string fPATID, string wid, string others, string remarks);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/InsertDrug", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/InsertDrug", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> InsertDrugAsync(string itemid, string issueqty, string issuid, string WARDID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/InsertDrugNA", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/InsertDrugNA", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> InsertDrugNAAsync(string itemid, string issueqty, string issuid, string WARDID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IssueCompletion", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IssueCompletion", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> IssueCompletionAsync(string issuid, string WARDID, string presAttached);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IssueComWithImage", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IssueComWithImage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.IssueComWithImageResponse> IssueComWithImageAsync(SMSRef.IssueComWithImageRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WardIssueAutoGenerateNumbers", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WardIssueAutoGenerateNumbers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WardIssueAutoGenerateNumbersAsync(string FacilityID, bool IsReceipt, string mType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getOPDStockDataStr", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getOPDStockDataStr", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getOPDStockDataStrAsync(string wID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/BindDocterStr", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/BindDocterStr", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> BindDocterStrAsync(string wid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/BindPatientTypeStr", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/BindPatientTypeStr", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> BindPatientTypeStrAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/LiveTenders", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/LiveTenders", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> LiveTendersAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/LiveTendersItems", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/LiveTendersItems", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> LiveTendersItemsAsync(string mschemeid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/LiveTendersSubs", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/LiveTendersSubs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> LiveTendersSubsAsync(string supplierid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WardStockBatch", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WardStockBatch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WardStockBatchAsync(string nhmHCID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WardStockBatchDT", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WardStockBatchDT", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WardStockBatchDTResponseWardStockBatchDTResult> WardStockBatchDTAsync(string nhmHCID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacCurBStockDT_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacCurBStockDT_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.FacCurBStockDT_NICResponseFacCurBStockDT_NICResult> FacCurBStockDT_NICAsync(string nhmHCID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CallMyAPI", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CallMyAPI", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CallMyAPIAsync(string cgmscFacreceiptid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacReceipt_NewFor_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacReceipt_NewFor_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FacReceipt_NewFor_NICAsync(string nhmHCID, string OPDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacReceiptWithOPDT_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacReceiptWithOPDT_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.FacReceiptWithOPDT_NICResponseFacReceiptWithOPDT_NICResult> FacReceiptWithOPDT_NICAsync(string nhmHCID, string OPDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacReceiptItems_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacReceiptItems_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.FacReceiptItems_NICResponseFacReceiptItems_NICResult> FacReceiptItems_NICAsync(string nhmHCID, string OPDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacReceiptBatches_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacReceiptBatches_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.FacReceiptBatches_NICResponseFacReceiptBatches_NICResult> FacReceiptBatches_NICAsync(string nhmHCID, string OPDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FacGetBatches_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FacGetBatches_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.FacGetBatches_NICResponseFacGetBatches_NICResult> FacGetBatches_NICAsync(string nhmHCID, string Itemid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Masitemcategories_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Masitemcategories_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.Masitemcategories_NICResponseMasitemcategories_NICResult> Masitemcategories_NICAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Masitemtypes_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Masitemtypes_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.Masitemtypes_NICResponseMasitemtypes_NICResult> Masitemtypes_NICAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Masitems_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Masitems_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.Masitems_NICResponseMasitems_NICResult> Masitems_NICAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Update_Facility_OPDate_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Update_Facility_OPDate_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> Update_Facility_OPDate_NICAsync(string nhm_facid, string OPdate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Insert_Monthly_Indent_NICD", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Insert_Monthly_Indent_NICD", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> Insert_Monthly_Indent_NICDAsync(string nhm_facid, string DataJson);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Insert_Mon_Indent_Items_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Insert_Mon_Indent_Items_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> Insert_Mon_Indent_Items_NICAsync(string IndentID, string nhm_facid, string DataJson);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GEWHSTOCKFOR_NIC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GEWHSTOCKFOR_NIC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.GEWHSTOCKFOR_NICResponseGEWHSTOCKFOR_NICResult> GEWHSTOCKFOR_NICAsync(string mWHID, string jSonData);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/HelloWorld", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/HelloWorld", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> HelloWorldAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Alerts", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Alerts", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> AlertsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PopulateWHDistribution", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PopulateWHDistribution", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> PopulateWHDistributionAsync(string AccYr, string supId, string poNoId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PopulateInwardDetails", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PopulateInwardDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> PopulateInwardDetailsAsync(string poNoId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PopulatePaymentDetails", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PopulatePaymentDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> PopulatePaymentDetailsAsync(string poNoId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PopulateSuplierDetails", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PopulateSuplierDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> PopulateSuplierDetailsAsync(string supplierloginid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PopulateSanctionDetails", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PopulateSanctionDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> PopulateSanctionDetailsAsync(string poNoId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PopulatePOData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PopulatePOData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> PopulatePODataAsync(string AccYr, string supId, string poNoId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/supplierLogin", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/supplierLogin", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> supplierLoginAsync(string userid, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/fillPO", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/fillPO", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> fillPOAsync(string finYr, string supId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetFacility", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetFacility", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetFacilityAsync(string DistID, string FacTypeid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugIssue", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugIssue", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugIssueAsync(string facilityid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/VoucherFacility", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/VoucherFacility", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> VoucherFacilityAsync(string facilityid, string year, string month);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/VoucherDetail", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/VoucherDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> VoucherDetailAsync(string facilityid, string voucherNo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugIssueNew", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugIssueNew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugIssueNewAsync(string warehouseid, string facilityid, string Drugcode, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugIssuebatchwise", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugIssuebatchwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugIssuebatchwiseAsync(string facilityid, string durgcode, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugIssueDrugWise", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugIssueDrugWise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugIssueDrugWiseAsync(string durgcode, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugStockAsync(string durgcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/whstock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/whstock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> whstockAsync(string whid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACstockAvailable", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACstockAvailable", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACstockAvailableAsync(string facilityid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACOnlineStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACOnlineStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACOnlineStatusAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACOnlineStatusByDistrict", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACOnlineStatusByDistrict", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACOnlineStatusByDistrictAsync(string districtid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACOnlineDrugs", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACOnlineDrugs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACOnlineDrugsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACOnlineDistrict_MC", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACOnlineDistrict_MC", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACOnlineDistrict_MCAsync(string itemid, string dmedhs);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/whstockIOS", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/whstockIOS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> whstockIOSAsync(string whid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DruginfoIOS", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DruginfoIOS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DruginfoIOSAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/whstockbatchwise", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/whstockbatchwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> whstockbatchwiseAsync(string whid, string drugcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/whstockSearching", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/whstockSearching", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> whstockSearchingAsync(string whid, string drugcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CGMSCStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CGMSCStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CGMSCStockAsync(string catid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CGMSCStockIOS", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CGMSCStockIOS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CGMSCStockIOSAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CGMSCStockDrugWise", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CGMSCStockDrugWise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CGMSCStockDrugWiseAsync(string drugcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/InsertFeedBack", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/InsertFeedBack", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> InsertFeedBackAsync(string Mobno, string emaild, string feedback, string rateus, string apptype, string name);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WebCGMSCStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WebCGMSCStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WebCGMSCStockResponseWebCGMSCStockResult> WebCGMSCStockAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Webwhstockbatchwise", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Webwhstockbatchwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.WebwhstockbatchwiseResponseWebwhstockbatchwiseResult> WebwhstockbatchwiseAsync(string whid, string drugcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckLoginFacility", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckLoginFacility", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckLoginFacilityAsync(string userid, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugIssuefacility_finyr", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugIssuefacility_finyr", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugIssuefacility_finyrAsync(string facilityid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckLoginCGMSCL", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckLoginCGMSCL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckLoginCGMSCLAsync(string userid, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IssuedByFacility", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IssuedByFacility", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> IssuedByFacilityAsync(string warehouseid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/TotalIssuedNo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/TotalIssuedNo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> TotalIssuedNoAsync(string warehouseid, string facilityid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/TotalIssuedBatchwise", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/TotalIssuedBatchwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> TotalIssuedBatchwiseAsync(string issueno);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ReceiptByWH", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ReceiptByWH", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> ReceiptByWHAsync(string warehouseid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ReceiptByPoNo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ReceiptByPoNo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> ReceiptByPoNoAsync(string warehouseid, string fromaDate, string toaDate, string ponoid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ReceiptByChallanNo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ReceiptByChallanNo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> ReceiptByChallanNoAsync(string tranid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/sampleSentbyWH", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/sampleSentbyWH", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> sampleSentbyWHAsync(string warehouseid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/sampleSentbyBatch", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/sampleSentbyBatch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> sampleSentbyBatchAsync(string warehouseid, string fromaDate, string toaDate, string itemid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugStockJSON", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugStockJSON", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugStockJSONAsync(string durgcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugStockJSONNew", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugStockJSONNew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task DrugStockJSONNewAsync(string durgcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugDetail", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugDetailAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugDetailDemo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugDetailDemo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugDetailDemoAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/codeWiseDrugDetai", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/codeWiseDrugDetai", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> codeWiseDrugDetaiAsync(string drugcode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DailyActivity", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DailyActivity", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DailyActivityAsync(string warehouseid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/nearexpiry", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/nearexpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> nearexpiryAsync(string warehouseid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/IsStockAvailable", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/IsStockAvailable", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> IsStockAvailableAsync(string drugcode, int NHMfacilityid, int Qty);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckLoginFac", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckLoginFac", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckLoginFacAsync(string userid, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckLoginWH", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckLoginWH", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckLoginWHAsync(string userid, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WH", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WH", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WHAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WHALL", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WHALL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WHALLAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/District", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/District", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DistrictAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getfacilitydist", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getfacilitydist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getfacilitydistAsync(string dist, string type);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getDistrictbyWH", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getDistrictbyWH", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getDistrictbyWHAsync(string warehouseid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getDistrict27", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getDistrict27", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getDistrict27Async();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getFacilitybyWH", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getFacilitybyWH", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getFacilitybyWHAsync(string warehouseid, string districtid, string facilitytypeid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getFacilitybyD", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getFacilitybyD", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getFacilitybyDAsync(string districtid, string facilitytypeid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getFacilityType", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getFacilityType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getFacilityTypeAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getFacType", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getFacType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getFacTypeAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/DrugIssuefacility", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/DrugIssuefacility", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> DrugIssuefacilityAsync(string facilityid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/BathWiseStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/BathWiseStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> BathWiseStockAsync(string BatchNo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WareHouseWiseDrugStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WareHouseWiseDrugStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WareHouseWiseDrugStockAsync(string BatchNo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WHWiseIssueDetail", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WHWiseIssueDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WHWiseIssueDetailAsync(string BatchNo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetItemInfo", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetItemInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetItemInfoAsync(string ItemCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetSupplier", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.GetSupplierResponseGetSupplierResult> GetSupplierAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetPONOBySupplier", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetPONOBySupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.GetPONOBySupplierResponseGetPONOBySupplierResult> GetPONOBySupplierAsync(string SupplierID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetPOStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetPOStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetPOStatusAsync(string Finid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetFinPOStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetFinPOStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetFinPOStatusAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetCatPOStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetCatPOStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetCatPOStatusAsync(string CatID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetWHPOStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetWHPOStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetWHPOStatusAsync(string CatID, string FinYR);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetFinYear", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetFinYear", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetFinYearAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetCategory", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetCategoryAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetAllCategory", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetAllCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetAllCategoryAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetWHItemPOStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetWHItemPOStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetWHItemPOStatusAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetTenderStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetTenderStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetTenderStatusAsync(string FinYR);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetBatchwiseStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetBatchwiseStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetBatchwiseStockAsync(string BachNO);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/WHPOStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/WHPOStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> WHPOStatusAsync(string CategoryID, string AccyrSetID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetWHItemStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetWHItemStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetWHItemStatusAsync(string CatID, string FinYR);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/GetEDLDrug", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/GetEDLDrug", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> GetEDLDrugAsync(string CatID, string EdlCat);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getfacilityList", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getfacilityList", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getfacilityListAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/StockIssueAbstarct", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/StockIssueAbstarct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> StockIssueAbstarctAsync(string facilityid, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CGMSCStockNew", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CGMSCStockNew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CGMSCStockNewAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CGMSCWHStockNew", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CGMSCWHStockNew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CGMSCWHStockNewAsync(string CatId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getDrugCategory", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getDrugCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getDrugCategoryAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ValueDashborad", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ValueDashborad", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> ValueDashboradAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/POReportNonSupply", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/POReportNonSupply", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> POReportNonSupplyAsync(string DrugCat, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/POReportNonSupplyDTL", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/POReportNonSupplyDTL", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> POReportNonSupplyDTLAsync(string srno, string DrugCat, string fromaDate, string toaDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/PndingTenderStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/PndingTenderStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> PndingTenderStatusAsync(string FinYR);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getFaclevel", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getFaclevel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getFaclevelAsync(string FacTypeid, string DistrictId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACStatusAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACOffline", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACOffline", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACOfflineAsync(string districtid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/FACOnline", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/FACOnline", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> FACOnlineAsync(string districtid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckAmedment", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckAmedment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckAmedmentAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckFWDAmedment", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckFWDAmedment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckFWDAmedmentAsync(string districtid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckUNFWDAmedment", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckUNFWDAmedment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckUNFWDAmedmentAsync(string districtid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/CheckDMEAmedment", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/CheckDMEAmedment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> CheckDMEAmedmentAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getDHSDrugDashBoard", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getDHSDrugDashBoard", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getDHSDrugDashBoardAsync(string drugCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getDHSDistirctStock", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getDHSDistirctStock", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getDHSDistirctStockAsync(string itemId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/getDirectorateNearEXP", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/getDirectorateNearEXP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getDirectorateNearEXPAsync(string dtype);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SendReceiptMaster", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SendReceiptMaster", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> SendReceiptMasterAsync(string facilityid, string cgsmclIndentNo, string mcReceiptno, string mcReceiptdate, string remarks);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SendReceiptItems", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SendReceiptItems", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> SendReceiptItemsAsync(string facilityid, string cgsmclIndentNo, string mcReceiptno, SMSRef.SendReceiptItemsDtreceiptitems dtreceiptitems);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SendReceiptDataItemsBatches", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SendReceiptDataItemsBatches", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> SendReceiptDataItemsBatchesAsync(string facilityid, string mcReceiptno, SMSRef.SendReceiptDataItemsBatchesDtreceiptitemsBatches dtreceiptitemsBatches);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SendIssueMaster", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SendIssueMaster", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> SendIssueMasterAsync(string facilityid, string issueno, string issuedate, string wrequdate, string wardreqby, string wardid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SendIssueDataItem", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SendIssueDataItem", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> SendIssueDataItemAsync(string facilityid, string IssueNo, string issueitems);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/SendIssueOutwards", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/SendIssueOutwards", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> SendIssueOutwardsAsync(string facilityid, string IssueNo, string dtIssueBatches);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ReceiptMaster_Data", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ReceiptMaster_Data", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ReceiptMaster_DataResponseReceiptMaster_DataResult> ReceiptMaster_DataAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/ReceiptAllData", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/ReceiptAllData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<SMSRef.ReceiptAllDataResponseReceiptAllDataResult> ReceiptAllDataAsync(string indentid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Receipt_Entry_Master", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Receipt_Entry_Master", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task Receipt_Entry_MasterAsync(string indentid, string flag);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://140.238.246.250/ws_stock/Receipt_Entry_Items", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://141.148.193.157/ws_stock/Receipt_Entry_Items", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> Receipt_Entry_ItemsAsync(string indentid, string flag, string ReceiptEntryDate, string indentitemid, string batchno, string batchreceiptqty);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class PASSNOCNUM_NICResponsePASSNOCNUM_NICResult
     {
         
@@ -970,9 +970,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WSWHIssueData_NICResponseWSWHIssueData_NICResult
     {
         
@@ -1010,9 +1010,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WSWHIssueItemData_NICResponseWSWHIssueItemData_NICResult
     {
         
@@ -1050,9 +1050,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WSWHIssueBatchesData_NICResponseWSWHIssueBatchesData_NICResult
     {
         
@@ -1090,9 +1090,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getWardUserResponseGetWardUserResult
     {
         
@@ -1130,9 +1130,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class FillincompleteDataResponseFillincompleteDataResult
     {
         
@@ -1170,9 +1170,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getIssuedDataResponseGetIssuedDataResult
     {
         
@@ -1210,9 +1210,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getIssuedDataNAResponseGetIssuedDataNAResult
     {
         
@@ -1250,9 +1250,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getOPDStockDataResponseGetOPDStockDataResult
     {
         
@@ -1290,9 +1290,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class BindDocterResponseBindDocterResult
     {
         
@@ -1330,9 +1330,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class BindPatientTypeResponseBindPatientTypeResult
     {
         
@@ -1370,9 +1370,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class btnSearchPatientResponseBtnSearchPatientResult
     {
         
@@ -1410,9 +1410,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class IssueDashboardDataResponseIssueDashboardDataResult
     {
         
@@ -1450,9 +1450,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class IssueDashboardDataNosResponseIssueDashboardDataNosResult
     {
         
@@ -1490,9 +1490,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class IssueDashboardDrugWiseResponseIssueDashboardDrugWiseResult
     {
         
@@ -1530,9 +1530,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getOPDStockReportResponseGetOPDStockReportResult
     {
         
@@ -1570,9 +1570,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getOPDFACStockResponseGetOPDFACStockResult
     {
         
@@ -1610,9 +1610,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getRPTPatientDataResponseGetRPTPatientDataResult
     {
         
@@ -1650,9 +1650,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getRPTDrugDataResponseGetRPTDrugDataResult
     {
         
@@ -1690,9 +1690,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getitemtypeResponseGetitemtypeResult
     {
         
@@ -1730,9 +1730,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getNonEDLResponseGetNonEDLResult
     {
         
@@ -1770,9 +1770,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class getEDLdataResponseGetEDLdataResult
     {
         
@@ -1810,9 +1810,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class PopulateWardIndentResponsePopulateWardIndentResult
     {
         
@@ -1850,9 +1850,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowSavedIndentsResponseShowSavedIndentsResult
     {
         
@@ -1890,9 +1890,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class IndentReportMResponseIndentReportMResult
     {
         
@@ -1930,9 +1930,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class IndentReportCResponseIndentReportCResult
     {
         
@@ -1970,9 +1970,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WardReceiptDashResponseWardReceiptDashResult
     {
         
@@ -2010,9 +2010,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WardReceiptDetailsResponseWardReceiptDetailsResult
     {
         
@@ -2050,9 +2050,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowRecDataResponseShowRecDataResult
     {
         
@@ -2090,9 +2090,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowWardOPInfoResponseShowWardOPInfoResult
     {
         
@@ -2130,9 +2130,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowWardInfoResponseShowWardInfoResult
     {
         
@@ -2170,9 +2170,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowRacksResponseShowRacksResult
     {
         
@@ -2210,9 +2210,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class BindRackResponseBindRackResult
     {
         
@@ -2250,9 +2250,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowAlreadyOPStockResponseShowAlreadyOPStockResult
     {
         
@@ -2290,9 +2290,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowOPDataResponseShowOPDataResult
     {
         
@@ -2330,13 +2330,13 @@ namespace SMSRef
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="showPrescription", WrapperNamespace="http://140.238.246.250/ws_stock/", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="showPrescription", WrapperNamespace="http://141.148.193.157/ws_stock/", IsWrapped=true)]
     public partial class showPrescriptionRequest
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=0)]
         public string issueid;
         
         public showPrescriptionRequest()
@@ -2350,13 +2350,13 @@ namespace SMSRef
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="showPrescriptionResponse", WrapperNamespace="http://140.238.246.250/ws_stock/", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="showPrescriptionResponse", WrapperNamespace="http://141.148.193.157/ws_stock/", IsWrapped=true)]
     public partial class showPrescriptionResponse
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] showPrescriptionResult;
         
@@ -2371,9 +2371,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ShowWardRecDataResponseShowWardRecDataResult
     {
         
@@ -2411,9 +2411,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class YearIDDataResponseYearIDDataResult
     {
         
@@ -2451,28 +2451,28 @@ namespace SMSRef
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IssueComWithImage", WrapperNamespace="http://140.238.246.250/ws_stock/", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IssueComWithImage", WrapperNamespace="http://141.148.193.157/ws_stock/", IsWrapped=true)]
     public partial class IssueComWithImageRequest
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=0)]
         public string Fissuid;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=1)]
         public string FPATID;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=2)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=2)]
         public string FWARDID;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=3)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=3)]
         public string Fctype;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=4)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=4)]
         public string FName;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=5)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=5)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] FPRISCRIPTION;
         
@@ -2492,13 +2492,13 @@ namespace SMSRef
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IssueComWithImageResponse", WrapperNamespace="http://140.238.246.250/ws_stock/", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IssueComWithImageResponse", WrapperNamespace="http://141.148.193.157/ws_stock/", IsWrapped=true)]
     public partial class IssueComWithImageResponse
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://140.238.246.250/ws_stock/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://141.148.193.157/ws_stock/", Order=0)]
         public string IssueComWithImageResult;
         
         public IssueComWithImageResponse()
@@ -2512,9 +2512,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WardStockBatchDTResponseWardStockBatchDTResult
     {
         
@@ -2552,9 +2552,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class FacCurBStockDT_NICResponseFacCurBStockDT_NICResult
     {
         
@@ -2592,9 +2592,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class FacReceiptWithOPDT_NICResponseFacReceiptWithOPDT_NICResult
     {
         
@@ -2632,9 +2632,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class FacReceiptItems_NICResponseFacReceiptItems_NICResult
     {
         
@@ -2672,9 +2672,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class FacReceiptBatches_NICResponseFacReceiptBatches_NICResult
     {
         
@@ -2712,9 +2712,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class FacGetBatches_NICResponseFacGetBatches_NICResult
     {
         
@@ -2752,9 +2752,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class Masitemcategories_NICResponseMasitemcategories_NICResult
     {
         
@@ -2792,9 +2792,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class Masitemtypes_NICResponseMasitemtypes_NICResult
     {
         
@@ -2832,9 +2832,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class Masitems_NICResponseMasitems_NICResult
     {
         
@@ -2872,9 +2872,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class GEWHSTOCKFOR_NICResponseGEWHSTOCKFOR_NICResult
     {
         
@@ -2912,9 +2912,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WebCGMSCStockResponseWebCGMSCStockResult
     {
         
@@ -2952,9 +2952,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class WebwhstockbatchwiseResponseWebwhstockbatchwiseResult
     {
         
@@ -2992,9 +2992,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class GetSupplierResponseGetSupplierResult
     {
         
@@ -3032,9 +3032,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class GetPONOBySupplierResponseGetPONOBySupplierResult
     {
         
@@ -3072,9 +3072,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class SendReceiptItemsDtreceiptitems
     {
         
@@ -3112,9 +3112,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class SendReceiptDataItemsBatchesDtreceiptitemsBatches
     {
         
@@ -3152,9 +3152,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ReceiptMaster_DataResponseReceiptMaster_DataResult
     {
         
@@ -3192,9 +3192,9 @@ namespace SMSRef
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://140.238.246.250/ws_stock/")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://141.148.193.157/ws_stock/")]
     public partial class ReceiptAllDataResponseReceiptAllDataResult
     {
         
@@ -3231,13 +3231,13 @@ namespace SMSRef
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface ServiceSoapChannel : SMSRef.ServiceSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class ServiceSoapClient : System.ServiceModel.ClientBase<SMSRef.ServiceSoap>, SMSRef.ServiceSoap
     {
         
@@ -4439,6 +4439,13 @@ namespace SMSRef
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
+        
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {

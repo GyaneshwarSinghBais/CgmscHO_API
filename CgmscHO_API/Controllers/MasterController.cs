@@ -343,6 +343,18 @@ left outer join masfacheaderfooter h on h.userid = u.userid
 where ur.roleid  in (482)
 order by d.districtname ";
                     }
+            else if (Usertype == "SUP")
+            {
+                qry = @" select d.suppliername  as textfield,u.userid,u.STATUS,u.emailid,firstname,lastname,u.orderid,'Supplier' as SIDesig,h.footer2 as SIName,
+ nvl(h.FOOTER3, d.phone1 )  SIMobile
+,d.email as DEPEMAIL ,ur.rolename,ur.roleid, 0 as warehouseid,d.supplierid as districtid,0 as HimisDistrictid,0 as  BLID
+from usrusers u
+left outer join massuppliers d on d.supplierid = u.supplierid
+ inner join usrroles ur on ur.roleid = u.roleid
+left outer join masfacheaderfooter h on h.userid = u.userid
+where ur.roleid  in (427)
+order by d.suppliername ";
+            }
 
             else
             {

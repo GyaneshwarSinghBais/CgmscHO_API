@@ -1,5 +1,380 @@
 [
   {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrix",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrix",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrixDetail",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrixDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrixWithStockOut",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrixWithStockOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixWithStockOutDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABC_VED_SDE_matrixWithStockOutDetail",
+    "RelativePath": "api/Analysis/ABC_VED_SDE_matrixWithStockOutDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "iCateogry",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "columnFlag",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABC_VED_SDE_matrixWithStockOutDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABCanalysisSummary",
+    "RelativePath": "api/Analysis/ABCanalysisSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isedl",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABCanalysisSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABCanalysisSummaryDetail",
+    "RelativePath": "api/Analysis/ABCanalysisSummaryDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isedl",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABCanalysisSummaryDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "ABCanalysisWithRCvalid",
+    "RelativePath": "api/Analysis/ABCanalysisWithRCvalid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.ABCanalysisWithRCvalidDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "pipelineSlippage",
+    "RelativePath": "api/Analysis/pipelineSlippage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.pipelineSlippageDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "pipelineSlippageItemDetail",
+    "RelativePath": "api/Analysis/pipelineSlippageItemDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "flag",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.PipelineSlippageDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.AnalysisController",
+    "Method": "PipelineSlippagePOItemDetailDTO",
+    "RelativePath": "api/Analysis/PipelineSlippagePOItemDetailDTO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "flag",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.AnalysisDTO.PipelineSlippagePOItemDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "CgmscHO_API.Controllers.ANPRController",
     "Method": "InsertMASWHVEHICLETRANSPORT",
     "RelativePath": "api/ANPR/insertMASWHVEHICLETRANSPORT",
@@ -2921,6 +3296,161 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardDME",
+    "Method": "ClgHos_IssueWihtoutAI",
+    "RelativePath": "api/DashboardDME/ClgHos_IssueWihtoutAI",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "whyearid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DirectorateDTO.ClgHospitalWithoutAIIssueDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardDME",
+    "Method": "CollegeHospital_AIvsIssue",
+    "RelativePath": "api/DashboardDME/CollegeHospital_AIvsIssue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DirectorateDTO.ClGHospitalAIVSISSUEDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardDME",
+    "Method": "CollegeYearwuse_AIvsIssue",
+    "RelativePath": "api/DashboardDME/CollegeYearwuse_AIvsIssue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DirectorateDTO.YrsCollegeHospitalAIIssue, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardDME",
+    "Method": "DMEAIvsIssue",
+    "RelativePath": "api/DashboardDME/DMEAIvsIssue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DirectorateDTO.AIvsIssueDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardDME",
+    "Method": "DMEIssueWihtoutAI",
+    "RelativePath": "api/DashboardDME/DMEIssueWihtoutAI",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DirectorateDTO.DirectorateWithoutAIDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "CgmscHO_API.Controllers.DashboardFinance",
     "Method": "ChequePrepDetails",
     "RelativePath": "api/DashboardFinance/ChequePrepDetails",
@@ -3334,7 +3864,18 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "hodid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DashHomeDTO.CGMSCIndentPendingDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -3382,12 +3923,27 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "IndentfromDT",
         "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Indenttodt",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "hodid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -3493,6 +4049,16 @@
         "Name": "yrid",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "hodid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ltflag",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -3527,6 +4093,11 @@
       },
       {
         "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "hodid",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -3736,11 +4307,98 @@
         "Name": "mcid",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "hodid",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.HODYearWisePODTONew, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardHome",
+    "Method": "RCValidDrillDown",
+    "RelativePath": "api/DashboardHome/RCValidDrillDown",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "hoType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "drillType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DashHomeDTO.RCValidDrillDownDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardHome",
+    "Method": "RCValidSatus",
+    "RelativePath": "api/DashboardHome/RCValidSatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "hoType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DashHomeDTO.RCValidSatusDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3782,6 +4440,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DashHomeDTO.StockoutPerHome, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.DashboardHome",
+    "Method": "SupplierPendingPayments",
+    "RelativePath": "api/DashboardHome/SupplierPendingPayments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "budgetId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.SupplierPendingPaymentsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4712,6 +5396,68 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "AIvsIssuance",
+    "RelativePath": "api/HO/AIvsIssuance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.AIvsIssuanceDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "annualIndentClassification",
+    "RelativePath": "api/HO/annualIndentClassification",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.annualIndentClassificationDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
     "Method": "CGMSCItemStock",
     "RelativePath": "api/HO/CGMSCItemStock",
     "HttpMethod": "GET",
@@ -4788,6 +5534,197 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.StockVDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "ExcessLiftDetail",
+    "RelativePath": "api/HO/CMEExcessLiftDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ExcessLiftDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMEexcessLiftSummary",
+    "RelativePath": "api/HO/CMEexcessLiftSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ExcessLiftSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMESlowMovingDetails",
+    "RelativePath": "api/HO/CMESlowMovingDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "percent",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMESlowMovingDetailsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMESlowMovingSummary",
+    "RelativePath": "api/HO/CMESlowMovingSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "percent",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMESlowMovingSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMEwithoutAIDetail",
+    "RelativePath": "api/HO/CMEwithoutAIDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMEwithoutAIDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "CMEwithoutAISummary",
+    "RelativePath": "api/HO/CMEwithoutAISummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.CMEwithoutAISummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -5122,7 +6059,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "RoleID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.FundsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -5782,6 +6725,26 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "HoldStockinNos",
+    "RelativePath": "api/HO/HoldStockinNos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.HoldStockinNosDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
     "Method": "insertTblRecvProgress",
     "RelativePath": "api/HO/insertTblRecvProgress",
     "HttpMethod": "POST",
@@ -5885,6 +6848,47 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "IssuePerDetail",
+    "RelativePath": "api/HO/IssuePerDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "perCondition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "tendCondition",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.IssuePerDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
     "Method": "itemIndentQuantity",
     "RelativePath": "api/HO/itemIndentQuantity",
     "HttpMethod": "GET",
@@ -5920,6 +6924,135 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ItemIndentQtyDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "MCAIissueDetail",
+    "RelativePath": "api/HO/MCAIissueDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.AIissueDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "MontlyItemDemography",
+    "RelativePath": "api/HO/MontlyItemDemography",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.MontlyItemDemographyDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "NearExpiryBatchWise",
+    "RelativePath": "api/HO/NearExpiryBatchWise",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.NearExpiryBatchWiseDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "NearExpiryItemsWH",
+    "RelativePath": "api/HO/NearExpiryItemsWH",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.NearExpiryItemsWHDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -6378,6 +7511,150 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "StockOutDetails",
+    "RelativePath": "api/HO/StockOutDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "tendCondition",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StockOUtDetailsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "StockStatus",
+    "RelativePath": "api/HO/StockStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StockStatusDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "WarehoueWiseStockOut",
+    "RelativePath": "api/HO/WarehoueWiseStockOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StockOut1DTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "WarehoueWiseStockOutDetail",
+    "RelativePath": "api/HO/WarehoueWiseStockOutDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "whId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "colFlag",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StockOutDetail1DTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
     "Method": "WarehouseWiseStock",
     "RelativePath": "api/HO/WarehouseWiseStock",
     "HttpMethod": "GET",
@@ -6445,6 +7722,63 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "WhStockOutIn",
+    "RelativePath": "api/HO/WhStockOutIn",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.WhStockOutInDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "WhStockOutInDetail",
+    "RelativePath": "api/HO/WhStockOutInDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "whid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "para",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.WhStockOutInDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
     "Method": "YearWiseExpired",
     "RelativePath": "api/HO/YearWiseExpired",
     "HttpMethod": "GET",
@@ -6460,6 +7794,37 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.YearWiseExpiredDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOController",
+    "Method": "YearWiseIssueReport",
+    "RelativePath": "api/HO/YearWiseIssueReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.YearWiseIssueReportDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -6499,6 +7864,11 @@
       },
       {
         "Name": "itemtypeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "pogiven",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -6594,6 +7964,42 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HodDTO.FacCoverageDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HODController",
+    "Method": "GenerateIndentReportByEDLType",
+    "RelativePath": "api/HOD/GenerateIndentReportByEDLType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "HodType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HodDTO.GenerateIndentReportByEDLTypeDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -6842,6 +8248,37 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HODController",
+    "Method": "variousStatusAgainstCYAI",
+    "RelativePath": "api/HOD/variousStatusAgainstCYAI",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HodDTO.variousStatusAgainstCYAIDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HODController",
     "Method": "WarehouseInfo",
     "RelativePath": "api/HOD/WarehouseInfo",
     "HttpMethod": "GET",
@@ -6857,6 +8294,26 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HodDTO.WarehouseInfoDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "ConversationHodCgmsc",
+    "RelativePath": "api/HOTender/ConversationHodCgmsc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ConversationHodCgmscDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -6909,6 +8366,94 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "ItemDetails1",
+    "RelativePath": "api/HOTender/ItemDetails1",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isedl",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ItemDetails1DTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "NoOfBidders",
+    "RelativePath": "api/HOTender/NoOfBidders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schemeId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.NoOfBiddersDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "RcDetail1",
+    "RelativePath": "api/HOTender/RcDetail1",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.RcDetail1DTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
     "Method": "RCValidTenderPostion",
     "RelativePath": "api/HOTender/RCValidTenderPostion",
     "HttpMethod": "GET",
@@ -6950,6 +8495,115 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "SchemeReceived",
+    "RelativePath": "api/HOTender/SchemeReceived",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.SchemeReceivedDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "SchemeTenderStatus",
+    "RelativePath": "api/HOTender/SchemeTenderStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.SchemeTenderStatusDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "StatusDetail",
+    "RelativePath": "api/HOTender/StatusDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcatid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StatusDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "StatusItemDetail",
+    "RelativePath": "api/HOTender/StatusItemDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schemeId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.StatusItemDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
     "Method": "TenderStagePending",
     "RelativePath": "api/HOTender/TenderStagePending",
     "HttpMethod": "GET",
@@ -6970,6 +8624,84 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.TenderstageDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "TenderStagesTotal",
+    "RelativePath": "api/HOTender/TenderStagesTotal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcatid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.TenderStagesTotalDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "ToBeTender",
+    "RelativePath": "api/HOTender/ToBeTender",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ToBeTenderDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "ToBeTenderDetail",
+    "RelativePath": "api/HOTender/ToBeTenderDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.ToBeTenderDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -7180,6 +8912,37 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "TotalRC1",
+    "RelativePath": "api/HOTender/TotalRC1",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcatid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEdl",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.TotalRC1DTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
     "Method": "TotalRCMC",
     "RelativePath": "api/HOTender/TotalRCMC",
     "HttpMethod": "GET",
@@ -7206,6 +8969,32 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "TotalTender",
+    "RelativePath": "api/HOTender/TotalTender",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.TotalTenderDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
     "Method": "TotaltoBeTender",
     "RelativePath": "api/HOTender/TotaltoBeTender",
     "HttpMethod": "GET",
@@ -7215,6 +9004,26 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.TotalTDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.HOTenderController",
+    "Method": "WhMangerSSODetail",
+    "RelativePath": "api/HOTender/WhMangerSSODetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.WhMangerSSODetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -7393,6 +9202,100 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.LogAuditController",
+    "Method": "getUserLoginLogs",
+    "RelativePath": "api/LogAudit/getUserLoginLogs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usertype",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.LogAuditDTO.getUserLoginLogsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.LogAuditController",
+    "Method": "getUserPageViewLogs",
+    "RelativePath": "api/LogAudit/getUserPageViewLogs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usertype",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.LogAuditDTO.getUserPageViewLogsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.LogAuditController",
+    "Method": "InsertUserLoginLog",
+    "RelativePath": "api/LogAudit/InsertUserLoginLog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userLoginLog",
+        "Type": "CgmscHO_API.LogAuditDTO.UserLoginLogDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.LogAuditController",
+    "Method": "InsertUserPageViewLog",
+    "RelativePath": "api/LogAudit/InsertUserPageViewLog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userPageViewLog",
+        "Type": "CgmscHO_API.LogAuditDTO.UserPageViewLogDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.LoginController",
@@ -7840,6 +9743,92 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasitemsPO",
+    "RelativePath": "api/Master/MasitemsPO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "groupid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemtypeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "edlcat",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.MasItemsPODTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
     "Method": "MasPOs",
     "RelativePath": "api/Master/MasPOs",
     "HttpMethod": "GET",
@@ -7853,6 +9842,72 @@
       },
       {
         "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.MasPODTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasPOSummary",
+    "RelativePath": "api/Master/MasPOSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -7943,6 +9998,72 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasSchemePO",
+    "RelativePath": "api/Master/MasSchemePO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.masSchemeDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
     "Method": "MasSupplier",
     "RelativePath": "api/Master/MasSupplier",
     "HttpMethod": "GET",
@@ -7977,6 +10098,67 @@
     "Parameters": [
       {
         "Name": "wh",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.SuplierDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.MasterController",
+    "Method": "MasSupplierPO",
+    "RelativePath": "api/Master/MasSupplierPO",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "yrid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "VED",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatCAT",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -8437,6 +10619,32 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.QC",
+    "Method": "HoldItemDetails",
+    "RelativePath": "api/QC/HoldItemDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.QCDTO.QCHoldItemDetails, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.QC",
     "Method": "InTransitHOtoLab",
     "RelativePath": "api/QC/InTransitHOtoLab",
     "HttpMethod": "GET",
@@ -8571,6 +10779,93 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.QC",
+    "Method": "nsqDrugDetails",
+    "RelativePath": "api/QC/nsqDrugDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.QCDTO.NsqDrugDetailsDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.QC",
+    "Method": "QCHold_NSQDash",
+    "RelativePath": "api/QC/QCHold_NSQDash",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "nsqhold",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.QCDTO.QCHomeDashDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.QC",
+    "Method": "QCLabPendingTimeline",
+    "RelativePath": "api/QC/QCLabPendingTimeline",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Timeline",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "labid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.QCDTO.QCSamplePendingTimelinesDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.QC",
     "Method": "QCPendingDashboard",
     "RelativePath": "api/QC/QCPendingDashboard",
     "HttpMethod": "GET",
@@ -8623,6 +10918,32 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.QC",
+    "Method": "QCPendingMonthwiseRec",
+    "RelativePath": "api/QC/QCPendingMonthwiseRec",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.QCDTO.QCMonthWisePendingRecDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.QC",
     "Method": "QCPendingParticularArea",
     "RelativePath": "api/QC/QCPendingParticularArea",
     "HttpMethod": "GET",
@@ -8631,6 +10952,11 @@
     "Parameters": [
       {
         "Name": "area",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -8664,6 +10990,58 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.QCDTO.QCHomeDashPlacewise, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.QC",
+    "Method": "QCResultFinalUpdatePending",
+    "RelativePath": "api/QC/QCResultFinalUpdatePending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.Models.QCLabOutDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.QC",
+    "Method": "QCResultPendingLabWise",
+    "RelativePath": "api/QC/QCResultPendingLabWise",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.QCDTO.LabWisePendingDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -9381,6 +11759,42 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.TimeTaken",
+    "Method": "QCTimeTakenYear",
+    "RelativePath": "api/TimeTaken/QCTimeTakenYear",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemtypeid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.HODTO.TimeTakenYearQC, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TimeTaken",
     "Method": "QCTimeTakenYearwise",
     "RelativePath": "api/TimeTaken/QCTimeTakenYearwise",
     "HttpMethod": "GET",
@@ -9493,6 +11907,221 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.MasterDTO.SupplyDuration, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "DmeFacNocDetail",
+    "RelativePath": "api/Transaction/DmeFacNocDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facilityId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.DmeFacNocDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "DmeFacNocSummary",
+    "RelativePath": "api/Transaction/DmeFacNocSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.DmeFacNocSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "HoldBatchHistory",
+    "RelativePath": "api/Transaction/HoldBatchHistory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "nsqholdflag",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.HoldBatchHistoryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "NonSupplySummary",
+    "RelativePath": "api/Transaction/NonSupplySummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.NonSupplySummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.TransactionController",
+    "Method": "NonSupplySummaryDetail",
+    "RelativePath": "api/Transaction/NonSupplySummaryDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "supplierId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "schemeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ponoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.TransactionDTO.NonSupplySummaryDetailDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -9903,6 +12532,37 @@
       },
       {
         "Name": "longitude",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.Warehouse",
+    "Method": "updateTBIndentTravale1",
+    "RelativePath": "api/Warehouse/updateTBIndentTravale1",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "travelId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "latitude",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "longitude",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isSynced",
         "Type": "System.String",
         "IsRequired": false
       }
