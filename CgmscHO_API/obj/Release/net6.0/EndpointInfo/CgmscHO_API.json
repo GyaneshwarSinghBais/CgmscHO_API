@@ -7329,6 +7329,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "VID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "WHID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -9066,6 +9080,242 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/EMDReleaseddetDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EMD/getemdpolist": {
+      "get": {
+        "tags": [
+          "EMD"
+        ],
+        "parameters": [
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EMDPOListDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EMDPOListDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EMDPOListDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EMD/ForwardToMD": {
+      "post": {
+        "tags": [
+          "EMD"
+        ],
+        "parameters": [
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "poNoId",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EMD/ReceivedFromMD": {
+      "post": {
+        "tags": [
+          "EMD"
+        ],
+        "parameters": [
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "poNoId",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EMD/getemdpolistReturnFromMD": {
+      "get": {
+        "tags": [
+          "EMD"
+        ],
+        "parameters": [
+          {
+            "name": "mcid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EMDPOListDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EMDPOListDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EMDPOListDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EMD/fileForwarding": {
+      "post": {
+        "tags": [
+          "EMD"
+        ],
+        "parameters": [
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "poNoId",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "toUserId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromUserId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/EMD/selectFileReceiver": {
+      "get": {
+        "tags": [
+          "EMD"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/selectFileReceiverDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/selectFileReceiverDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/selectFileReceiverDTO"
                   }
                 }
               }
@@ -16227,6 +16477,51 @@
         }
       }
     },
+    "/api/Login/getDoctorOTPSaved": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ipAddress",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Login/VerifyOTPLogin": {
       "get": {
         "tags": [
@@ -21342,6 +21637,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "whid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "whvehicle",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -21411,6 +21720,34 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "parentfacid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AckowledgeMobNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AckowledgeName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Designation",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -21443,6 +21780,41 @@
           },
           {
             "name": "longitude",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parentfacid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AckowledgeMobNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AckowledgeOTP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AckowledgeName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Designation",
             "in": "query",
             "schema": {
               "type": "string"
@@ -21486,6 +21858,34 @@
           },
           {
             "name": "isSynced",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parentfacid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AckowledgeMobNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AckowledgeName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Designation",
             "in": "query",
             "schema": {
               "type": "string"
@@ -21779,6 +22179,308 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/GetLatLongDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Warehouse/GetDistrictsByWarehouse": {
+      "get": {
+        "tags": [
+          "Warehouse"
+        ],
+        "parameters": [
+          {
+            "name": "warehouseId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetDistrictDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetDistrictDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetDistrictDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Warehouse/GetFacilityTypes": {
+      "get": {
+        "tags": [
+          "Warehouse"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFacilityTypeDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFacilityTypeDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFacilityTypeDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Warehouse/GetFacilities": {
+      "get": {
+        "tags": [
+          "Warehouse"
+        ],
+        "parameters": [
+          {
+            "name": "districtId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facilityTypeId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFacilityDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFacilityDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetFacilityDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Warehouse/GetFacilityDetails": {
+      "get": {
+        "tags": [
+          "Warehouse"
+        ],
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacilityDetailsDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacilityDetailsDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacilityDetailsDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Warehouse/FreezeFacilityLocation": {
+      "post": {
+        "tags": [
+          "Warehouse"
+        ],
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Warehouse/GetDispatchTrackingReport": {
+      "get": {
+        "tags": [
+          "Warehouse"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "districtId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "whid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "facilityId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "vehicleId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "travaleId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "indentId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DispatchTrackingDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DispatchTrackingDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DispatchTrackingDTO"
                   }
                 }
               }
@@ -23761,6 +24463,116 @@
         },
         "additionalProperties": false
       },
+      "DispatchTrackingDTO": {
+        "type": "object",
+        "properties": {
+          "facilityid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "districtname": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuevoucher": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuevoucherdt": {
+            "type": "string",
+            "nullable": true
+          },
+          "nositems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "travelvoucherissuedt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ispartialrelease": {
+            "type": "string",
+            "nullable": true
+          },
+          "indentno": {
+            "type": "string",
+            "nullable": true
+          },
+          "indendt": {
+            "type": "string",
+            "nullable": true
+          },
+          "vid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "travaleid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "voucherid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "indentid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vehicalno": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilitytypeid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "parentfacid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "parentfacility": {
+            "type": "string",
+            "nullable": true
+          },
+          "plongitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "platitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "dropdate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ackowledgemobno": {
+            "type": "string",
+            "nullable": true
+          },
+          "ackowledgedesignation": {
+            "type": "string",
+            "nullable": true
+          },
+          "ackowledgename": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DistCGMSCSupplyDTO": {
         "type": "object",
         "properties": {
@@ -24762,6 +25574,65 @@
         },
         "additionalProperties": false
       },
+      "EMDPOListDTO": {
+        "type": "object",
+        "properties": {
+          "mcid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "ponoid": {
+            "type": "number",
+            "format": "double"
+          },
+          "pono": {
+            "type": "string",
+            "nullable": true
+          },
+          "poDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "budgetId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sanctionId": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "sanctionNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "sanctionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "grossAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "supplierName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "EMDReleaseddetDTO": {
         "type": "object",
         "properties": {
@@ -25007,6 +25878,37 @@
           "nosindent": {
             "type": "integer",
             "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacilityDetailsDTO": {
+        "type": "object",
+        "properties": {
+          "facilityid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "iswhfreezlat": {
+            "type": "string",
+            "nullable": true
+          },
+          "travaleid": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -25848,6 +26750,20 @@
         },
         "additionalProperties": false
       },
+      "GetDistrictDTO": {
+        "type": "object",
+        "properties": {
+          "districtid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "districtname": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GetEnterExitVhicleDTO": {
         "type": "object",
         "properties": {
@@ -25882,6 +26798,34 @@
             "nullable": true
           },
           "warehousename": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetFacilityDTO": {
+        "type": "object",
+        "properties": {
+          "facilityid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetFacilityTypeDTO": {
+        "type": "object",
+        "properties": {
+          "facilitytypeid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "factype": {
             "type": "string",
             "nullable": true
           }
@@ -33389,6 +34333,33 @@
         },
         "additionalProperties": false
       },
+      "selectFileReceiverDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "emailId": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "StatusDetailDTO": {
         "type": "object",
         "properties": {
@@ -35299,6 +36270,54 @@
             "nullable": true
           },
           "facilityid": {
+            "type": "string",
+            "nullable": true
+          },
+          "vehicalno": {
+            "type": "string",
+            "nullable": true
+          },
+          "plongitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "platitude": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentFacility": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentFacid": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilitytypeid": {
+            "type": "string",
+            "nullable": true
+          },
+          "inchargeMobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "inchargename": {
+            "type": "string",
+            "nullable": true
+          },
+          "inchargeDesignation": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentInchargeMobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentInchargename": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentInchargeDesignation": {
             "type": "string",
             "nullable": true
           }

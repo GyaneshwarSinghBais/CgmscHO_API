@@ -27,7 +27,26 @@ namespace CgmscHO_API.Models
         public string? LATITUDE { get; set; }
         public string? TRAVALEID { get; set; }
         public string? FACILITYID { get; set; }
-        
+        public string? VEHICALNO { get; set; }
+
+
+        public string? PLONGITUDE { get; set; }
+        public string? PLATITUDE { get; set; }
+        public string? ParentFacility { get; set; }
+        public string? ParentFacid { get; set; }
+        public string? facilitytypeid { get; set; }
+
+        public string? InchargeMobile { get; set; }
+        public string? Inchargename { get; set; }
+        public string? InchargeDesignation { get; set; }
+
+        public string? ParentInchargeMobile { get; set; }
+        public string? ParentInchargename { get; set; }
+        public string? ParentInchargeDesignation { get; set; }
+
+
+
+
 
 
     }

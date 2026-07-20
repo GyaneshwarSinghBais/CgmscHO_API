@@ -482,7 +482,7 @@ whready,whUQC,WHPipeline,SKUAprxRate
 ,TotalNOCTaken,RCcount,IssuedCount,IssuedMorethanAI,NoIssued_andNOCTaken,OnlyPipeline,LPOGen,readystkavailabe,lpovalue
 ,IssuePEr
 , case when BalancetobeLiftQTY=0 then 100 
-else case when (whready+whUQC+WHPipeline)>0 and BalancetobeLiftQTY>0 then Round((whready+whUQC+WHPipeline)/BalancetobeLiftQTY*100,0)    else
+else case when (whready+whUQC+WHPipeline)>0 and BalancetobeLiftQTY>0 then Round((whready+whUQC+WHPipeline)/BalancetobeLiftQTY*100,0)    else 
 0 end end  as availbleper,
  case when BalancetobeLiftQTY=0 then 100 
 else case when (OtherWHReady+OtherWHUQC)>0 and BalancetobeLiftQTY>0 then Round((OtherWHReady+OtherWHUQC)/BalancetobeLiftQTY*100,0)    else
@@ -697,12 +697,18 @@ order by mcid ";
         }
 
         [HttpGet("TravelVouchers")]
-        public async Task<ActionResult<IEnumerable<TransportVoucherDTO>>> TravelVouchers(string vid, string indentId)
+        public async Task<ActionResult<IEnumerable<TransportVoucherDTO>>> TravelVouchers(string vid, string indentId,string whid,string whvehicle)
         {
 
 
             string whremid = "";
             string whIndentId = "";
+            string whWarehouseid = "";
+
+            if (whid != "0")
+            {
+                whWarehouseid = " and tb.WAREHOUSEID = " + whid;
+            }
 
             if (indentId != "0")
             {
@@ -722,8 +728,11 @@ order by mcid ";
                 whremid = " and tb.VID=" + vid;
             }
 
-
-
+            string whvhicleWH = "and tbi.ENTRYDATE >= '01-Apr-2026'";
+            if (whvehicle == "Yes")
+            {
+                whvhicleWH = "and tbi.ENTRYDATE > '04-Jul-2026'";
+            }
 
 
             string qry = @" select f.facilityid, f.facilityname,d.districtname,tbb.indentno as IssueVoucher,to_char(tbb.indentdate,'dd-MM-yyyy') IssueVoucherDT,nositems
@@ -731,8 +740,15 @@ order by mcid ";
 case when tbi.IspartialRelease ='Y' then 'Partialy Dispatch of Voucher' else 'Fully Dispatch of Voucher' end IspartialRelease
 ,noc.nocnumber as IndentNo,to_char(noc.nocdate,'dd-MM-yyyy') IndenDT
 ,tb.VID,tbi.travaleid,tb.voucherid,tbb.indentid,f.facilityname||'-'||tbb.indentno as details
-,f.LONGITUDE,f.LATITUDE
+,f.LONGITUDE,f.LATITUDE,v.VEHICALNO,f.facilitytypeid,fp.facilityid as ParentFacid,fp.facilityname as ParentFacility,fp.LONGITUDE as PLONGITUDE ,fp.LATITUDE as PLATITUDE
+
+, case when f.facilitytypeid=377 then f.PHONE1 else fh.FOOTER3 end as InchargeMobile, case when f.facilitytypeid=377 then f.CONTACTPERSONNAME else fh.FOOTER2 end as Inchargename
+,case when f.facilitytypeid=377 then 'Consultant' else fh.FOOTER1 end as InchargeDesignation
+,pfh.FOOTER3 ParentInchargeMobile
+,pfh.FOOTER2 ParentInchargename
+,pfh.FOOTER1 ParentInchargeDesignation
 from TBTRAVALEMASTER tb 
+inner join masvehical v on v.vid=tb.vid
 inner join TBINDENTTRAVALE tbi on tbi.voucherid=tb.voucherid
 inner join tbindents tbb on tbb.indentid=tbi.indentid
 inner join 
@@ -742,9 +758,17 @@ group by tbi.INDENTID
 ) it on it.INDENTID=tbb.indentid
 left outer join mascgmscnoc noc on noc.nocid=tbb.nocid and noc.status='C'
 inner join masfacilities f on f.facilityid=tbb.facilityid
+left outer join masfacilities fp on fp.facilityid=f.PHC_ID
+left outer join usrusers u on u.facilityid=f.facilityid
+left outer join masfacheaderfooter fh on fh.userid=u.userid
+
+
+left outer join usrusers pu on pu.facilityid=fp.facilityid
+left outer join masfacheaderfooter pfh on pfh.userid=pu.userid
+
 inner join masdistricts d on d.districtid=f.districtid
-where tbb.status='C' and tb.status='C' " + whremid + @" " + whIndentId + @"
-and tbi.ENTRYDATE > '01-Dec-2024'
+where tbb.status='C' and tb.status='C'  " + whWarehouseid + @" " + whremid + @" " + whIndentId + @"
+"+ whvhicleWH + @"
 and tbi.ISDROP is null order by tbi.ENTRYDATE desc  ";
             var myList = _context.TransportVoucherDBSet
 .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
@@ -753,7 +777,7 @@ and tbi.ISDROP is null order by tbi.ENTRYDATE desc  ";
         }
 
         [HttpPut("updateTBIndentTravaleWH")]
-        public IActionResult UpdateTBIndentTravaleWH(long travelId, string? latitude, string? longitude, string dt1)
+        public IActionResult UpdateTBIndentTravaleWH(long travelId, string? latitude, string? longitude, string dt1,string parentfacid, string AckowledgeMobNo, string AckowledgeName, string Designation)
         {
             // Validate the date and time format (dd-MM-yyyy HH:mm:ss)
             if (!DateTime.TryParseExact(dt1, "dd-MM-yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
@@ -772,6 +796,7 @@ and tbi.ISDROP is null order by tbi.ENTRYDATE desc  ";
             DROPLONGITUDE = '{longitude}',
             DROPLATITUDE = '{latitude}',
             isDropbyAPL = 'Y'
+,DropParentFacID= '{parentfacid}', AckowledgeMobNo='{AckowledgeMobNo}', AckowledgeName = '{AckowledgeName}' ,AckowledgeDesignation = '{Designation}'
         WHERE TRAVALEID = {travelId}";
 
             // Execute the query
@@ -809,12 +834,12 @@ and tbi.ISDROP is null order by tbi.ENTRYDATE desc  ";
 
 
         [HttpPut("updateTBIndentTravale")]
-        public IActionResult updateTBIndentTravale(Int64 travelId, string? latitude, string? longitude)
+        public IActionResult updateTBIndentTravale(Int64 travelId, string? latitude, string? longitude,string parentfacid,string AckowledgeMobNo,string AckowledgeOTP, string AckowledgeName, string Designation)
         {
             string dt1 = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt");    
 
             
-            string qry = @" update TBINDENTTRAVALE set ISDROP = 'Y' ,DROPDATE = '" + dt1 + "',DROPLONGITUDE = '" + longitude + "',DROPLATITUDE = '" + latitude + @"' 
+            string qry = @" update TBINDENTTRAVALE set ISDROP = 'Y' ,DROPDATE = '" + dt1 + "',DROPLONGITUDE = '" + longitude + "',DROPLATITUDE = '" + latitude + @"' ,DropParentFacID= " + parentfacid + @", AckowledgeMobNo=" + AckowledgeMobNo + @", AckowledgeOTP = " + AckowledgeOTP + @",AckowledgeName = '" + AckowledgeName + @"' ,AckowledgeDesignation = '" + Designation + @"' 
                         where travaleid = " + travelId + "  ";
             _context.Database.ExecuteSqlRaw(qry);
             return Ok("Successfully Saved");
@@ -823,12 +848,12 @@ and tbi.ISDROP is null order by tbi.ENTRYDATE desc  ";
 
 
         [HttpPut("updateTBIndentTravale1")]
-        public IActionResult updateTBIndentTravale1(Int64 travelId, string? latitude, string? longitude, string? isSynced)
+        public IActionResult updateTBIndentTravale1(Int64 travelId, string? latitude, string? longitude, string? isSynced, string parentfacid, string AckowledgeMobNo, string AckowledgeName, string Designation)
         {
             string dt1 = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt");
 
 
-            string qry = @" update TBINDENTTRAVALE set ISDROP = 'Y' ,DROPDATE = '" + dt1 + "',DROPLONGITUDE = '" + longitude + "',DROPLATITUDE = '" + latitude + @"' ,ISSYNCED = '" + isSynced + @"'
+            string qry = @" update TBINDENTTRAVALE set ISDROP = 'Y' ,DROPDATE = '" + dt1 + "',DROPLONGITUDE = '" + longitude + "',DROPLATITUDE = '" + latitude + @"' ,ISSYNCED = '" + isSynced + @"', AckowledgeMobNo=" + AckowledgeMobNo + @"  ,DropParentFacID= " + parentfacid + @",AckowledgeName = '" + AckowledgeName + @"' ,AckowledgeDesignation = '" + Designation + @"' 
                         where travaleid = " + travelId + "  ";
             _context.Database.ExecuteSqlRaw(qry);
             return Ok("Successfully Saved");
@@ -1025,6 +1050,239 @@ where 1=1 and facilitytypeid not in (377,371) and f.isactive = 1  " + whIndent +
     .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
             return myList;
 
+        }
+
+        [HttpGet("GetDistrictsByWarehouse")]
+        public async Task<ActionResult<IEnumerable<GetDistrictDTO>>> GetDistrictsByWarehouse(string warehouseId)
+        {
+            string qry = "";
+
+            qry = @"select DISTRICTID, DISTRICTNAME
+            from masdistricts
+            where stateid = 1
+            and warehouseid = " + warehouseId + @"
+            order by DISTRICTNAME";
+
+            var myList = _context.GetDistrictDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToList();
+
+            return myList;
+        }
+
+        [HttpGet("GetFacilityTypes")]
+        public async Task<ActionResult<IEnumerable<GetFacilityTypeDTO>>> GetFacilityTypes()
+        {
+            string qry = @"select FACILITYTYPEID,
+                          FACILITYTYPECODE || '-' || FACILITYTYPEDESC as FACTYPE
+                   from masfacilitytypes
+                   order by ORDERDP";
+
+            var myList = _context.GetFacilityTypeDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToList();
+
+            return myList;
+        }
+
+        [HttpGet("GetFacilities")]
+        public async Task<ActionResult<IEnumerable<GetFacilityDTO>>> GetFacilities(string districtId, string facilityTypeId)
+        {
+            string whereClause = "";
+
+            if (facilityTypeId != "0")
+            {
+                whereClause = " and FACILITYTYPEID = " + facilityTypeId + " ";
+            }
+
+            string qry = @"select FACILITYID,
+                          FACILITYNAME
+                   from masfacilities
+                   where isactive = 1 "
+                           + whereClause +
+                           @" and districtid = " + districtId;
+
+            var myList = _context.GetFacilityDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToList();
+
+            return myList;
+        }
+
+        [HttpGet("GetFacilityDetails")]
+        public async Task<ActionResult<FacilityDetailsDTO>> GetFacilityDetails(string facilityId)
+        {
+            string qry = @"select f.FACILITYID,
+                          f.FACILITYNAME,
+                          LONGITUDE,
+                          LATITUDE,
+                          case
+                              when nvl(iswhfreezlat,'N')='Y'
+                                   or TRAVALEID is not null
+                              then 'Yes'
+                              else 'No'
+                          end as ISWHFREEZLAT,
+                          TRAVALEID
+                   from masfacilities f
+                   left outer join
+                   (
+                       select tb.facilityid,
+                              max(TRAVALEID) as TRAVALEID
+                       from tbtravalemaster tv
+                       inner join tbindenttravale tdv
+                           on tdv.VOUCHERID = tv.VOUCHERID
+                       inner join tbindents tb
+                           on tb.indentid = tdv.indentid
+                       where tv.status = 'C'
+                         and tdv.isdrop = 'Y'
+                         and tb.facilityid = " + facilityId + @"
+                         and DROPLONGITUDE is not null
+                         and DROPLATITUDE is not null
+                       group by tb.facilityid
+                   ) tv
+                   on tv.facilityid = f.facilityid
+                   where f.isactive = 1
+                     and f.FACILITYID = " + facilityId;
+
+            var data = _context.FacilityDetailsDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(data);
+        }
+
+        [HttpPost("FreezeFacilityLocation")]
+        public async Task<IActionResult> FreezeFacilityLocation(string facilityId)
+        {
+            string qry = @"update masfacilities
+                   set LONGITUDE = null,
+                       LATITUDE = null,
+                       ISWHFREEZLAT = 'Y'
+                   where facilityid = " + facilityId;
+
+            await _context.Database.ExecuteSqlRawAsync(qry);
+
+            return Ok("Facility location frozen successfully.");
+        }
+
+        [HttpGet("GetDispatchTrackingReport")]
+        public async Task<ActionResult<IEnumerable<DispatchTrackingDTO>>> GetDispatchTrackingReport(
+    string fromDate = "0",
+    string toDate = "0",
+    string districtId = "0",
+    string whid = "0",
+    string facilityId = "0",
+    string vehicleId = "0",
+    string travaleId = "0",
+    string indentId = "0")
+        {
+            string whereClause = "";
+
+            if (districtId != "0")
+                whereClause += " and d.districtid = " + districtId;
+
+            if (whid != "0")
+                whereClause += " and tb.warehouseid = " + whid;
+
+            if (facilityId != "0")
+                whereClause += " and f.facilityid = " + facilityId;
+
+            if (vehicleId != "0")
+                whereClause += " and tb.vid = " + vehicleId;
+
+            if (travaleId != "0")
+                whereClause += " and tbi.travaleid = " + travaleId;
+
+            if (indentId != "0")
+                whereClause += " and tbb.indentid = " + indentId;
+
+            if (fromDate != "0" && toDate != "0")
+            {
+                whereClause += @" and trunc(tbi.DROPDATE)
+                           between to_date('" + fromDate + @"','dd-MM-yyyy')
+                           and to_date('" + toDate + @"','dd-MM-yyyy')";
+            }
+
+            string qry = @"
+select
+    f.facilityid,
+    f.facilityname,
+    d.districtname,
+    tbb.indentno as IssueVoucher,
+    to_char(tbb.indentdate,'dd-MM-yyyy') IssueVoucherDT,
+    nositems,
+    tbi.ENTRYDATE as TravelVoucherIssueDT,
+    case
+        when tbi.IspartialRelease ='Y'
+        then 'Partialy Dispatch of Voucher'
+        else 'Fully Dispatch of Voucher'
+    end IspartialRelease,
+    noc.nocnumber as IndentNo,
+    to_char(noc.nocdate,'dd-MM-yyyy') IndenDT,
+    tb.VID,
+    tbi.travaleid,
+    tb.voucherid,
+    tbb.indentid,
+    v.VEHICALNO,
+    f.facilitytypeid,
+    fp.facilityid as ParentFacid,
+    fp.facilityname as ParentFacility,
+    tbi.DROPLONGITUDE as PLONGITUDE,
+    tbi.DROPLATITUDE as PLATITUDE,
+    DROPDATE,
+    ACKOWLEDGEMOBNO,
+    ACKOWLEDGEDESIGNATION,
+    ACKOWLEDGENAME
+from TBTRAVALEMASTER tb
+inner join masvehical v
+    on v.vid = tb.vid
+inner join TBINDENTTRAVALE tbi
+    on tbi.voucherid = tb.voucherid
+inner join tbindents tbb
+    on tbb.indentid = tbi.indentid
+inner join
+(
+    select
+        tbi.INDENTID,
+        count(distinct ITEMID) as nositems
+    from tbindentitems tbi
+    group by tbi.INDENTID
+) it
+    on it.INDENTID = tbb.indentid
+left outer join mascgmscnoc noc
+    on noc.nocid = tbb.nocid
+   and noc.status = 'C'
+inner join masfacilities f
+    on f.facilityid = tbb.facilityid
+left outer join usrusers u
+    on u.facilityid = f.facilityid
+left outer join masfacheaderfooter fh
+    on fh.userid = u.userid
+left outer join masfacilities fp
+    on fp.facilityid = f.PHC_ID
+inner join masdistricts d
+    on d.districtid = f.districtid
+where tbb.status='C'
+  and tb.status='C'
+  and tbi.ISDROP='Y'
+"
+        + whereClause +
+        @"
+order by tbi.ENTRYDATE desc 
+--FETCH FIRST 5 ROWS ONLY 
+";
+
+            var result = _context.DispatchTrackingDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToList();
+
+            return result;
         }
 
     }

@@ -5,6 +5,7 @@ using CgmscHO_API.DirectorateDTO;
 using CgmscHO_API.DistrictDTO;
 using CgmscHO_API.DistrictDTOs;
 using CgmscHO_API.DTO;
+using CgmscHO_API.EmdDTO;
 using CgmscHO_API.FacilityDTO;
 using CgmscHO_API.FinanceDTO;
 using CgmscHO_API.HodDTO;
@@ -440,7 +441,14 @@ namespace CgmscHO_API.Models
         public DbSet<GetWHStockItemsDTO> getGetWHStockItemsDbSet { get; set; }
         public DbSet<getFitUnfitDTO> getFitUnfitDbSet { get; set; }
         public DbSet<getFitUnfitSummaryDTO> getFitUnfitSummaryDbSet { get; set; }
-        
+        public DbSet<EMDPOListDTO> GetEMDPOListDTODbSet { get; set; }
+        public DbSet<selectFileReceiverDTO> selectFileReceiverDbSet { get; set; }
+        public DbSet<GetDistrictDTO> GetDistrictDbSet { get; set; }
+        public DbSet<GetFacilityTypeDTO> GetFacilityTypeDbSet { get; set; }
+        public DbSet<GetFacilityDTO> GetFacilityDbSet { get; set; }
+        public DbSet<FacilityDetailsDTO> FacilityDetailsDbSet { get; set; }
+
+        public DbSet<DispatchTrackingDTO> DispatchTrackingDbSet { get; set; }
 
 
 
@@ -506,7 +514,14 @@ namespace CgmscHO_API.Models
             modelBuilder.Entity<DmeFacNocDetailDTO>().HasNoKey();
             modelBuilder.Entity<getFitUnfitDTO>().HasNoKey();
             modelBuilder.Entity<getFitUnfitSummaryDTO>().HasNoKey();
-            
+            modelBuilder.Entity<EMDPOListDTO>().HasNoKey();
+            modelBuilder.Entity<selectFileReceiverDTO>().HasNoKey();
+            modelBuilder.Entity<GetDistrictDTO>().HasNoKey();
+            modelBuilder.Entity<GetFacilityTypeDTO>().HasNoKey();
+            modelBuilder.Entity<GetFacilityDTO>().HasNoKey();
+            modelBuilder.Entity<FacilityDetailsDTO>().HasNoKey();
+            modelBuilder.Entity<DispatchTrackingDTO>().HasNoKey();
+
 
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");
 

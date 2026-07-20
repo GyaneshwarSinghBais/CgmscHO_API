@@ -143,6 +143,14 @@ namespace CgmscHO_API.Controllers
             return sRandomOTP;
         }
 
+        [HttpPost("getDoctorOTPSaved")]
+        public string getDoctorOTPSaved(string userid, string ipAddress)
+        {
+            FacOperations fc = new FacOperations(_context);
+            string sRandomOTP = fc.insertUpdateOTPDoctor(userid, ipAddress);
+            return sRandomOTP;
+        }
+
         [HttpGet("VerifyOTPLogin")]
         public IActionResult VerifyOTPLogin(string otp, string userid)
         {

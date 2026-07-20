@@ -352,8 +352,20 @@ from usrusers u
 left outer join massuppliers d on d.supplierid = u.supplierid
  inner join usrroles ur on ur.roleid = u.roleid
 left outer join masfacheaderfooter h on h.userid = u.userid
-where ur.roleid  in (427)
+where ur.roleid  in (427,468)
 order by d.suppliername ";
+            }
+            else if (Usertype == "CMHO")
+            {
+                qry = @" select d.districtname as textfield,u.userid,u.STATUS,u.emailid,firstname,lastname,u.orderid,'District Collector' as SIDesig,h.footer2 as SIName,
+ nvl(h.FOOTER3, u.DEPMOBILE)  SIMobile
+,'' as DEPEMAIL ,ur.rolename,ur.roleid, d.warehouseid,d.districtid,d.HimisDistrictid,0 as  BLID
+from usrusers u
+inner join masdistricts d on d.districtid = u.districtid
+ inner join usrroles ur on ur.roleid = u.roleid
+left outer join masfacheaderfooter h on h.userid = u.userid
+where ur.roleid  in (439)
+order by d.districtname ";
             }
 
             else

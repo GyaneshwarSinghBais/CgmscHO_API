@@ -871,7 +871,7 @@ select  mc.mcid,mc.mcategory, m.itemid,tb.facilityid
       string IndentfromDT,
       string Indenttodt,
       string hodid,
-      string mcid)
+      string mcid,string VID,string WHID)
         {
             string whereyearid = "";
             string whyearid = "";
@@ -888,10 +888,66 @@ select  mc.mcid,mc.mcategory, m.itemid,tb.facilityid
             if (hodid != "0")
                 whclause = whclause + " and  t.hodid = " + hodid;
             string whmcclause = "";
+
             if (mcid != "0")
                 whmcclause = " and mc.mcid =" + mcid;
+
+            string whWAREHOSUEID = "";
+
+            if (WHID != "0")
+                whWAREHOSUEID = " AND  w.warehouseid =" + WHID;
+
+            string whVEHICLEid = "";
+            if (VID != "0")
+                whVEHICLEid = " AND   VH.VID  =" + VID;
+
+
+
             string qry = "";
-            qry = "  select count(distinct facilityid) as nooffacIndented,count(distinct NOCID) as nosindent,count(distinct indentid) as IndentIssued,\r\nsum(dropindentid) as dropindentid,count(distinct dropfacid)-1 as dropfac\r\nfrom \r\n(\r\nselect ind.NOCID,ind.facilityid,d.districtid,w.warehousename,w.warehouseid,d.districtname,nvl(nositems,0) IssueItems, case when nvl(nositems,0)>0 then 1 else 0 end as IndentCleared\r\n,tbi.indentid,case when dropindentid is not null then 1 else 0 end as dropindentid,\r\ncase when DROPDATE is not null then round((to_date(to_char(DROPDATE,'dd-MM-yyyy'),'dd-MM-yyyy'))-ind.nocdate,0) else 0 end  as DaysTakenafterIssue\r\n,case when dropindentid is not null then ind.facilityid else 0 end as dropfacid\r\nfrom mascgmscnoc ind \r\ninner join \r\n(\r\nselect distinct msi.nocid as IndentNOCID from  mascgmscnocitems msi\r\n inner join masItems MI on mi.itemid=msi.itemid\r\n  inner join masitemcategories ic on ic.categoryid = mi.categoryid\r\n inner join masitemmaincategory mc on mc.MCID=ic.MCID\r\nwhere nvl(BOOKEDQTY,0)>0  " + whmcclause + "\r\n) indi on indi.IndentNOCID=ind.nocid\r\ninner join masfacilities f on f.facilityid=ind.facilityid\r\n         inner join masfacilitytypes t on t.facilitytypeid = f.facilitytypeid\r\ninner join masdistricts d on d.districtid=f.districtid\r\nINNER JOIN maswarehouses w on w.warehouseid=d.warehouseid\r\ninner join\r\n(\r\nselect count(VID) as nosvehicle,vh.warehouseid from  masvehical vh \r\nwhere  ISACTIVE='Y'\r\ngroup by vh.warehouseid \r\n\r\n) vh on vh.warehouseid=w.warehouseid \r\n\r\nleft outer join \r\n(\r\nselect tb.nocid,tb.indentid,nositems,di.dropindentid,DROPDATE from tbindents tb\r\nleft outer join\r\n(\r\nSELECT INDENTID AS dropindentid,MIN(ENTRYDATE) AS DROPDATE FROM TBINDENTTRAVALE \r\nWHERE ISDROP='Y' GROUP BY INDENTID\r\n) di on di.dropindentid=tb.indentid\r\n\r\ninner join \r\n(\r\nselect tbi.INDENTID,count(distinct ITEMID) as nositems from tbindentitems tbi\r\ngroup by tbi.INDENTID\r\n) tbi on tbi.INDENTID=tb.indentid\r\nwhere tb.nocid is not null and tb.issuetype='NO' and tb.status='C'\r\n) tbi on tbi.nocid=ind.nocid\r\n\r\nwhere  ind.status='C' " + datebetween + " " + whclause + "\r\n\r\n)  ";
+           
+
+            qry = @"select count(distinct facilityid) as nooffacIndented,count(distinct NOCID) as nosindent,count(distinct indentid) as IndentIssued,
+sum(dropindentid) as dropindentid,count(distinct dropfacid) - 1 as dropfac
+from
+(
+select ind.NOCID, ind.facilityid, d.districtid, w.warehousename, w.warehouseid, d.districtname, nvl(nositems, 0) IssueItems, case when nvl(nositems, 0) > 0 then 1 else 0 end as IndentCleared
+,tbi.indentid,case when dropindentid is not null then 1 else 0 end as dropindentid,
+case when DROPDATE is not null then round((to_date(to_char(DROPDATE,'dd-MM-yyyy'),'dd-MM-yyyy'))-ind.nocdate,0) else 0 end as DaysTakenafterIssue
+,case when dropindentid is not null then ind.facilityid else 0 end as dropfacid
+from mascgmscnoc ind
+inner
+join
+(
+select distinct msi.nocid as IndentNOCID from mascgmscnocitems msi
+ inner
+                                         join masItems MI on mi.itemid = msi.itemid
+  inner
+                                         join masitemcategories ic on ic.categoryid = mi.categoryid
+ inner
+                                         join masitemmaincategory mc on mc.MCID = ic.MCID
+where nvl(BOOKEDQTY, 0) > 0
+) indi on indi.IndentNOCID = ind.nocid
+inner join masfacilities f on f.facilityid = ind.facilityid
+         inner join masfacilitytypes t on t.facilitytypeid = f.facilitytypeid
+inner join masdistricts d on d.districtid = f.districtid
+INNER JOIN maswarehouses w on w.warehouseid = d.warehouseid
+inner join
+(
+select count(VID) as nosvehicle,vh.warehouseid from  masvehical vh
+where  1 = 1  AND ISACTIVE = 'Y'  "+ whVEHICLEid + @"
+group by vh.warehouseid ) vh on vh.warehouseid = w.warehouseid 
+
+left outer join ( select tb.nocid, tb.indentid, nositems, di.dropindentid, DROPDATE from tbindents tb 
+                    left outer join 
+                    ( SELECT INDENTID AS dropindentid, MIN(ENTRYDATE) AS DROPDATE FROM TBINDENTTRAVALE WHERE ISDROP = 'Y'
+                    GROUP BY INDENTID ) di     on di.dropindentid = tb.indentid 
+                    inner join (select tbi.INDENTID, count(distinct ITEMID) as nositems from tbindentitems tbi group by tbi.INDENTID ) tbi on tbi.INDENTID = tb.indentid 
+where tb.nocid is not null         and tb.issuetype = 'NO' and tb.status = 'C') tbi on tbi.nocid = ind.nocid where ind.status = 'C'    "+ whWAREHOSUEID + @"
+                   "+ datebetween + @"  
+
+)  ";
+            
+            
             List<DeliveryMonthDTsDTO> myList = this._context.DeliveryMonthDbSet.FromSqlInterpolated<DeliveryMonthDTsDTO>(FormattableStringFactory.Create(qry)).ToList<DeliveryMonthDTsDTO>();
             ActionResult<IEnumerable<DeliveryMonthDTsDTO>> actionResult = (ActionResult<IEnumerable<DeliveryMonthDTsDTO>>)myList;
             whereyearid = (string)null;

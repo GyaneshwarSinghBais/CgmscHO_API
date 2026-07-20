@@ -4024,6 +4024,16 @@
         "Name": "mcid",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "VID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "WHID",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -5252,6 +5262,151 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DTO.EMDSummaryDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.EMD",
+    "Method": "fileForwarding",
+    "RelativePath": "api/EMD/fileForwarding",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "poNoId",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "toUserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "fromUserId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.EMD",
+    "Method": "ForwardToMD",
+    "RelativePath": "api/EMD/ForwardToMD",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "poNoId",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.EMD",
+    "Method": "GetEMDPOList",
+    "RelativePath": "api/EMD/getemdpolist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.EmdDTO.EMDPOListDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.EMD",
+    "Method": "getemdpolistReturnFromMD",
+    "RelativePath": "api/EMD/getemdpolistReturnFromMD",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.EmdDTO.EMDPOListDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.EMD",
+    "Method": "ReceivedFromMD",
+    "RelativePath": "api/EMD/ReceivedFromMD",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "poNoId",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.EMD",
+    "Method": "selectFileReceiver",
+    "RelativePath": "api/EMD/selectFileReceiver",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.EmdDTO.selectFileReceiverDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -9393,6 +9548,37 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.LoginController",
+    "Method": "getDoctorOTPSaved",
+    "RelativePath": "api/Login/getDoctorOTPSaved",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ipAddress",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.LoginController",
     "Method": "getOTPSaved",
     "RelativePath": "api/Login/getOTPSaved",
     "HttpMethod": "POST",
@@ -12216,6 +12402,186 @@
   },
   {
     "ContainingType": "CgmscHO_API.Controllers.Warehouse",
+    "Method": "FreezeFacilityLocation",
+    "RelativePath": "api/Warehouse/FreezeFacilityLocation",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facilityId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.Warehouse",
+    "Method": "GetDispatchTrackingReport",
+    "RelativePath": "api/Warehouse/GetDispatchTrackingReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "districtId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "whid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facilityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vehicleId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "travaleId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.WarehouseDTO.DispatchTrackingDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.Warehouse",
+    "Method": "GetDistrictsByWarehouse",
+    "RelativePath": "api/Warehouse/GetDistrictsByWarehouse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "warehouseId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.WarehouseDTO.GetDistrictDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.Warehouse",
+    "Method": "GetFacilities",
+    "RelativePath": "api/Warehouse/GetFacilities",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "districtId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facilityTypeId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.WarehouseDTO.GetFacilityDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.Warehouse",
+    "Method": "GetFacilityDetails",
+    "RelativePath": "api/Warehouse/GetFacilityDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facilityId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CgmscHO_API.WarehouseDTO.FacilityDetailsDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.Warehouse",
+    "Method": "GetFacilityTypes",
+    "RelativePath": "api/Warehouse/GetFacilityTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.WarehouseDTO.GetFacilityTypeDTO, CgmscHO_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CgmscHO_API.Controllers.Warehouse",
     "Method": "GetLatLong",
     "RelativePath": "api/Warehouse/GetLatLong",
     "HttpMethod": "GET",
@@ -12581,6 +12947,16 @@
         "Name": "indentId",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "whid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "whvehicle",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -12617,6 +12993,31 @@
         "Name": "longitude",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "parentfacid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AckowledgeMobNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AckowledgeOTP",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AckowledgeName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Designation",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -12648,6 +13049,26 @@
         "Name": "isSynced",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "parentfacid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AckowledgeMobNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AckowledgeName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Designation",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -12677,6 +13098,26 @@
       },
       {
         "Name": "dt1",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "parentfacid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AckowledgeMobNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AckowledgeName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Designation",
         "Type": "System.String",
         "IsRequired": false
       }

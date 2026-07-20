@@ -1,23 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CgmscHO_API.DTO;
+using CgmscHO_API.EmdDTO;
+using CgmscHO_API.HODTO;
+using CgmscHO_API.Models;
+using CgmscHO_API.Utility;
+using MessagePack;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO.Pipelines;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using CgmscHO_API.Models;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
-using MessagePack;
-using System.Net.NetworkInformation;
-using System.IO.Pipelines;
+using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using CgmscHO_API.HODTO;
-using CgmscHO_API.Utility;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Drawing;
-using System.Net;
-using CgmscHO_API.DTO;
 //using Broadline.Controls;
 //using CgmscHO_API.Utility;
 namespace CgmscHO_API.Controllers
@@ -263,6 +265,358 @@ order by chequdta desc
 
         }
 
+
+        [HttpGet("getemdpolist")]
+        public async Task<ActionResult<IEnumerable<EMDPOListDTO>>> GetEMDPOList(string mcid)
+        {
+
+            string whMCId = "";
+            if (mcid != "0")
+            {
+                whMCId = " and mc.mcid = " + mcid;
+            }
+
+            string qry = @" 
+
+    select 
+        mc.mcid,
+        mc.mcategory as category,
+        p.ponoid,
+        p.pono,
+        p.soissuedate as podate,
+        fm.FILEID as fileno,
+        p.budgetid,
+        s.SANCTIONID,
+        s.SANCTIONNO,
+        s.SANCTIONDATE,
+        round(s.totnetamount,0) grossamount,
+        sup.suppliername
+    from soorderplaced p
+
+    inner join soordereditems i 
+        on i.ponoid = p.ponoid
+
+    inner join blpsanctions s 
+        on s.ponoid = p.ponoid
+
+    inner join massuppliers sup 
+        on sup.supplierid = p.supplierid
+
+    inner join masfilemovement fm 
+        on fm.ponoid = p.ponoid
+
+    inner join masitems m 
+        on m.itemid = i.itemid
+
+    inner join masitemcategories c 
+        on c.categoryid = m.categoryid
+
+    inner join masitemmaincategory mc 
+        on mc.MCID = c.MCID 
+      left outer join( select distinct ponoid as sentponoid from masfilemovement fm where fm.remarks = 'Forward to MD' and PRESENTFILEFLAG = 'Y' and TOUSERID = 4474) fmsent on fmsent.sentponoid =  p.ponoid
+    where s.status = 'IN' 
+        "+ whMCId + @"
+        and s.SANCTIONDATE >= TO_DATE('01-APR-26','DD-MON-YY')
+      
+        and fm.presentfileflag = 'Y'
+and sentponoid is NULL
+    order by s.SANCTIONDATE
+    ";
+
+            var myList = await _context.GetEMDPOListDTODbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToListAsync();
+
+            return myList;
+        }
+
+        [HttpPost("ForwardToMD")]
+        public async Task<IActionResult> ForwardToMD(DateTime toDate, decimal poNoId)
+        {
+            // Step 1 : Update old present file flag
+            string updateQry = $@"
+    
+        update masfilemovement 
+        set PRESENTFILEFLAG = 'N' 
+        where PONOID = {poNoId}
+    
+    ";
+
+            await _context.Database.ExecuteSqlRawAsync(updateQry);
+
+
+            // Step 2 : Insert new movement entry
+            string insertQry = $@"
+
+        insert into masfilemovement
+        (
+            USERID,
+            TODATE,
+            ENTRYDT,
+            REMARKS,
+            PRESENTFILEFLAG,
+            TOUSERID,
+            FLAG,
+            PONOID
+        )
+        values
+        (
+            2994,
+            TO_DATE('{toDate:dd-MMM-yyyy}','DD-MON-YYYY'),
+            SYSDATE,
+            'Forward to MD',
+            'Y',
+            4474,
+            'S',
+            {poNoId}
+        )
+
+    ";
+
+            await _context.Database.ExecuteSqlRawAsync(insertQry);
+
+            return Ok("Forwarded To MD Successfully");
+        }
+
+        [HttpPost("ReceivedFromMD")]
+        public async Task<IActionResult> ReceivedFromMD(DateTime toDate, decimal poNoId)
+        {
+            // Step 1 : Update old present file flag
+            string updateQry = $@"
+    
+        update masfilemovement 
+        set PRESENTFILEFLAG = 'N' 
+        where PONOID = {poNoId}
+    
+    ";
+
+            await _context.Database.ExecuteSqlRawAsync(updateQry);
+
+
+            // Step 2 : Insert new movement entry
+            string insertQry = $@"
+
+        insert into masfilemovement
+        (
+            USERID,
+            TODATE,
+            ENTRYDT,
+            REMARKS,
+            PRESENTFILEFLAG,
+            TOUSERID,
+            FLAG,
+            PONOID
+        )
+        values
+        (
+            4474,
+            TO_DATE('{toDate:dd-MMM-yyyy}','DD-MON-YYYY'),
+            SYSDATE,
+            'Received from MD',
+            'Y',
+            2994,
+            'S',
+            {poNoId}
+        )
+
+    ";
+
+            await _context.Database.ExecuteSqlRawAsync(insertQry);
+
+            return Ok("Received from MD Successfully");
+        }
+
+
+
+        [HttpGet("getemdpolistReturnFromMD")]
+        public async Task<ActionResult<IEnumerable<EMDPOListDTO>>> getemdpolistReturnFromMD(string mcid)
+        {
+            string whMCId = "";
+                if(mcid != "0")
+                {
+                    whMCId = " and mc.mcid = " + mcid;
+            }
+
+            string qry = @"  
+
+    select 
+        mc.mcid,
+        mc.mcategory as category,
+        p.ponoid,
+        p.pono,
+        p.soissuedate as podate,
+        fm.FILEID as fileno,
+        p.budgetid,
+        s.SANCTIONID,
+        s.SANCTIONNO,
+        s.SANCTIONDATE,
+        round(s.totnetamount,0) grossamount,
+        sup.suppliername
+    from soorderplaced p
+
+    inner join soordereditems i 
+        on i.ponoid = p.ponoid
+    inner join masfilemovement fm on fm.PONOID = p.ponoid and fm.remarks = 'Forward to MD' and PRESENTFILEFLAG = 'Y' and TOUSERID = 4474
+    inner join blpsanctions s 
+        on s.ponoid = p.ponoid
+
+    inner join massuppliers sup 
+        on sup.supplierid = p.supplierid
+
+--    inner join masfilemovement fm 
+--        on fm.ponoid = p.ponoid
+
+    inner join masitems m 
+        on m.itemid = i.itemid
+
+    inner join masitemcategories c 
+        on c.categoryid = m.categoryid
+
+    inner join masitemmaincategory mc 
+        on mc.MCID = c.MCID 
+
+    where s.status = 'IN' 
+        "+ whMCId + @"
+        and s.SANCTIONDATE >= TO_DATE('01-APR-26','DD-MON-YY')
+
+    order by s.SANCTIONDATE
+    ";
+
+            var myList = await _context.GetEMDPOListDTODbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToListAsync();
+
+            return myList;
+        }
+
+
+        //    [HttpPost("fileForwarding")]
+        //    public async Task<IActionResult> fileForwarding(DateTime toDate, decimal poNoId,string toUserId, string fromUserId)
+        //    {
+        //        // Step 1 : Update old present file flag
+        //        string updateQry = $@"
+
+        //    update masfilemovement 
+        //    set PRESENTFILEFLAG = 'N' 
+        //    where PONOID = {poNoId}
+
+        //";
+
+        //        await _context.Database.ExecuteSqlRawAsync(updateQry);
+
+
+        //        // Step 2 : Insert new movement entry
+        //        string insertQry = $@"
+
+        //    insert into masfilemovement
+        //    (
+        //        USERID,
+        //        TODATE,
+        //        ENTRYDT,
+        //        REMARKS,
+        //        PRESENTFILEFLAG,
+        //        TOUSERID,
+        //        FLAG,
+        //        PONOID
+        //    )
+        //    values
+        //    (
+        //        "+ fromUserId + @",
+        //        TO_DATE('{toDate:dd-MMM-yyyy}','DD-MON-YYYY'),
+        //        SYSDATE,
+        //        'Received from MD',
+        //        'Y',
+        //        "+ toUserId + @",
+        //        'S',
+        //        {poNoId}
+        //    )
+
+        //";
+
+        //        await _context.Database.ExecuteSqlRawAsync(insertQry);
+
+        //        return Ok("Received and Send Other Successfully");
+        //    }
+
+
+
+        [HttpPost("fileForwarding")]
+        public async Task<IActionResult> fileForwarding(
+    DateTime toDate,
+    decimal poNoId,
+    string toUserId,
+    string fromUserId)
+        {
+            // Step 1 : Update old present file flag
+            string updateQry = @"
+        UPDATE masfilemovement
+        SET PRESENTFILEFLAG = 'N'
+        WHERE PONOID = :poNoId";
+
+            await _context.Database.ExecuteSqlRawAsync(
+                updateQry,
+                new OracleParameter("poNoId", poNoId)
+            );
+
+            // Step 2 : Insert new movement entry
+            string insertQry = @"
+        INSERT INTO masfilemovement
+        (
+            USERID,
+            TODATE,
+            ENTRYDT,
+            REMARKS,
+            PRESENTFILEFLAG,
+            TOUSERID,
+            FLAG,
+            PONOID
+        )
+        VALUES
+        (
+            :fromUserId,
+            :toDate,
+            SYSDATE,
+            'Forwarded to Other',
+            'Y',
+            :toUserId,
+            'S',
+            :poNoId
+        )";
+
+            await _context.Database.ExecuteSqlRawAsync(
+                insertQry,
+                new OracleParameter("fromUserId", fromUserId),
+                new OracleParameter("toDate", toDate),
+                new OracleParameter("toUserId", toUserId),
+                new OracleParameter("poNoId", poNoId)
+            );
+
+            return Ok("Received and Send Other Successfully");
+        }
+
+
+        [HttpGet("selectFileReceiver")]
+        public async Task<ActionResult<IEnumerable<selectFileReceiverDTO>>> selectFileReceiver()
+        {
+            string qry = "";
+
+            qry = @"  select USERID, EMAILID, FIRSTNAME, LASTNAME, DISPLAYNAME from usrusers 
+where USERID  in (3000,
+2999,
+2998,
+2997,
+2995,2927) 
+
+order by EMAILID ";
+
+
+
+            var myList = _context.selectFileReceiverDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
 
 
     }

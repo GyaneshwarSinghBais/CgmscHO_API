@@ -43,7 +43,7 @@ namespace CgmscHO_API.Controllers
                                  inner join masitems m on m.itemid = tbi.itemid
                                  inner join maswarehouses w on w.warehouseid = tb.warehouseid
                                  where tb.Status = 'C' and tb.issuetype in ('QA','QS')             
-                                 and tb.indentdate between '04-May-2024' and SYSDATE and tb.CTID is null
+                                 and tb.indentdate between '15-Jun-2026' and SYSDATE and tb.CTID is null
                                  and tb.isCourierPickQC is null
                                  and tb.QDOCKETNO not in ('0000000000')
                                  and  w.warehouseid =" + userid + @" " + whselectedDocket + @"
@@ -62,7 +62,7 @@ namespace CgmscHO_API.Controllers
                                  inner join masitems m on m.itemid = tbi.itemid
                                  inner join maswarehouses w on w.warehouseid = tb.warehouseid
                                  where tb.Status = 'C' and tb.issuetype in ('QA','QS')              
-                                 and tb.indentdate between '04-May-2024' and SYSDATE and tb.CTID is null
+                                 and tb.indentdate between '15-Jun-2026' and SYSDATE and tb.CTID is null
                                  and tb.isCourierPickQC is null
                                  and tb.QDOCKETNO not in ('0000000000')
                                  and  w.warehouseid =" + userid + @"
@@ -145,6 +145,7 @@ namespace CgmscHO_API.Controllers
                                   where tb.Status = 'C' 
                                  and tb.CTID is not null                              
                                  and isdrop is null " + whselectedDocket + @"
+                                 and ct.pickdate >= '15-Jun-2026'
                                  group by  w.warehousename,tb.QDOCKETNO,w.warehouseid, tb.ctid
                                  ,ct.entrydatepick,ct.pickdate,ct.destinationtype,ct.destinationid,ct.weight,ct.unit 
                                  ,hi.status,hi.entrydate  ";
@@ -167,6 +168,7 @@ namespace CgmscHO_API.Controllers
                                   where tb.Status = 'C' 
                                  and tb.CTID is not null                              
                                  and isdrop is null " + whselectedDocket + @"
+                                 and ct.pickdate >= '15-Jun-2026'
                                  group by  w.warehousename,tb.QDOCKETNO,w.warehouseid, tb.ctid
                                  ,ct.entrydatepick,ct.pickdate,ct.destinationtype,ct.destinationid,ct.weight,ct.unit 
                                  ,hi.status,hi.entrydate  ";
@@ -329,7 +331,7 @@ FROM (
         hi.status,
         COUNT(DISTINCT tbi.itemid) AS NoOFItems,
         TO_DATE(TO_CHAR(ct.DROPDATE, 'dd-MM-yyyy'), 'dd-MM-yyyy') AS chard,
-        TO_DATE('01-APR-2024', 'dd-MM-yyyy') AS sdsd,
+        TO_DATE('15-JUN-2026', 'dd-MM-yyyy') AS sdsd,
         TO_DATE(TO_CHAR(ct.DROPDATE, 'DD-MON-YYYY'), 'DD-MM-YYYY') AS DROPDATE,
         TO_DATE(TO_CHAR(ct.pickdate, 'DD-MON-YYYY'), 'DD-MM-YYYY') AS pickdate,
         TO_DATE(TO_CHAR(ct.DROPDATE, 'DD-MON-YYYY'), 'DD-MM-YYYY') - TO_DATE(TO_CHAR(ct.pickdate, 'DD-MON-YYYY'), 'DD-MM-YYYY') AS DaysTaken
@@ -472,7 +474,7 @@ GROUP BY
                         inner join qclabs ql on ql.labid=qt.labid
                         
                         where DOCKETNO is not null and  DOCKETDATE is not null and CTID is null
-                        and DOCKETDATE>'13-May-2024' and qt.isCourierPickQC is null and qt.labid not in (398)
+                        and DOCKETDATE>'15-Jun-2026' and qt.isCourierPickQC is null and qt.labid not in (398)
                         " + whDocketLab + @"
                         ) group by CTID,DOCKETNO,DOCKETDATE,LABID,LABNAME,ADDRESS1,  ADDRESS2,  ADDRESS3, CITY,  ZIP,  PHONE1 ";
 
@@ -547,7 +549,7 @@ GROUP BY
                         inner join qclabs ql on ql.labid=qt.labid
                         inner join couriertransaction ct on ct.ctid = qt.ctid and ct.docketno = qt.docketno                        
                         where qt.DOCKETNO is not null and  qt.DOCKETDATE is not null and qt.CTID is not null and isdrop is null
-                        and qt.DOCKETDATE>'13-May-2024' and qt.isCourierPickQC is null
+                        and qt.DOCKETDATE>'15-Jun-2026' and qt.isCourierPickQC is null
                          " + whDocketLab + @"                     
                         ) group by CTID,DOCKETNO,DOCKETDATE,LABID,LABNAME,ADDRESS1,  ADDRESS2,  ADDRESS3, CITY,  ZIP,  PHONE1,weight  ";
 
@@ -593,7 +595,7 @@ GROUP BY
                         inner join qclabs ql on ql.labid=qt.labid
                         inner join couriertransaction ct on ct.ctid = qt.ctid and ct.docketno = qt.docketno                        
                         where qt.DOCKETNO is not null and  qt.DOCKETDATE is not null and qt.CTID is not null and isdrop is null
-                        and qt.DOCKETDATE>'13-May-2024'   and qt.isCourierPickQC is null  
+                        and qt.DOCKETDATE>'14-Jun-2026'   and qt.isCourierPickQC is null  
                         " + whPickDate + @"
                         ) group by CTID,DOCKETNO,DOCKETDATE,LABID,LABNAME,ADDRESS1,  ADDRESS2,  ADDRESS3, CITY,  ZIP,  PHONE1,weight
                         ,days_since_pickdate ";
@@ -639,7 +641,7 @@ GROUP BY
                                  inner join masitems m on m.itemid = tbi.itemid
                                  inner join maswarehouses w on w.warehouseid = tb.warehouseid
                                  where tb.Status = 'C' and tb.issuetype  in ('QA','QS')             
-                                 and tb.indentdate between '04-May-2024' and SYSDATE and tb.CTID is null and tb.isCourierPickQC is null
+                                 and tb.indentdate between '15-Jun-2026' and SYSDATE and tb.CTID is null and tb.isCourierPickQC is null
                                  and tb.QDOCKETNO not in ('0000000000')
                                  group by  w.warehousename,tb.QDOCKETNO,tb.indentid,tb.indentno ,tb.indentdate,w.warehouseid 
                                  order by w.warehouseid
@@ -671,7 +673,7 @@ GROUP BY
                                  inner join masitems m on m.itemid = tbi.itemid
                                  inner join maswarehouses w on w.warehouseid = tb.warehouseid
                                  where tb.Status = 'C' and tb.issuetype  in ('QA','QS')             
-                                 and tb.indentdate between '04-May-2024' and SYSDATE and tb.CTID is null and tb.isCourierPickQC is null
+                                 and tb.indentdate between '15-Jun-2026' and SYSDATE and tb.CTID is null and tb.isCourierPickQC is null
                                  and tb.QDOCKETNO not in ('0000000000')
                                  " + whWarehouse + @"
                                  group by  w.warehousename,tb.QDOCKETNO,tb.indentid,tb.indentno ,tb.indentdate,w.warehouseid , m.itemname, m.itemcode
@@ -826,7 +828,7 @@ from
                                  inner join masitems m on m.itemid = tbi.itemid
                                  inner join maswarehouses w on w.warehouseid = tb.warehouseid
                                  where tb.Status = 'C' and tb.issuetype  in ('QA','QS')             
-                                 and tb.indentdate between '04-May-2024' and SYSDATE and tb.CTID is null and tb.isCourierPickQC is null
+                                 and tb.indentdate between '15-Jun-2026' and SYSDATE and tb.CTID is null and tb.isCourierPickQC is null
                                  and tb.QDOCKETNO not in ('0000000000')
                                  " + whItemId + @"
                                  group by  w.warehousename,tb.QDOCKETNO,tb.indentid,tb.indentno ,tb.indentdate,w.warehouseid , m.itemname, m.itemcode,m.itemid
@@ -903,7 +905,7 @@ inner join masitemmaincategory mc on mc.MCID = c.MCID
 where t.labid not in (398) and t.SAMPLERECEIVEDDATE is null
 and t.DOCKETNO is not null
 and t.CTID is null
---and t.labissuedate between '01-MAY-2024' and SYSDATE
+--and t.labissuedate between '15-JUN-2026' and SYSDATE
 " + whItemId + @"
 ) group by mcid,mcategory,noofdays order by noofdays desc ";
 
@@ -940,7 +942,7 @@ rb.expdate,tbo.issueqty,ct.ctid,s.outwno,round((sysdate-1)-tb.QDOCKETDT,0) noofd
                                  left outer join couriertransaction ct on ct.ctid = tb.ctid
                                  where tb.Status = 'C' and tb.issuetype  in ('QA','QS') --and m.itemid = 17816            
                                  and s.outwno is null 
-                                 and tb.indentdate between '01-MAY-2024' and SYSDATE 
+                                 and tb.indentdate between '15-JUN-2026' and SYSDATE 
                                  and ct.DESTINATIONTYPE = 'HO' and ct.CTID is not null and ct.ISDROP is not null
                                 " + whItemId + @"
                          
@@ -1018,7 +1020,7 @@ inner join masitems m on m.itemid = s.itemid and m.qctest = 'Y'
 inner join masitemcategories c on c.categoryid=m.categoryid
 inner join masitemmaincategory mc on mc.MCID = c.MCID
 left outer join masitemtypes mt on mt.itemtypeid = m.itemtypeid
-where t.SAMPLERECEIVEDDATE between '01-MAY-2024' and SYSDATE
+where t.SAMPLERECEIVEDDATE between '01-JUN-2026' and SYSDATE
 and t.LABUPLOADEDDATE is null and round((sysdate)-t.SAMPLERECEIVEDDATE,0)<mt.qcdayslab
 " + whItemId + @"
 ) group by mcid,mcategory,noofdays order by noofdays desc
@@ -1055,7 +1057,7 @@ inner join masitems m on m.itemid = s.itemid and m.qctest = 'Y'
 inner join masitemcategories c on c.categoryid=m.categoryid
 inner join masitemmaincategory mc on mc.MCID = c.MCID
 left outer join masitemtypes mt on mt.itemtypeid = m.itemtypeid
-where t.SAMPLERECEIVEDDATE between '01-MAY-2024' and SYSDATE
+where t.SAMPLERECEIVEDDATE between '01-JUN-2026' and SYSDATE
 and t.LABUPLOADEDDATE is null and round((sysdate)-t.SAMPLERECEIVEDDATE,0)>mt.qcdayslab
 " + whItemId + @"
 ) group by mcid,mcategory,noofdays order by noofdays desc
@@ -1090,7 +1092,7 @@ inner join qcsamples s on s.sampleid = t.sampleid --or s.refsampleid = t.samplei
 inner join masitems m on m.itemid = s.itemid and m.qctest = 'Y'
 inner join masitemcategories c on c.categoryid=m.categoryid
 inner join masitemmaincategory mc on mc.MCID = c.MCID
-where t.REPORTRECEIVEDDATE between '01-MAY-2024' and SYSDATE
+where t.REPORTRECEIVEDDATE between '01-JUN-2026' and SYSDATE
 and nvl(s.newtestresult,s.testresult) is null
 " + whItemId + @"
 ) group by mcid,mcategory,noofdays order by noofdays desc
@@ -1125,8 +1127,8 @@ from (
                         inner join qcsamples qs on qs.sampleid=qt.sampleid
                         inner join qclabs ql on ql.labid=qt.labid
                         inner join couriertransaction ct on ct.ctid = qt.ctid
-                        where qt.DOCKETNO is not null and  qt.DOCKETDATE is not null and qt.CTID is not null
-                        and qt.DOCKETDATE>'13-May-2024' and qt.isCourierPickQC is null and qt.labid not in (398)
+                        where qt.DOCKETNO is not null and  qt.DOCKETDATE is not null and qt.CTID is not null and qt.SAMPLERECEIVEDDATE is not null
+                        and qt.DOCKETDATE>'01-Jun-2026' and qt.isCourierPickQC is null and qt.labid not in (398)
                       
                         ) group by CTID,DOCKETNO,DOCKETDATE,LABID,LABNAME,ADDRESS1,  ADDRESS2,  ADDRESS3, CITY,  ZIP,  PHONE1,weight, unit ";
 

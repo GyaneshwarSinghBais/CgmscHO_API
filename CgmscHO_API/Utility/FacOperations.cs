@@ -128,36 +128,121 @@ namespace CgmscHO_API.Utility
         }
 
 
-//        private string getMobileNumber(string userid)
-//        {
-//            string value = "0";
-//            string qry = @" select  d.districtname,l.locationname, f.FACILITYNAME,p.FACILITYNAME as parentfac,f.LONGITUDE,f.LATITUDE,f.PHC_ID,f.PHONE1, case when f.is_aam = 'Y' then 'AAM' else '-' end as mfacility ,f.CONTACTPERSONNAME,
+
+        private string getMobileNumberDoctor(string userid)
+        {
+            string value = "0";
+            string qry = "";
 
 
-//f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,
-//d.districtid,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact  
-//,u.userid,u.emailid, p.INDENTDURATION
-//from masfacilities f
-//                            inner join usrusers u on u.FACILITYID = f.facilityid
-//                            left outer join MASFACHEADERFOOTER h on h.userid = u.userid
-//                            inner join masfacilitywh fw on fw.facilityid = f.facilityid
-//                            inner join maswarehouses w on w.WAREHOUSEID = fw.WAREHOUSEID
-//                            inner join masfacilitytypes ft on ft.FACILITYTYPEID = f.FACILITYTYPEID
-//                            inner join masdistricts d on d.districtid = f.districtid
-//                            left outer join maslocations l on l.LOCATIONID=f.LOCATIONID
-//                            left outer join masfacilities p on p.facilityid=f.PHC_ID
-//                            where 1=1  and u.userid = " + userid + "";
-//            var myList = _context.FacilityInfoAamDbSet
-//            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            //                qry = @" select  d.districtname,l.locationname, f.FACILITYNAME,p.FACILITYNAME as parentfac,f.LONGITUDE,f.LATITUDE,f.PHC_ID,f.PHONE1, case when f.is_aam = 'Y' then 'AAM' else '-' end as mfacility ,f.CONTACTPERSONNAME,
 
 
-//            if (myList.Count > 0)
-//            {
-//                value = myList[0].PHONE1.ToString();
-//            }
+            //f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,
+            //d.districtid,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact  
+            //,u.userid,u.emailid, p.INDENTDURATION
+            //from masfacilities f
+            //                            inner join usrusers u on u.FACILITYID = f.facilityid
+            //                            left outer join MASFACHEADERFOOTER h on h.userid = u.userid
+            //                            inner join masfacilitywh fw on fw.facilityid = f.facilityid
+            //                            inner join maswarehouses w on w.WAREHOUSEID = fw.WAREHOUSEID
+            //                            inner join masfacilitytypes ft on ft.FACILITYTYPEID = f.FACILITYTYPEID
+            //                            inner join masdistricts d on d.districtid = f.districtid
+            //                            left outer join maslocations l on l.LOCATIONID=f.LOCATIONID
+            //                            left outer join masfacilities p on p.facilityid=f.PHC_ID
+            //                            where 1=1  and u.userid = " + userid + "";
 
-//            return value;
-//        }
+            qry = @" SELECT  
+            d.districtname,
+            l.locationname,
+            f.FACILITYNAME,
+            p.FACILITYNAME AS parentfac,
+            f.LONGITUDE,
+            f.LATITUDE,
+            f.PHC_ID,
+            CASE 
+                WHEN u.USERTYPE = 'FAC' THEN nvl(h.DRMOBILE, h.DRMOBILE) 
+                       ELSE TO_CHAR(u.DEPMOBILE) 
+            END AS PHONE1,
+            CASE 
+                WHEN f.is_aam = 'Y' THEN 'AAM' 
+                ELSE '-' 
+            END AS mfacility,
+            f.CONTACTPERSONNAME,
+            f.FACILITYCODE,
+            f.FACILITYID,
+            h.FOOTER1,
+            h.FOOTER2,
+            h.FOOTER3,
+            h.EMAIL,
+            d.districtid,
+            ft.FACILITYTYPECODE,
+            ft.FACILITYTYPEDESC,
+            ft.ELDCAT,
+            fw.warehouseid,
+            w.WAREHOUSENAME,
+            w.email AS whemail,
+            w.phone1 AS whcontact,
+            u.userid,
+            u.emailid,
+            p.INDENTDURATION
+        FROM 
+            usrusers u 
+        LEFT OUTER JOIN masfacilities f ON u.FACILITYID = f.facilityid
+        LEFT OUTER JOIN MASFACHEADERFOOTER h ON h.userid = u.userid
+        LEFT OUTER JOIN masfacilitywh fw ON fw.facilityid = f.facilityid
+        LEFT OUTER JOIN maswarehouses w ON w.WAREHOUSEID = fw.WAREHOUSEID
+        LEFT OUTER JOIN masfacilitytypes ft ON ft.FACILITYTYPEID = f.FACILITYTYPEID
+        LEFT OUTER JOIN masdistricts d ON d.districtid = f.districtid
+        LEFT OUTER JOIN maslocations l ON l.LOCATIONID = f.LOCATIONID
+        LEFT OUTER JOIN masfacilities p ON p.facilityid = f.PHC_ID
+        WHERE u.userid =" + userid + " ";
+
+
+
+            var myList = _context.FacilityInfoAamDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+
+            if (myList.Count > 0)
+            {
+                value = myList[0].PHONE1.ToString();
+            }
+
+            return value;
+        }
+
+
+        //        private string getMobileNumber(string userid)
+        //        {
+        //            string value = "0";
+        //            string qry = @" select  d.districtname,l.locationname, f.FACILITYNAME,p.FACILITYNAME as parentfac,f.LONGITUDE,f.LATITUDE,f.PHC_ID,f.PHONE1, case when f.is_aam = 'Y' then 'AAM' else '-' end as mfacility ,f.CONTACTPERSONNAME,
+
+
+        //f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,
+        //d.districtid,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact  
+        //,u.userid,u.emailid, p.INDENTDURATION
+        //from masfacilities f
+        //                            inner join usrusers u on u.FACILITYID = f.facilityid
+        //                            left outer join MASFACHEADERFOOTER h on h.userid = u.userid
+        //                            inner join masfacilitywh fw on fw.facilityid = f.facilityid
+        //                            inner join maswarehouses w on w.WAREHOUSEID = fw.WAREHOUSEID
+        //                            inner join masfacilitytypes ft on ft.FACILITYTYPEID = f.FACILITYTYPEID
+        //                            inner join masdistricts d on d.districtid = f.districtid
+        //                            left outer join maslocations l on l.LOCATIONID=f.LOCATIONID
+        //                            left outer join masfacilities p on p.facilityid=f.PHC_ID
+        //                            where 1=1  and u.userid = " + userid + "";
+        //            var myList = _context.FacilityInfoAamDbSet
+        //            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+
+        //            if (myList.Count > 0)
+        //            {
+        //                value = myList[0].PHONE1.ToString();
+        //            }
+
+        //            return value;
+        //        }
         public string insertUpdateOTP1(string userid, string ipAddress)
         {
             string module = "HO_API_login";
@@ -192,6 +277,45 @@ namespace CgmscHO_API.Utility
 
 
         }
+
+
+        public string insertUpdateOTPDoctor(string userid, string ipAddress)
+        {
+            string module = "HO_API_login";
+            string templateId = "1407161537152057950";
+            string mobNo = getMobileNumberDoctor(userid);
+            string macAddress = GetMACAddress();
+            // string mobNo = "9691611103";
+
+            string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+            string sRandomOTP = GenerateRandomOTP(5, saAllowedCharacters);
+            string now = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            string senddata = "OTP for Login on DPDMIS is " + sRandomOTP;
+            getLoginSMS(mobNo.ToString(), senddata);
+
+
+            string strUpdateQuery = "Update usrUsers Set OTP = '" + sRandomOTP + "' , OTPUPDATEDT = TO_DATE('" + now + "','MM/DD/YYYY hh24:mi:ss') where userid = " + userid;
+            var myList = _context.ProgressRecDbSet
+          .FromSqlInterpolated(FormattableStringFactory.Create(strUpdateQuery)).ToList();
+
+            // insert OTPrecord
+            string strInsertQuery = "insert into otprecord(updatedt, otp, mob,  userid,EntryDate,IsLogin)values(TO_DATE('" + now + "','MM/DD/YYYY hh24:mi:ss'), '" + sRandomOTP + "', '" + mobNo + "',  " + userid + ", TO_DATE('" + now + "','MM/DD/YYYY hh24:mi:ss'),'Y' )";
+            var myListInsert = _context.ProgressRecDbSet
+              .FromSqlInterpolated(FormattableStringFactory.Create(strInsertQuery)).ToList();
+
+            // insert SMSlog with MACADDRESS and IPADDRESS
+            string strInsertSmsLog = @"insert into smslog(mobno, sms, entrydate, module, templateid, MACADDRESS, IPADDRESS)
+                values(" + mobNo + ", '" + senddata + "', TO_DATE('" + now + "','MM/DD/YYYY hh24:mi:ss'), '" + module + "', '" + templateId + "', '" + macAddress + "', '" + ipAddress + "')";
+            var myListInsertSmsLog = _context.ProgressRecDbSet
+              .FromSqlInterpolated(FormattableStringFactory.Create(strInsertSmsLog)).ToList();
+
+            return sRandomOTP;
+
+
+        }
+
+
+        
 
         public string GetMACAddress()
         {
